@@ -11,7 +11,12 @@ const ApplicationStatus = () => {
           <thead className="bg-gray-200">
             <tr>
               <th className="px-2 sm:px-4 py-2">FormId</th>
-              <th className="px-2 sm:px-4 py-2">Programs</th>
+              <th className="px-2 sm:px-4 py-2">IOE Symbol No.</th>
+              <th className="px-2 sm:px-4 py-2">IOE Rank</th>
+              <th className="px-2 sm:px-4 py-2">Name</th>
+              <th className="px-2 sm:px-4 py-2">Gender</th>
+              <th className="px-2 sm:px-4 py-2">DOB</th>
+              <th className="px-2 sm:px-4 py-2">Intrested Programs</th>
               <th className="px-2 sm:px-4 py-2">View Detail</th>
               <th className="px-2 sm:px-4 py-2">Confirmation</th>
             </tr>

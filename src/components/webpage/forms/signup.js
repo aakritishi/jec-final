@@ -32,7 +32,13 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://192.168.1.135:8000/api/accounts/signup/', formData);
+      const response = await axios.post(
+        'http://192.168.1.135:8000/api/accounts/signup/',
+        formData,{
+          headers: {
+            'Content-Type': 'application/json',
+          },
+    });
       setSuccess('Signup successful! Please check your email to verify your account.');
       setError('');
       

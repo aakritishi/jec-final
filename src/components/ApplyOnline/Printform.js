@@ -11,7 +11,7 @@ export default function PrintForm() {
         const token = localStorage.getItem('authToken');
         const response = await axios.get('http://192.168.1.135:8000/api/application-forms/', {
           headers: {
-            'Authorization': `Token ${token}`, // Corrected format
+            'Authorization': `Token ${token}`, 
           },
         });
         const latestForm = response.data[response.data.length - 1];

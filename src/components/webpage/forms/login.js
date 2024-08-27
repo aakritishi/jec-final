@@ -30,7 +30,12 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://192.168.1.135:8000/api/accounts/login/', formData);
+      const response = await axios.post('http://192.168.1.135:8000/api/accounts/login/', formData, {
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Authorization': `Token ${token}`, 
+        },
+    });
       localStorage.setItem('authToken', response.data.token);
       localStorage.setItem('user', response.data.user.id); // Store user ID
       navigate('/');
