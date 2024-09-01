@@ -9,6 +9,7 @@ const Signup = () => {
     email: '',
     phone_number: '',
     password: '',
+    confirm_password: '', // Added confirm password field
   });
 
   const [error, setError] = useState('');
@@ -31,6 +32,20 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Password validation
+    if (formData.password !== formData.confirm_password) {
+        setError('Passwords do not match.');
+        setSuccess('');
+        return;
+    }
+
+    if (formData.password.length < 8) {
+        setError('Password must be at least 8 characters long.');
+        setSuccess('');
+        return;
+    }
+
     try {
       const response = await axios.post(
         'http://192.168.1.135:8000/api/accounts/signup/',
@@ -38,7 +53,8 @@ const Signup = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-    });
+        }
+      );
       setSuccess('Signup successful! Please check your email to verify your account.');
       setError('');
       
@@ -108,6 +124,17 @@ const Signup = () => {
             type="password"
             name="password"
             value={formData.password}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border border-gray-300 rounded"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="confirm_password" className="block text-gray-950">Confirm Password</label>
+          <input
+            type="password"
+            name="confirm_password"
+            value={formData.confirm_password}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded"
             required

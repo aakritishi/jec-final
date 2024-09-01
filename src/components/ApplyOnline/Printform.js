@@ -4,6 +4,7 @@ import axios from 'axios';
 export default function PrintForm() {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchFormData = async () => {
@@ -11,13 +12,14 @@ export default function PrintForm() {
         const token = localStorage.getItem('authToken');
         const response = await axios.get('http://192.168.1.135:8000/api/application-forms/', {
           headers: {
-            'Authorization': `Token ${token}`, 
+            'Authorization': `Token ${token}`,
           },
         });
-        const latestForm = response.data[response.data.length - 1];
+
+        const latestForm = response.data.length > 0 ? response.data[response.data.length - 1] : {};
         setFormData(latestForm);
       } catch (error) {
-        console.error('Error fetching form data:', error.response ? error.response.data : error.message);
+        setError(error.response ? error.response.data : error.message);
       } finally {
         setLoading(false);
       }
@@ -32,6 +34,10 @@ export default function PrintForm() {
 
   if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
   }
 
   return (
@@ -76,10 +82,33 @@ export default function PrintForm() {
           <div className='mb-8'>
             <h2 className='text-xl font-serif mb-3'>Undertaking and Signature</h2>
             <p className='text-base font-serif'>
-              <input type="checkbox" name="agreement" checked={formData.agreement} className='mr-2' readOnly />
+              <input type="checkbox" name="agreement" checked={formData.agreement || false} className='mr-2' readOnly />
               I hereby declare that the particulars furnished in this application form are correct and true and I fully agree to whatever actions taken as per rules and regulations of JEC Kupondole if found false or incorrect.
             </p>
           </div>
+
+          {formData && Object.keys(formData).length > 0 && (
+            <div className='overflow-x-auto'>
+              <table className='table-auto w-full border-collapse'>
+                <thead className='bg-gray-100'>
+                  <tr>
+                    <th className='border p-2 text-left'>FormId</th>
+                    <th className='border p-2 text-left'>Name</th>
+                    <th className='border p-2 text-left'>Interested Program</th>
+                    <th className='border p-2 text-left'>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className='border p-2'>{formData.id || 'N/A'}</td>
+                    <td className='border p-2'>{formData.full_name || 'N/A'}</td>
+                    <td className='border p-2'>{formData.interested_course === 'civil' ? 'B.E Civil' : formData.interested_course === 'computer' ? 'B.E Computer' : formData.interested_course === 'electronics' ? 'B.E Electronics' : 'N/A'}</td>
+                    <td className='border p-2'>{formData.status || 'Pending'}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          )}
 
           <div className='text-center mt-8'>
             <button type='button' onClick={handlePrint} className='bg-blue-600 text-white py-2 px-4 rounded'>

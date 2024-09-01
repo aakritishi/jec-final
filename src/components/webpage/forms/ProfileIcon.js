@@ -18,7 +18,7 @@ const ProfileIcon = () => {
 
     if (token) {
       // Fetch user data
-      axios.get('http://192.168.1.135:8000/api/accounts/signup/', {
+      axios.get('http://192.168.1.135:8000/api/accounts/user/', {
         headers: { Authorization: `Token ${token}` }
       })
       .then(response => {
@@ -69,10 +69,10 @@ const ProfileIcon = () => {
           {dropdownVisible && (
             <div
               ref={dropdownRef}
-              className="absolute mt-20 w-48 bg-white rounded-lg shadow-lg z-50 
+              className="absolute mt-28 w-48 bg-white rounded-lg shadow-lg z-50 
                          right-0 lg:mt-20 lg:right-0 "
             >
-              <div className="px-4 py-2 text-gray-700">
+              <div className="px-4 py-2 text-gray-800">
                 {userData ? (
                   <>
                     <p className="font-semibold">{userData.first_name} {userData.last_name}</p>
@@ -83,7 +83,7 @@ const ProfileIcon = () => {
               </div>
               <button
                 onClick={handleLogout}
-                className="block w-full text-left px-4 py-2 text-gray-700 hover:text-red-600 rounded-lg transition-colors duration-200"
+                className="block w-full text-left px-4 py-2 text-gray-800 hover:text-red-600 rounded-lg transition-colors duration-200"
               >
                 Logout
               </button>

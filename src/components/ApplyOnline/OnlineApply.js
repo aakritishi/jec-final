@@ -21,7 +21,8 @@ export default function OnlineApply() {
 
   const [errors, setErrors] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState(null); 
+  const [user, setUser] = useState(null);
+  const [hasSubmitted, setHasSubmitted] = useState(false); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,11 +31,28 @@ export default function OnlineApply() {
     if (token && storedUser) {
       setIsLoggedIn(true);
       setUser(storedUser);
+      checkSubmissionStatus(token);
     } else {
       setIsLoggedIn(false);
       navigate('/login'); // Redirect to login page if not logged in
     }
   }, [navigate]);
+
+  const checkSubmissionStatus = async (token) => {
+    try {
+      const response = await axios.get('http://192.168.1.135:8000/api/application-forms/', {
+        headers: {
+          'Authorization': `Token ${token}`,
+        },
+      });
+      if (response.data.length > 0) {
+        setHasSubmitted(true);
+      }
+    } catch (error) {
+      console.log(error);
+      setErrors({ checkStatus: 'Error checking form submission status.' });
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
@@ -70,7 +88,7 @@ export default function OnlineApply() {
             'Authorization': `Token ${token}`,
           },
         });
-
+        setHasSubmitted(true);
         alert('You have successfully applied.');
         navigate('/');
       } catch (error) {
@@ -100,6 +118,7 @@ export default function OnlineApply() {
 
     return Object.keys(newErrors).length === 0;
   };
+
 
   return (
     <div className='container mx-auto p-6'>
@@ -328,24 +347,35 @@ export default function OnlineApply() {
             </p>
           </div>
 
-          <div className='text-center'>
+          <div className='flex justify-center text-xl'>
+          {hasSubmitted ? (
+            <div className='flex space-x-4'>
+              <Link to='/viewform'>
+                <button
+                  type='button'
+                  className='bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-lg'
+                >
+                  Edit Form
+                </button>
+              </Link>
+              <Link to='/printForm'>
+                <button
+                  type='button'
+                  className='bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-lg'
+                >
+                  Form Status
+                </button>
+              </Link>
+            </div>
+          ) : (
             <button
               type='submit'
-              className='bg-red-700 text-white py-3 px-6 rounded-lg text-xl hover:bg-red-800 transition duration-300'
-              style={{ fontFamily: "'Merriweather', serif" }}
+              className='bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-lg'
             >
               Submit
             </button>
-            <Link to='/printForm'>
-              <button
-                type='button'
-                className='bg-red-700 text-white py-3 ms-4 px-6 rounded-lg text-xl hover:bg-red-800 transition duration-300'
-                style={{ fontFamily: "'Merriweather', serif" }}
-              >
-                Print Form
-              </button>
-            </Link>
-          </div>
+          )}
+        </div>
         </div>
       </form>
     </div>

@@ -24,6 +24,7 @@ import Signup from './components/webpage/forms/Signup';
 import Login from './components/webpage/forms/Login';
 import AdminHome from './Admin/AdminHome';
 import ApplicationStatus from './Admin/ApplicationStatus';
+import ViewForm from './components/ApplyOnline/ViewForm';
 function App() {
   return (
     <HashRouter>
@@ -51,6 +52,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/admin/adminhome" element={<AdminHome/>}/>
           <Route path="/applicationstatus" element={<ApplicationStatus/>}/>
+          <Route path="/viewform" element={<ViewForm/>}/>
         </Routes>
       
         <Footer />

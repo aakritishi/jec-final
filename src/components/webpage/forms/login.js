@@ -33,14 +33,23 @@ const Login = () => {
       const response = await axios.post('http://192.168.1.135:8000/api/accounts/login/', formData, {
         headers: {
           'Content-Type': 'application/json',
-          // 'Authorization': `Token ${token}`, 
         },
-    });
-      localStorage.setItem('authToken', response.data.token);
-      localStorage.setItem('user', response.data.user.id); // Store user ID
-      navigate('/');
+      });
+
+      const { token, user } = response.data;
+      localStorage.setItem('authToken', token);
+      localStorage.setItem('user', JSON.stringify(user)); // Store the full user object
+
+      // Check if the user is an admin (is_staff)
+      if (user.is_staff) {
+        navigate('/admin/adminhome');
+      } else {
+        navigate('/'); // Redirect to user homepage
+      }
+
       window.location.reload(); // Reload the page after successful login
     } catch (error) {
+      console.log(error);
       setError('Invalid credentials, please try again.');
     }
   };

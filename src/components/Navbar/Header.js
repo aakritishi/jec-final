@@ -8,8 +8,7 @@ import axios from 'axios';
 export const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // New state for login status
-    const [isAdmin, setIsAdmin] = useState(false); // State for checking admin role
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
@@ -20,33 +19,33 @@ export const Header = () => {
     };
 
     useEffect(() => {
-        const checkAdminStatus = async () => {
-            try {
-                const token = localStorage.getItem('authToken');
-                if (token) {
-                    const response = await axios.get('http://192.168.1.135:8000/api/user/role/', {
+        const checkLoginStatus = async () => {
+            const token = localStorage.getItem('authToken');
+            if (token) {
+                try {
+                    const response = await axios.get('http://127.0.0.1:8000/api/accounts/user/', {
                         headers: {
                             'Authorization': `Token ${token}`,
                         },
                     });
-                    setIsAdmin(response.data.role === 'admin');
+
+                    const { is_staff } = response.data.user;
+                    setIsAdmin(is_staff);
+                } catch (error) {
+                    console.error('Error fetching user role:', error.response ? error.response.data : error.message);
                 }
-            } catch (error) {
-                console.error('Error fetching user role:', error.response ? error.response.data : error.message);
             }
         };
 
-        checkAdminStatus();
+        checkLoginStatus();
     }, []);
 
     return (
         <div className='z-50 w-full bg-blue-900' style={{ fontFamily: "'Merriweather', serif" }}>
             <div className='lg:w-[95%] w-full flex justify-between items-center mx-auto p-2'>
-                {/* Logo section */}
                 <div>
                     <Link to="/"><img src={logo} className='h-20' alt="Logo" /></Link>
                 </div>
-                {/* Menu icon visible on small screens */}
                 <div className='md:hidden' onClick={toggleMenu} aria-label="Toggle menu">
                     {menuOpen ? (
                         <FaTimes className="text-white text-3xl transition-transform duration-300 hover:text-gray-300" />
@@ -54,10 +53,8 @@ export const Header = () => {
                         <FaBars className="text-white text-3xl transition-transform duration-300 hover:text-gray-300" />
                     )}
                 </div>
-                {/* Lists section */}
                 <div className='hidden md:flex items-center w-full md:w-auto gap-5'>
                     <ul className='flex flex-col md:flex-row gap-5 p-2'>
-                        {/* About Us with Dropdown */}
                         <li className="relative group">
                             <button className="text-xl text-white hover:text-gray-300 transition duration-700 border-none">
                                 About Us
@@ -75,11 +72,10 @@ export const Header = () => {
                         <li><Link to='/contact-us' className="text-xl text-white hover:text-gray-300 transition duration-300">Contact</Link></li>
                         {isAdmin && <li><Link to="/admin/adminhome" className='text-xl text-white hover:text-gray-300 transition duration-300'>Admin</Link></li>}
                     </ul>
-                    <ProfileIcon/>
+                    <ProfileIcon />
                 </div>
             </div>
 
-            {/* Sliding Menu for small screens */}
             <div className={`fixed top-0 right-0 h-full bg-blue-900 z-50 transition-transform transform ${menuOpen ? 'translate-x-0' : 'translate-x-full'} w-64 md:hidden`}>
                 <div className="flex justify-end p-4">
                     <FaTimes 
@@ -91,7 +87,7 @@ export const Header = () => {
                 <ul className='flex flex-col gap-5 p-3 mt-10'>
                     <li>
                         <div className='mb-4'>
-                            <ProfileIcon/>
+                            <ProfileIcon />
                         </div>
                         <button 
                             onClick={toggleDropdown} 
