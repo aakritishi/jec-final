@@ -7,15 +7,14 @@ export default function ViewForm() {
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [newDocuments, setNewDocuments] = useState({});
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     const fetchFormData = async () => {
       try {
         const token = localStorage.getItem('authToken');
         const response = await axios.get('http://192.168.1.135:8000/api/application-forms/', {
-          headers: {
-            'Authorization': `Token ${token}`,
-          },
+          headers: { 'Authorization': `Token ${token}` },
         });
 
         const latestForm = response.data.length > 0 ? response.data[response.data.length - 1] : {};
@@ -30,16 +29,16 @@ export default function ViewForm() {
     fetchFormData();
   }, []);
 
-  const handleEdit = () => {
-    setIsEditing(true);
-  };
+  const handleEdit = () => setIsEditing(true);
 
   const handleCancel = () => {
     setIsEditing(false);
     setNewDocuments({});
+    // Optionally, you could refetch the form data here to reset to original state
   };
 
   const handleSave = async () => {
+    setSaving(true);
     const formDataToSend = new FormData();
 
     for (const key in newDocuments) {
@@ -55,12 +54,13 @@ export default function ViewForm() {
         },
       });
 
-      // Update formData with the new response data
       setFormData(response.data);
       setIsEditing(false);
       setNewDocuments({});
     } catch (error) {
       setError(error.response ? error.response.data : error.message);
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -96,6 +96,7 @@ export default function ViewForm() {
         <div className='relative mb-8'>
           <div className='flex flex-col gap-4'>
             <div className='space-y-2'>
+              {/* Full Name */}
               <div className='text-base font-serif'>
                 <strong>Full Name:</strong>
                 {isEditing ? (
@@ -111,6 +112,7 @@ export default function ViewForm() {
                 )}
               </div>
 
+              {/* Date of Birth */}
               <div className='text-base font-serif'>
                 <strong>Date of Birth:</strong>
                 {isEditing ? (
@@ -126,6 +128,7 @@ export default function ViewForm() {
                 )}
               </div>
 
+              {/* Address */}
               <div className='text-base font-serif'>
                 <strong>Address:</strong>
                 {isEditing ? (
@@ -141,6 +144,7 @@ export default function ViewForm() {
                 )}
               </div>
 
+              {/* Gender */}
               <div className='text-base font-serif'>
                 <strong>Gender:</strong>
                 {isEditing ? (
@@ -159,6 +163,7 @@ export default function ViewForm() {
                 )}
               </div>
 
+              {/* Interested Course */}
               <div className='text-base font-serif'>
                 <strong>Interested Course:</strong>
                 {isEditing ? (
@@ -177,6 +182,7 @@ export default function ViewForm() {
                 )}
               </div>
 
+              {/* IOE Entrance Symbol.No */}
               <div className='text-base font-serif'>
                 <strong>IOE Entrance Symbol.No:</strong>
                 {isEditing ? (
@@ -192,18 +198,19 @@ export default function ViewForm() {
                 )}
               </div>
 
+              {/* IOE Rank */}
               <div className='text-base font-serif'>
                 <strong>IOE Rank:</strong>
                 {isEditing ? (
                   <input
                     type='text'
                     name='ioe_rank'
-                    value={typeof formData.ioe_rank === 'object' ? JSON.stringify(formData.ioe_rank) : formData.ioe_rank || ''}
+                    value={formData.ioe_rank || ''}
                     onChange={handleChange}
                     className='border rounded p-1 ml-2'
                   />
                 ) : (
-                  ` ${typeof formData.ioe_rank === 'object' ? JSON.stringify(formData.ioe_rank) : formData.ioe_rank || 'N/A'}`
+                  ` ${formData.ioe_rank || 'N/A'}`
                 )}
               </div>
             </div>
@@ -267,8 +274,9 @@ export default function ViewForm() {
                 type='button'
                 className='px-4 py-2 bg-blue-500 text-white rounded mr-2'
                 onClick={handleSave}
+                disabled={saving}
               >
-                Save
+                {saving ? 'Saving...' : 'Save'}
               </button>
               <button
                 type='button'

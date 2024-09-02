@@ -25,7 +25,7 @@ import Login from "./components/webpage/forms/Login";
 import ViewForm from "./components/ApplyOnline/ViewForm";
 import AdminHome from "./components/Admin/AdminHome";
 import ApplicationStatus from "./components/Admin/ApplicationStatus";
-import FormStatus from "./components/Admin/FormStatus";
+import FormStatus from "./components/ApplyOnline/FormStatus";
 import PrivateRoute from "./components/Admin/AdminRoute";
 function App() {
   return (
