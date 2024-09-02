@@ -17,19 +17,33 @@ export default function Chatbot() {
     }
   }, [isChatbotVisible, messages.length]);
 
-  const handleSendMessage = useCallback(() => {
+  const handleSendMessage = useCallback(async () => {
     if (input.trim()) {
       setIsLoading(true);
       const newMessages = [...messages, { text: input, sender: 'user' }];
       setMessages(newMessages);
       setInput('');
-      setTimeout(() => {
-        const botResponse = getBotResponse(input);
-        setMessages([...newMessages, { text: botResponse, sender: 'bot' }]);
+  
+      try {
+        const response = await fetch('http://192.168.1.135:8000/api/chatbot/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ message: input }),
+        });
+  
+        const data = await response.json();
+        setMessages([...newMessages, { text: data.response, sender: 'bot' }]);
+      } catch (error) {
+        console.error('Error:', error);
+        setMessages([...newMessages, { text: "Sorry, I couldn't connect to the server.", sender: 'bot' }]);
+      } finally {
         setIsLoading(false);
-      }, 1000);
+      }
     }
   }, [input, messages]);
+  
 
   const getBotResponse = (userMessage) => {
     const responses = {
@@ -68,11 +82,11 @@ export default function Chatbot() {
             </button>
           </div>
 
-          <div className="flex-1 p-3 overflow-y-auto space-y-3">
+          <div className="flex-1 p-3 my-2 overflow-y-auto space-y-3">
             <div aria-live="polite">
               {messages.map((message, index) => (
                 <div key={index} className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`p-4 rounded-lg shadow-md ${message.sender === 'user' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-black'} max-w-[80%] md:max-w-[70%] lg:max-w-[60%] relative`}>
+                  <div className={`p-4 my-3 rounded-lg shadow-md ${message.sender === 'user' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-black'} max-w-[80%] md:max-w-[70%] lg:max-w-[60%] relative`}>
                     {message.text}
                     {isLoading && index === messages.length - 1 && (
                       <div className="absolute bottom-0 left-0 right-0 h-2 bg-blue-600 animate-pulse"></div>

@@ -110,11 +110,11 @@ export default function PrintForm() {
             </div>
           )}
 
-          <div className='text-center mt-8'>
+          {/* <div className='text-center mt-8'>
             <button type='button' onClick={handlePrint} className='bg-blue-600 text-white py-2 px-4 rounded'>
               Print
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
 

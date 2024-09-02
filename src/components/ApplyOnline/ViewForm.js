@@ -1,312 +1,294 @@
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
-const ViewForm = () => {
-  const [formData, setFormData] = useState({
-    full_name: '',
-    gender: '',
-    date_of_birth: '',
-    address: '',
-    photo: null,
-    interested_course: '',
-    ioe_roll_no: '',
-    ioe_rank: '',
-    transcript: null,
-    migration: null,
-    character: null,
-    agreement: false,
-  });
+export default function ViewForm() {
+  const [formData, setFormData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [newDocuments, setNewDocuments] = useState({});
 
-  const [errors, setErrors] = useState({});
+  useEffect(() => {
+    const fetchFormData = async () => {
+      try {
+        const token = localStorage.getItem('authToken');
+        const response = await axios.get('http://192.168.1.135:8000/api/application-forms/', {
+          headers: {
+            'Authorization': `Token ${token}`,
+          },
+        });
 
-  const handleChange = (e) => {
-    const { name, value, type, checked, files } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : type === 'file' ? files[0] : value,
-    });
+        const latestForm = response.data.length > 0 ? response.data[response.data.length - 1] : {};
+        setFormData(latestForm);
+      } catch (error) {
+        setError(error.response ? error.response.data : error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFormData();
+  }, []);
+
+  const handleEdit = () => {
+    setIsEditing(true);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleCancel = () => {
+    setIsEditing(false);
+    setNewDocuments({});
+  };
 
-    const form = new FormData();
-    for (let key in formData) {
-      form.append(key, formData[key]);
+  const handleSave = async () => {
+    const formDataToSend = new FormData();
+
+    for (const key in newDocuments) {
+      formDataToSend.append(key, newDocuments[key]);
     }
 
     try {
       const token = localStorage.getItem('authToken');
-      const response = await axios.post
-      ('http://192.168.1.135:8000/api/application-forms/', form, {
+      const response = await axios.patch(`http://192.168.1.135:8000/api/application-forms/${formData.id}/`, formDataToSend, {
         headers: {
-          'Content-Type': 'multipart/form-data',
           'Authorization': `Token ${token}`,
+          'Content-Type': 'multipart/form-data',
         },
       });
-      console.log('Form submitted successfully', response.data);
+
+      // Update formData with the new response data
+      setFormData(response.data);
+      setIsEditing(false);
+      setNewDocuments({});
     } catch (error) {
-      console.error('Error submitting form', error);
-      if (error.response && error.response.data) {
-        setErrors(error.response.data); // Set errors to display in the form
-      }
+      setError(error.response ? error.response.data : error.message);
     }
   };
 
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleFileChange = (e) => {
+    setNewDocuments({
+      ...newDocuments,
+      [e.target.name]: e.target.files[0]
+    });
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
-    <div className='container mx-auto p-6'>
-      <div className='text-center mb-12'>
-        <h1 className='text-4xl font-bold text-blue-700' style={{ fontFamily: "'Merriweather', serif" }}>
-          APPLY YOUR JEC <br />ADMISSION FORM ONLINE
-        </h1>
-      </div>
-
-      <div className='flex flex-col md:flex-row md:justify-between items-center'>
-        <div className='md:w-1/2 mb-8 md:mb-0'>
-          <p className='text-lg' style={{ fontFamily: "'Merriweather', serif" }}>
-            Applying for admission to Janakpur Engineering College (JEC) is now easier than ever with our online application form. Prospective students can visit our official website, fill out the required information, upload necessary documents, and submit the form from the comfort of their homes. This streamlined process is designed to save time and ensure that all applications are processed efficiently. Don’t miss the opportunity to be part of JEC’s vibrant academic community. Apply online today and take the first step towards a promising engineering career!
-          </p>
+    <div className='view-form-container p-5'>
+      <div className='max-w-4xl mx-auto'>
+        <div className='text-center mb-5'>
+          <h1 className='text-2xl font-serif text-blue-600'>VIEW AND EDIT APPLICATION FORM</h1>
         </div>
-        {/* <div className='md:w-1/2 flex justify-center'>
-          <img src={apply} alt="JEC Facilities" className='w-full max-w-lg rounded-lg shadow-lg' />
-        </div> */}
-      </div>
 
-      <div className='my-12'>
-        <h1 className='text-3xl font-bold text-blue-700 text-center' style={{ fontFamily: "'Merriweather', serif" }}>
-          APPLICATION FORM
-        </h1>
-      </div>
-
-      <form className='space-y-8' onSubmit={handleSubmit}>
-        <div className='flex flex-col md:flex-row gap-8'>
-          <div className='md:w-1/2'>
-            <label className='block text-lg font-bold mb-2' style={{ fontFamily: "'Merriweather', serif" }}>
-              FULL NAME:
-              <input
-                type='text'
-                name='full_name'
-                value={formData.full_name}
-                onChange={handleChange}
-                className={`block w-full border ${errors.full_name ? 'border-red-700' : 'border-blue-700'} rounded-lg px-4 py-2 mt-2`}
-                required
-              />
-              {errors.full_name && <p className='text-red-700'>{errors.full_name}</p>}
-            </label>
-
-            <div className='mb-4'>
-              <label className='block text-lg font-bold mb-2' style={{ fontFamily: "'Merriweather', serif" }}>
-                GENDER:
-              </label>
-              <div className='flex gap-4'>
-                <label className='flex items-center'>
-                  <input type="radio" name="gender" value="M" onChange={handleChange} className='mr-2' required />
-                  MALE
-                </label>
-                <label className='flex items-center'>
-                  <input type="radio" name="gender" value="F" onChange={handleChange} className='mr-2' required />
-                  FEMALE
-                </label>
-                <label className='flex items-center'>
-                  <input type="radio" name="gender" value="O" onChange={handleChange} className='mr-2' required />
-                  OTHERS
-                </label>
+        <div className='relative mb-8'>
+          <div className='flex flex-col gap-4'>
+            <div className='space-y-2'>
+              <div className='text-base font-serif'>
+                <strong>Full Name:</strong>
+                {isEditing ? (
+                  <input
+                    type='text'
+                    name='full_name'
+                    value={formData.full_name || ''}
+                    onChange={handleChange}
+                    className='border rounded p-1 ml-2'
+                  />
+                ) : (
+                  ` ${formData.full_name || 'N/A'}`
+                )}
               </div>
-              {errors.gender && <p className='text-red-700'>{errors.gender}</p>}
-            </div>
 
-            <label className='block text-lg font-bold mb-2' style={{ fontFamily: "'Merriweather', serif" }}>
-              DATE OF BIRTH:
-              <input
-                type='date'
-                name='date_of_birth'
-                value={formData.date_of_birth}
-                onChange={handleChange}
-                className='block w-full border border-blue-700 rounded-lg px-4 py-2 mt-2'
-                required
-              />
-              {errors.date_of_birth && <p className='text-red-700'>{errors.date_of_birth}</p>}
-            </label>
+              <div className='text-base font-serif'>
+                <strong>Date of Birth:</strong>
+                {isEditing ? (
+                  <input
+                    type='date'
+                    name='date_of_birth'
+                    value={formData.date_of_birth || ''}
+                    onChange={handleChange}
+                    className='border rounded p-1 ml-2'
+                  />
+                ) : (
+                  ` ${formData.date_of_birth || 'N/A'}`
+                )}
+              </div>
 
-            <label className='block text-lg font-bold mb-2 mt-3' style={{ fontFamily: "'Merriweather', serif" }}>
-              ADDRESS:
-              <input
-                type='text'
-                name='address'
-                value={formData.address}
-                onChange={handleChange}
-                className='block w-full border border-blue-700 rounded-lg px-4 py-2 mt-2'
-                required
-              />
-              {errors.address && <p className='text-red-700'>{errors.address}</p>}
-            </label>
-          </div>
+              <div className='text-base font-serif'>
+                <strong>Address:</strong>
+                {isEditing ? (
+                  <input
+                    type='text'
+                    name='address'
+                    value={formData.address || ''}
+                    onChange={handleChange}
+                    className='border rounded p-1 ml-2'
+                  />
+                ) : (
+                  ` ${formData.address || 'N/A'}`
+                )}
+              </div>
 
-          <div className='md:w-1/2 flex flex-col items-center'>
-            <label className='text-lg font-bold mb-2' style={{ fontFamily: "'Merriweather', serif" }}>
-              PHOTO
-              <input
-                type='file'
-                name='photo'
-                onChange={handleChange}
-                className='block border border-blue-700 rounded-lg px-4 py-2 mt-2'
-                required
-              />
-              {errors.photo && <p className='text-red-700'>{errors.photo}</p>}
-            </label>
-          </div>
-        </div>
+              <div className='text-base font-serif'>
+                <strong>Gender:</strong>
+                {isEditing ? (
+                  <select
+                    name='gender'
+                    value={formData.gender || ''}
+                    onChange={handleChange}
+                    className='border rounded p-1 ml-2'
+                  >
+                    <option value='M'>Male</option>
+                    <option value='F'>Female</option>
+                    <option value='O'>Others</option>
+                  </select>
+                ) : (
+                  ` ${formData.gender === 'M' ? 'Male' : formData.gender === 'F' ? 'Female' : formData.gender === 'O' ? 'Others' : 'N/A'}`
+                )}
+              </div>
 
-        <div className=''>
-          <h1 className='text-2xl font-bold text-red-700' style={{ fontFamily: "'Merriweather', serif" }}>
-            Choose The Interested interested_course
-          </h1>
-          <div className='flex flex-row mt-4 gap-5'>
-            <label className='flex '>
-              <input type="radio" name="interested_course" value="civil" onChange={handleChange} className='mr-2' required />
-              B.E Civil
-            </label>
-            <label className='flex '>
-              <input type="radio" name="interested_course" value="computer" onChange={handleChange} className='mr-2' required />
-              B.E Computer
-            </label>
-            <label className='flex '>
-              <input type="radio" name="interested_course" value="electronics" onChange={handleChange} className='mr-2' required />
-              B.E Electronics
-            </label>
-          </div>
-          {errors.interested_course && <p className='text-red-700'>{errors.interested_course}</p>}
-        </div>
+              <div className='text-base font-serif'>
+                <strong>Interested Course:</strong>
+                {isEditing ? (
+                  <select
+                    name='interested_course'
+                    value={formData.interested_course || ''}
+                    onChange={handleChange}
+                    className='border rounded p-1 ml-2'
+                  >
+                    <option value='civil'>B.E Civil</option>
+                    <option value='computer'>B.E Computer</option>
+                    <option value='electronics'>B.E Electronics</option>
+                  </select>
+                ) : (
+                  ` ${formData.interested_course === 'civil' ? 'B.E Civil' : formData.interested_course === 'computer' ? 'B.E Computer' : formData.interested_course === 'electronics' ? 'B.E Electronics' : 'N/A'}`
+                )}
+              </div>
 
-        <div className='space-y-8'>
-          <div>
-            <h1 className='text-2xl font-bold' style={{ fontFamily: "'Merriweather', serif" }}>
-              IOE INFORMATION
-            </h1>
-            <div className='flex flex-col md:flex-row gap-8 mt-4'>
-              <div className='flex flex-col w-full md:w-1/2'>
-                <label className='text-lg font-bold mb-2'>
-                  IOE ROLL.NO
+              <div className='text-base font-serif'>
+                <strong>IOE Entrance Symbol.No:</strong>
+                {isEditing ? (
                   <input
                     type='text'
                     name='ioe_roll_no'
-                    value={formData.ioe_roll_no}
+                    value={formData.ioe_roll_no || ''}
                     onChange={handleChange}
-                    className='block w-full border border-blue-700 rounded-lg px-4 py-2 mt-2'
-                    required
+                    className='border rounded p-1 ml-2'
                   />
-                  {errors.ioe_roll_no && <p className='text-red-700'>{errors.ioe_roll_no}</p>}
-                </label>
+                ) : (
+                  ` ${formData.ioe_roll_no || 'N/A'}`
+                )}
               </div>
 
-              <div className='flex flex-col w-full md:w-1/2'>
-                <label className='text-lg font-bold mb-2'>
-                  IOE RANK
+              <div className='text-base font-serif'>
+                <strong>IOE Rank:</strong>
+                {isEditing ? (
                   <input
                     type='text'
                     name='ioe_rank'
-                    value={formData.ioe_rank}
+                    value={typeof formData.ioe_rank === 'object' ? JSON.stringify(formData.ioe_rank) : formData.ioe_rank || ''}
                     onChange={handleChange}
-                    className='block w-full border border-blue-700 rounded-lg px-4 py-2 mt-2'
-                    required
+                    className='border rounded p-1 ml-2'
                   />
-                  {errors.ioe_rank && <p className='text-red-700'>{errors.ioe_rank}</p>}
-                </label>
+                ) : (
+                  ` ${typeof formData.ioe_rank === 'object' ? JSON.stringify(formData.ioe_rank) : formData.ioe_rank || 'N/A'}`
+                )}
               </div>
             </div>
-          </div>
 
-          <div>
-            <h1 className='text-2xl font-bold' style={{ fontFamily: "'Merriweather', serif" }}>
-              DOCUMENTS UPLOAD
-            </h1>
-            <div className='flex flex-col md:flex-row gap-8 mt-4'>
-              <div className='flex flex-col w-full md:w-1/3'>
-                <label className='text-lg font-bold mb-2'>
-                  TRANSCRIPT
-                  <input
-                    type='file'
-                    name='transcript'
-                    onChange={handleChange}
-                    className='block w-full border border-blue-700 rounded-lg px-4 py-2 mt-2'
-                    required
-                  />
-                  {errors.transcript && <p className='text-red-700'>{errors.transcript}</p>}
-                </label>
-              </div>
-
-              <div className='flex flex-col w-full md:w-1/3'>
-                <label className='text-lg font-bold mb-2'>
-                  MIGRATION
-                  <input
-                    type='file'
-                    name='migration'
-                    onChange={handleChange}
-                    className='block w-full border border-blue-700 rounded-lg px-4 py-2 mt-2'
-                    required
-                  />
-                  {errors.migration && <p className='text-red-700'>{errors.migration}</p>}
-                </label>
-              </div>
-
-              <div className='flex flex-col w-full md:w-1/3'>
-                <label className='text-lg font-bold mb-2'>
-                  CHARACTER CERTIFICATE
-                  <input
-                    type='file'
-                    name='character'
-                    onChange={handleChange}
-                    className='block w-full border border-blue-700 rounded-lg px-4 py-2 mt-2'
-                    required
-                  />
-                  {errors.character && <p className='text-red-700'>{errors.character}</p>}
-                </label>
-              </div>
+            <div className='relative mb-5'>
+              {isEditing ? (
+                <div className='space-y-2'>
+                  <div>
+                    <strong>Photo:</strong>
+                    <input
+                      type='file'
+                      name='photo'
+                      onChange={handleFileChange}
+                      className='border rounded p-1 ml-2'
+                    />
+                  </div>
+                  <div>
+                    <strong>Transcript:</strong>
+                    <input
+                      type='file'
+                      name='transcript'
+                      onChange={handleFileChange}
+                      className='border rounded p-1 ml-2'
+                    />
+                  </div>
+                  <div>
+                    <strong>Migration Certificate:</strong>
+                    <input
+                      type='file'
+                      name='migration'
+                      onChange={handleFileChange}
+                      className='border rounded p-1 ml-2'
+                    />
+                  </div>
+                  <div>
+                    <strong>Character Certificate:</strong>
+                    <input
+                      type='file'
+                      name='character'
+                      onChange={handleFileChange}
+                      className='border rounded p-1 ml-2'
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <p><strong>Photo:</strong> <a href={formData.photo || '#'} target="_blank" rel="noopener noreferrer" className='text-blue-600'>View Photo</a></p>
+                  <p><strong>Transcript:</strong> <a href={formData.transcript || '#'} target="_blank" rel="noopener noreferrer" className='text-blue-600'>View Transcript</a></p>
+                  <p><strong>Migration Certificate:</strong> <a href={formData.migration || '#'} target="_blank" rel="noopener noreferrer" className='text-blue-600'>View Migration Certificate</a></p>
+                  <p><strong>Character Certificate:</strong> <a href={formData.character || '#'} target="_blank" rel="noopener noreferrer" className='text-blue-600'>View Character Certificate</a></p>
+                </div>
+              )}
             </div>
           </div>
         </div>
 
-        {/* <div className='text-center'>
-          <label className='text-lg font-bold'>
-            <input
-              type='checkbox'
-              name='agreement'
-              checked={formData.agreement}
-              onChange={handleChange}
-              className='mr-2'
-              required
-            />
-            I agree to the terms and conditions.
-          </label>
-          {errors.agreement && <p className='text-red-700'>{errors.agreement}</p>}
-        </div> */}
-
-        <div className='text-center'>
-          <button
-            type='submit'
-            className='bg-blue-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-900'
-            style={{ fontFamily: "'Merriweather', serif" }}
-          >
-            Submit
-          </button>
+        <div className='text-center mt-8'>
+          {isEditing ? (
+            <div>
+              <button
+                type='button'
+                className='px-4 py-2 bg-blue-500 text-white rounded mr-2'
+                onClick={handleSave}
+              >
+                Save
+              </button>
+              <button
+                type='button'
+                className='px-4 py-2 bg-gray-500 text-white rounded'
+                onClick={handleCancel}
+              >
+                Cancel
+              </button>
+            </div>
+          ) : (
+            <button
+              type='button'
+              className='px-4 py-2 bg-blue-500 text-white rounded'
+              onClick={handleEdit}
+            >
+              Edit
+            </button>
+          )}
         </div>
-      </form>
-
-      <div className='text-center mt-8'>
-        <h1 className='text-lg font-bold' style={{ fontFamily: "'Merriweather', serif" }}>
-          IF YOU HAVE ALREADY APPLIED FOR THIS FORM.
-        </h1>
-        <Link
-          to='/printForm'
-          className='text-blue-700 hover:text-red-700 text-lg font-bold underline mt-4'
-          style={{ fontFamily: "'Merriweather', serif" }}
-        >
-          CHECK FORM STATUS
-        </Link>
       </div>
     </div>
   );
-};
-
-export default ViewForm;
+}

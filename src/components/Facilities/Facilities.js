@@ -95,12 +95,12 @@ export default function Facilities() {
           <h1 className='text-[45px] my-5 text-red-500' style={{ fontFamily: "'Merriweather', serif" }}>Facilities</h1>
         </div>
 
-        <div className='container-fluid'>
+        <div className='container-fluid py-7'>
           <div className='row'>
             {facilitiesData.map((facility) => (
               <div key={facility.id} className='col-12 col-md-6 col-lg-4 mb-4'>
                 <div className="card mx-auto shadow-md hover:shadow-xl transition-shadow duration-300" style={{ width: "100%" }}>
-                  <div className='flex items-center justify-center'>
+                  <div className='flex items-center justify-center my-3'>
                     <img src={facility.img} className="card-img-top h-[150px] w-[150px] object-cover transition-transform duration-300 hover:scale-105" alt={facility.title} />
                   </div>
                   <div className="card-body flex flex-col items-center justify-center">

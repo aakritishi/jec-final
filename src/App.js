@@ -22,15 +22,15 @@ import JECadvisory from './components/About/JECadvisoryBoard';
 import Teachers from './components/About/Teachers';
 import Signup from './components/webpage/forms/Signup';
 import Login from './components/webpage/forms/Login';
-import AdminHome from './Admin/AdminHome';
-import ApplicationStatus from './Admin/ApplicationStatus';
 import ViewForm from './components/ApplyOnline/ViewForm';
+import AdminHome from './components/Admin/AdminHome';
+import ApplicationStatus from './components/Admin/ApplicationStatus';
 function App() {
   return (
     <HashRouter>
       <div className="App">
         <Header />
-        {/* <Chatbot/> */}
+        <Chatbot/>
         <Routes>
           <Route path="/" element={<Home/>} />
           {/* <Route path="/about" element={<About />} /> */}
