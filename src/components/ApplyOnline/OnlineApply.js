@@ -358,7 +358,7 @@ export default function OnlineApply() {
                   Edit Form
                 </button>
               </Link>
-              <Link to='/printForm'>
+              <Link to='/formstatus'>
                 <button
                   type='button'
                   className='bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-lg'

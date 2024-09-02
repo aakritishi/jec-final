@@ -55,7 +55,7 @@ const Signup = () => {
           },
         }
       );
-      setSuccess('Signup successful! Please check your email to verify your account.');
+      setSuccess('Signup successful!');
       setError('');
       
       setTimeout(() => {
