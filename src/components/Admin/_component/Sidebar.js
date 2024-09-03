@@ -5,7 +5,7 @@ export const Sidebar = () => {
   return (
     <>
       <div className="bg-blue-800 h-screen w-[18%] p-4">
-        <h1 className="text-white text-xl mb-8">JEC</h1>
+        {/* <h1 className="text-white text-xl mb-8">JEC</h1> */}
         <ul>
           <li className="text-gray-300 hover:text-white mb-4">
             <Link
