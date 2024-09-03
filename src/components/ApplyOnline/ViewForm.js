@@ -34,20 +34,29 @@ export default function ViewForm() {
   const handleCancel = () => {
     setIsEditing(false);
     setNewDocuments({});
-    // Optionally, you could refetch the form data here to reset to original state
+    // Optionally, you could refetch the form data here to reset to the original state
   };
 
   const handleSave = async () => {
     setSaving(true);
     const formDataToSend = new FormData();
 
+    // Append user details to FormData
+    for (const key in formData) {
+      if (key !== 'photo' && key !== 'transcript' && key !== 'migration' && key !== 'character') {
+        formDataToSend.append(key, formData[key]);
+      }
+    }
+
+    // Append new files to FormData
     for (const key in newDocuments) {
       formDataToSend.append(key, newDocuments[key]);
     }
 
     try {
       const token = localStorage.getItem('authToken');
-      const response = await axios.patch(`http://192.168.1.135:8000/api/application-forms/${formData.id}/`, formDataToSend, {
+      const formId = formData.id; // Ensure you have the form ID to update
+      const response = await axios.patch(`http://192.168.1.135:8000/api/application-forms/${formId}/`, formDataToSend, {
         headers: {
           'Authorization': `Token ${token}`,
           'Content-Type': 'multipart/form-data',
@@ -264,37 +273,24 @@ export default function ViewForm() {
                 </div>
               )}
             </div>
-          </div>
-        </div>
 
-        <div className='text-center mt-8'>
-          {isEditing ? (
-            <div>
-              <button
-                type='button'
-                className='px-4 py-2 bg-blue-500 text-white rounded mr-2'
-                onClick={handleSave}
-                disabled={saving}
-              >
-                {saving ? 'Saving...' : 'Save'}
-              </button>
-              <button
-                type='button'
-                className='px-4 py-2 bg-gray-500 text-white rounded'
-                onClick={handleCancel}
-              >
-                Cancel
-              </button>
+            <div className='text-center'>
+              {isEditing ? (
+                <div>
+                  <button onClick={handleSave} className='bg-blue-500 text-white p-2 px-3 rounded mr-2' disabled={saving}>
+                    {saving ? 'Saving...' : 'Save'}
+                  </button>
+                  <button onClick={handleCancel} className='bg-gray-500 text-white p-2 px-3 rounded'>
+                    Cancel
+                  </button>
+                </div>
+              ) : (
+                <button onClick={handleEdit} className='bg-green-500 text-white p-2 px-3 rounded'>
+                  Edit
+                </button>
+              )}
             </div>
-          ) : (
-            <button
-              type='button'
-              className='px-4 py-2 bg-blue-500 text-white rounded'
-              onClick={handleEdit}
-            >
-              Edit
-            </button>
-          )}
+          </div>
         </div>
       </div>
     </div>

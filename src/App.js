@@ -44,7 +44,6 @@ function App() {
           <Route path="/about/courses-offered" element={<Academics />} />
           <Route path="/alearnmore" element={<Alearmore />} />
           <Route path="/onlineApply" element={<OnlineApply />} />
-          <Route path="/printForm" element={<Printform />} />
           <Route path="/privacypolicy" element={<PrivacyPolicy />} />
           <Route path="/admission" element={<Admission />} />
           <Route path="/about/introduction" element={<Introduction />} />
@@ -55,8 +54,9 @@ function App() {
           {/* private routing for admin panel */}
           <Route element={<PrivateRoute isStaff={true} />}>
             <Route path="/admin/adminhome" element={<AdminHome />} />
+            <Route path="/applicationstatus" element={<ApplicationStatus />} />
+            <Route path="/printForm" element={<Printform />} />
           </Route>
-          <Route path="/applicationstatus" element={<ApplicationStatus />} />
           <Route path="/viewform" element={<ViewForm />} />
           <Route path="/formstatus" element={<FormStatus />} />
         </Routes>
