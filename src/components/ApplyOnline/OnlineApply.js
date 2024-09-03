@@ -82,7 +82,7 @@ export default function OnlineApply() {
       try {
         console.log(formData);
         const token = localStorage.getItem('authToken');
-        const response = await axios.post('https://192.168.1.135:8000/api/application-forms/', formDataToSend, {
+        const response = await axios.post('http://192.168.1.135:8000/api/application-forms/', formDataToSend, {
           headers: {
             'Content-Type': 'multipart/form-data',
             'Authorization': `Token ${token}`,
