@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 import imgadv from '../images/academic.png';
+import img1 from '../images/bhim.jpg';
+import img2 from '../images/shaligram.jpg';
+import img3 from '../images/niroj.jpg';
+import img4 from '../images/tapendra.jpg';
+import img5 from '../images/ram.jpg';
+import img6 from '../images/arun.jpg';
+import img7 from '../images/rabindra.jpeg';
 
 export class JECadvisoryBoard extends Component {
   
@@ -7,51 +14,51 @@ export class JECadvisoryBoard extends Component {
     const advisorymemberdata = [
         {   
             id: 1,
-            img: imgadv,
+            img: img1,
             name: 'P. ENG. BHIM UPADHYAYA',
             position: 'FORMER SECRETARY, GOVERNMENT OF NEPAL'
         },
         {   
             id: 2,
-            img: imgadv,
+            img: img2,
             name: 'ER. SHALIGRAM SINGH',
             position: 'FORMER CHAIRMAN, NEPAL ENGINEERING COUNCIL'
         },
         {   
             id: 3,
-            img: imgadv,
+            img: img3,
             name: 'ER. DR. NIROJ PANDEY',
             position: 'FORMER REGISTRAR, NEPAL ENGINEERING COUNCIL'
         },
         {   
             id: 4,
-            img: imgadv,
+            img: img4,
             name: 'ER. TAPENDRA BAHADUR KHADKA',
             position: 'FORMER JOINT SECRETARY, DEPARTMENT OF URBAN DEVELOPMENT AND BUILDING CONSTRUCTION'
         },
         {   
             id: 5,
-            img: imgadv,
+            img: img5,
             name: 'ER. RAM KUMAR SHRESTHA',
             position: 'JOINT SECRETARY, GOVERNMENT OF NEPAL'
         },
         {   
             id: 6,
-            img: imgadv,
+            img: img6,
             name: 'ER.ARUN RAJAURIA',
             position: 'DGM at HIDCL Hydroelectricity Investment and DEVELOPMENT Company'
         },
         {   
             id: 7,
-            img: imgadv,
+            img: img7,
             name: 'Er. Rabindra Jha',
-            position: 'Board Member, Nepal Telecommunications Authority'
+            position: 'BOARD MEMBER, NEPAL TELECOMMUNICATION AUTHORITY'
         },
     ];
 
     return (
       <div className='w-[90%] mx-auto'>
-        <h1 className='text-[45px] my-5 text-red-500 flex justify-center items-center text-center' style={{ fontFamily: "'Merriweather', serif" }}>Advisior Board</h1>
+        <h1 className='text-[45px] my-5 text-red-500 flex justify-center items-center text-center' style={{ fontFamily: "'Merriweather', serif" }}>Advisiory Board</h1>
         <div className='mt-6 md:mt-10'>
                     <div className='flex flex-col md:flex-row items-center justify-between'>
                        <div>
@@ -95,7 +102,7 @@ export class JECadvisoryBoard extends Component {
                   </div>
                   <div className="card-body flex flex-col items-center justify-center">
                     <h5 className="card-title text-[24px] text-center text-blue-500" style={{ fontFamily: "'Merriweather', serif" }}>{advisorymember.name}</h5>
-                    <p className="text-center">{advisorymember.position}</p>
+                    <p className="text-center font-semibold">{advisorymember.position}</p>
                   </div>
                 </div>
               </div>
