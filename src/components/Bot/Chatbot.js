@@ -25,7 +25,7 @@ export default function Chatbot() {
       setInput('');
   
       try {
-        const response = await fetch('http://192.168.1.135:8000/api/chatbot/', {
+        const response = await fetch('https://192.168.1.135:8000/api/chatbot/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -26,7 +26,7 @@ export const Header = () => {
             const token = localStorage.getItem('authToken');
             if (token) {
                 try {
-                    const response = await axios.get('http://192.168.1.135:8000/api/accounts/user/', {
+                    const response = await axios.get('https://192.168.1.135:8000/api/accounts/user/', {
                         headers: {
                             'Authorization': `Token ${token}`,
                         },

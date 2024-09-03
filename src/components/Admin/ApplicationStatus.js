@@ -14,7 +14,7 @@ const ApplicationStatus = () => {
       return;
     }
 
-    axios.get('http://192.168.1.135:8000/api/application-forms/', {
+    axios.get('https://192.168.1.135:8000/api/application-forms/', {
       headers: {
         Authorization: `Token ${token}`,
       },
