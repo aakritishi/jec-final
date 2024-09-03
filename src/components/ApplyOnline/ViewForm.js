@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function ViewForm() {
   const [formData, setFormData] = useState({});
@@ -14,7 +15,7 @@ export default function ViewForm() {
       try {
         const token = localStorage.getItem('authToken');
         const response = await axios.get('http://192.168.1.135:8000/api/application-forms/', {
-          headers: { 'Authorization': `Token ${token}` },
+          headers: { Authorization: `Token ${token}` },
         });
 
         const latestForm = response.data.length > 0 ? response.data[response.data.length - 1] : {};
@@ -34,7 +35,6 @@ export default function ViewForm() {
   const handleCancel = () => {
     setIsEditing(false);
     setNewDocuments({});
-    // Optionally, you could refetch the form data here to reset to the original state
   };
 
   const handleSave = async () => {
@@ -58,7 +58,7 @@ export default function ViewForm() {
       const formId = formData.id; // Ensure you have the form ID to update
       const response = await axios.patch(`http://192.168.1.135:8000/api/application-forms/${formId}/`, formDataToSend, {
         headers: {
-          'Authorization': `Token ${token}`,
+          Authorization: `Token ${token}`,
           'Content-Type': 'multipart/form-data',
         },
       });
@@ -83,7 +83,7 @@ export default function ViewForm() {
   const handleFileChange = (e) => {
     setNewDocuments({
       ...newDocuments,
-      [e.target.name]: e.target.files[0]
+      [e.target.name]: e.target.files[0],
     });
   };
 
@@ -96,8 +96,8 @@ export default function ViewForm() {
   }
 
   return (
-    <div className='view-form-container p-5'>
-      <div className='max-w-4xl mx-auto'>
+    <div className='flex justify-center items-center min-h-screen p-5'>
+      <div className='w-full max-w-lg sm:w-full md:max-w-2xl'>
         <div className='text-center mb-5'>
           <h1 className='text-2xl font-serif text-blue-600'>VIEW AND EDIT APPLICATION FORM</h1>
         </div>
@@ -114,7 +114,7 @@ export default function ViewForm() {
                     name='full_name'
                     value={formData.full_name || ''}
                     onChange={handleChange}
-                    className='border rounded p-1 ml-2'
+                    className='border rounded p-1 ml-2 w-full'
                   />
                 ) : (
                   ` ${formData.full_name || 'N/A'}`
@@ -130,7 +130,7 @@ export default function ViewForm() {
                     name='date_of_birth'
                     value={formData.date_of_birth || ''}
                     onChange={handleChange}
-                    className='border rounded p-1 ml-2'
+                    className='border rounded p-1 ml-2 w-full'
                   />
                 ) : (
                   ` ${formData.date_of_birth || 'N/A'}`
@@ -146,7 +146,7 @@ export default function ViewForm() {
                     name='address'
                     value={formData.address || ''}
                     onChange={handleChange}
-                    className='border rounded p-1 ml-2'
+                    className='border rounded p-1 ml-2 w-full'
                   />
                 ) : (
                   ` ${formData.address || 'N/A'}`
@@ -161,7 +161,7 @@ export default function ViewForm() {
                     name='gender'
                     value={formData.gender || ''}
                     onChange={handleChange}
-                    className='border rounded p-1 ml-2'
+                    className='border rounded p-1 ml-2 w-full'
                   >
                     <option value='M'>Male</option>
                     <option value='F'>Female</option>
@@ -180,7 +180,7 @@ export default function ViewForm() {
                     name='interested_course'
                     value={formData.interested_course || ''}
                     onChange={handleChange}
-                    className='border rounded p-1 ml-2'
+                    className='border rounded p-1 ml-2 w-full'
                   >
                     <option value='civil'>B.E Civil</option>
                     <option value='computer'>B.E Computer</option>
@@ -200,7 +200,7 @@ export default function ViewForm() {
                     name='ioe_roll_no'
                     value={formData.ioe_roll_no || ''}
                     onChange={handleChange}
-                    className='border rounded p-1 ml-2'
+                    className='border rounded p-1 ml-2 w-full'
                   />
                 ) : (
                   ` ${formData.ioe_roll_no || 'N/A'}`
@@ -216,7 +216,7 @@ export default function ViewForm() {
                     name='ioe_rank'
                     value={formData.ioe_rank || ''}
                     onChange={handleChange}
-                    className='border rounded p-1 ml-2'
+                    className='border rounded p-1 ml-2 w-full'
                   />
                 ) : (
                   ` ${formData.ioe_rank || 'N/A'}`
@@ -233,7 +233,7 @@ export default function ViewForm() {
                       type='file'
                       name='photo'
                       onChange={handleFileChange}
-                      className='border rounded p-1 ml-2'
+                      className='border rounded p-1 ml-2 w-full'
                     />
                   </div>
                   <div>
@@ -242,7 +242,7 @@ export default function ViewForm() {
                       type='file'
                       name='transcript'
                       onChange={handleFileChange}
-                      className='border rounded p-1 ml-2'
+                      className='border rounded p-1 ml-2 w-full'
                     />
                   </div>
                   <div>
@@ -251,7 +251,7 @@ export default function ViewForm() {
                       type='file'
                       name='migration'
                       onChange={handleFileChange}
-                      className='border rounded p-1 ml-2'
+                      className='border rounded p-1 ml-2 w-full'
                     />
                   </div>
                   <div>
@@ -260,37 +260,63 @@ export default function ViewForm() {
                       type='file'
                       name='character'
                       onChange={handleFileChange}
-                      className='border rounded p-1 ml-2'
+                      className='border rounded p-1 ml-2 w-full'
                     />
                   </div>
                 </div>
               ) : (
                 <div>
-                  <p><strong>Photo:</strong> <a href={formData.photo || '#'} target="_blank" rel="noopener noreferrer" className='text-blue-600'>View Photo</a></p>
-                  <p><strong>Transcript:</strong> <a href={formData.transcript || '#'} target="_blank" rel="noopener noreferrer" className='text-blue-600'>View Transcript</a></p>
-                  <p><strong>Migration Certificate:</strong> <a href={formData.migration || '#'} target="_blank" rel="noopener noreferrer" className='text-blue-600'>View Migration Certificate</a></p>
-                  <p><strong>Character Certificate:</strong> <a href={formData.character || '#'} target="_blank" rel="noopener noreferrer" className='text-blue-600'>View Character Certificate</a></p>
+                  <p>
+                    <strong>Photo:</strong>{' '}
+                    <a href={formData.photo || '#'} target='_blank' rel='noopener noreferrer'>
+                      View Photo
+                    </a>
+                  </p>
+                  <p>
+                    <strong>Transcript:</strong>{' '}
+                    <a href={formData.transcript || '#'} target='_blank' rel='noopener noreferrer'>
+                      View Transcript
+                    </a>
+                  </p>
+                  <p>
+                    <strong>Migration Certificate:</strong>{' '}
+                    <a href={formData.migration || '#'} target='_blank' rel='noopener noreferrer'>
+                      View Migration Certificate
+                    </a>
+                  </p>
+                  <p>
+                    <strong>Character Certificate:</strong>{' '}
+                    <a href={formData.character || '#'} target='_blank' rel='noopener noreferrer'>
+                      View Character Certificate
+                    </a>
+                  </p>
                 </div>
-              )}
-            </div>
-
-            <div className='text-center'>
-              {isEditing ? (
-                <div>
-                  <button onClick={handleSave} className='bg-blue-500 text-white p-2 px-3 rounded mr-2' disabled={saving}>
-                    {saving ? 'Saving...' : 'Save'}
-                  </button>
-                  <button onClick={handleCancel} className='bg-gray-500 text-white p-2 px-3 rounded'>
-                    Cancel
-                  </button>
-                </div>
-              ) : (
-                <button onClick={handleEdit} className='bg-green-500 text-white p-2 px-3 rounded'>
-                  Edit
-                </button>
               )}
             </div>
           </div>
+        </div>
+
+        {isEditing ? (
+          <div className='flex justify-between'>
+            <button onClick={handleCancel} className='bg-gray-500 text-white px-4 py-2 rounded'>
+              Cancel
+            </button>
+            <button
+              onClick={handleSave}
+              className={`bg-blue-600 text-white px-4 py-2 rounded ${saving && 'opacity-50 cursor-not-allowed'}`}
+              disabled={saving}
+            >
+              {saving ? 'Saving...' : 'Save'}
+            </button>
+          </div>
+        ) : (
+          <button onClick={handleEdit} className='bg-blue-600 text-white px-4 py-2 rounded flex justify-center items-center'>
+            Edit
+          </button>
+        )}
+
+        <div className='text-lg flex justify-center items-center'>
+          <Link to='/formstatus'>View your form status</Link>
         </div>
       </div>
     </div>

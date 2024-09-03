@@ -10,14 +10,17 @@ export const Header = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
 
+    // Toggle the mobile menu
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
 
+    // Toggle the dropdown menu
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
     };
 
+    // Check login status and admin status
     useEffect(() => {
         const checkLoginStatus = async () => {
             const token = localStorage.getItem('authToken');
@@ -29,8 +32,18 @@ export const Header = () => {
                         },
                     });
 
-                    const { is_staff } = response.data.user;
-                    setIsAdmin(is_staff);
+                    // Log the entire response for debugging
+                    console.log('API Response:', response.data);
+
+                    // Adjust the access based on the actual response structure
+                    const userData = response.data; // Adjust this based on actual structure
+
+                    // Check if userData has is_staff property
+                    if (userData && userData.is_staff !== undefined) {
+                        setIsAdmin(userData.is_staff);
+                    } else {
+                        console.error('is_staff not found in response');
+                    }
                 } catch (error) {
                     console.error('Error fetching user role:', error.response ? error.response.data : error.message);
                 }
