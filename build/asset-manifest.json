@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/JEC-V2/static/js/main.9cf1e00b.js",
+    "main.js": "/JEC-V2/static/js/main.cb324d5f.js",
     "static/js/453.ed3810f9.chunk.js": "/JEC-V2/static/js/453.ed3810f9.chunk.js",
     "static/media/jec.mp4": "/JEC-V2/static/media/jec.af1ec883ff870b151398.mp4",
     "static/media/jec-about.png": "/JEC-V2/static/media/jec-about.9b474afc330b95fa309d.png",
@@ -15,8 +15,15 @@
     "static/media/student.png": "/JEC-V2/static/media/student.0f2ebbf5b9d7f6548f11.png",
     "static/media/jec-students.jpg": "/JEC-V2/static/media/jec-students.32679ac81e09cd194829.jpg",
     "static/media/civil.jpg": "/JEC-V2/static/media/civil.b3beb888742908be92e1.jpg",
+    "static/media/ram.jpg": "/JEC-V2/static/media/ram.41eee05de7c40e1d1e88.jpg",
+    "static/media/bhim.jpg": "/JEC-V2/static/media/bhim.b40e3bcc4c68624be427.jpg",
+    "static/media/shaligram.jpg": "/JEC-V2/static/media/shaligram.ec61732e05c0e3ff9b83.jpg",
+    "static/media/arun.jpg": "/JEC-V2/static/media/arun.ee0c5901284736d7e3c8.jpg",
     "static/media/facilities.jpg": "/JEC-V2/static/media/facilities.293ef961aa719a942d1f.jpg",
     "static/media/apply.jfif": "/JEC-V2/static/media/apply.b218e2b24108e5217cef.jfif",
+    "static/media/tapendra.jpg": "/JEC-V2/static/media/tapendra.a54c003bc9586e98a03c.jpg",
+    "static/media/rabindra.jpeg": "/JEC-V2/static/media/rabindra.0e2c81da5df80a7fb10e.jpeg",
+    "static/media/niroj.jpg": "/JEC-V2/static/media/niroj.8d28b7829f7b469c079e.jpg",
     "static/media/clock.png": "/JEC-V2/static/media/clock.dc550a9f52c407d30fa5.png",
     "static/media/intenship.png": "/JEC-V2/static/media/intenship.520d3a7ba90c00c4fa8f.png",
     "static/media/report.png": "/JEC-V2/static/media/report.46b5c6edf9669fb310d3.png",
@@ -25,10 +32,10 @@
     "static/media/counselling.jpg": "/JEC-V2/static/media/counselling.abd97c0a8188ac39af1e.jpg",
     "static/media/requirements.jfif": "/JEC-V2/static/media/requirements.9f95b63519da10de50cc.jfif",
     "index.html": "/JEC-V2/index.html",
-    "main.9cf1e00b.js.map": "/JEC-V2/static/js/main.9cf1e00b.js.map",
+    "main.cb324d5f.js.map": "/JEC-V2/static/js/main.cb324d5f.js.map",
     "453.ed3810f9.chunk.js.map": "/JEC-V2/static/js/453.ed3810f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.9cf1e00b.js"
+    "static/js/main.cb324d5f.js"
   ]
 }

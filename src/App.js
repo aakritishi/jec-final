@@ -27,6 +27,7 @@ import AdminHome from "./components/Admin/AdminHome";
 import ApplicationStatus from "./components/Admin/ApplicationStatus";
 import FormStatus from "./components/ApplyOnline/FormStatus";
 import PrivateRoute from "./components/Admin/AdminRoute";
+import AddTeam from "./components/Admin/AddTeam";
 function App() {
   return (
     <HashRouter>
@@ -55,6 +56,7 @@ function App() {
           <Route element={<PrivateRoute isStaff={true} />}>
             <Route path="/admin/adminhome" element={<AdminHome />} />
             <Route path="/applicationstatus" element={<ApplicationStatus />} />
+            <Route path='/addteam' element={<AddTeam/>}/>
             <Route path="/printForm" element={<Printform />} />
           </Route>
           <Route path="/viewform" element={<ViewForm />} />

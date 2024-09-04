@@ -3,7 +3,7 @@ import { Sidebar } from './_component/Sidebar';
 const Dashboard = () => {
   return (
     <>
-  <Sidebar/>
+  {/* <Sidebar/> */}
     </>
   );
 };
