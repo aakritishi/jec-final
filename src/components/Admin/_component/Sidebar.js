@@ -14,7 +14,7 @@ export const Sidebar = () => {
   return (
     <>
       {/* Sidebar for large screens */}
-      <div className={`hidden md:block fixed top-0 left-0 h-screen bg-blue-800 p-4 w-64`}>
+      <div className={`hidden md:block fixed top-0 left-0 h-screen bg-blue-800 p-3 w-64`}>
         <div className="flex justify-between items-center mb-8">
           <Link to='/' className="block">
             <img src={logo} alt='Logo' className="text-white text-xl" />
@@ -35,7 +35,7 @@ export const Sidebar = () => {
       </div>
 
       {/*Navbar for small screens */}
-      <div className={`block md:hidden bg-gray-600 py-2`}>
+      <div className={`block md:hidden bg-blue-800 py-1`}>
         <div className="flex  items-center mb-4">
           {/* Logo icon hidden on small screens */}
           {/* <Link to='/' className="hidden md:block">

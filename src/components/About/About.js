@@ -66,7 +66,7 @@ export default function About() {
       <div className="container mx-auto px-4 py-8" style={{ fontFamily: "'Merriweather', serif" }}>
         <div className="sm:mx-0 md:mx-6 lg:mx-16">
           <div className="my-3">
-            <h1 className="text-xl md:text-2xl lg:text-3xl leading-relaxed font-semibold text-blue-600 transition-transform transform hover:scale-105">
+            <h1 className="text-xl md:text-2xl lg:text-3xl leading-relaxed font-semibold text-blue-600 transition-transform transform hover:scale-105 text-justify">
               We are a research institution focused on providing massive <br />
               opportunities through value education. University is one of the<br />
               world’s preeminent public universities.
@@ -75,7 +75,7 @@ export default function About() {
           <br />
           <div className="flex flex-col gap-6 md:flex-row md:gap-12">
             <div className="md:w-7/12 w-full">
-              <p className="text-base md:text-lg leading-relaxed text-gray-700">
+              <p className="text-base md:text-lg leading-relaxed text-gray-700 text-justify">
                 Our impact on individuals, our region, and the world is profound
                 — whether we are launching young people into a boundless future
                 or confronting the grand challenges of our time through undaunted

@@ -98,7 +98,7 @@ export default function ViewForm() {
   return (
     <div className='flex justify-center items-center min-h-screen p-5'>
       <div className='w-full max-w-lg sm:w-full md:max-w-2xl'>
-        <div className='text-center mb-5'>
+        <div className='text-center md:text-left mb-5'>
           <h1 className='text-2xl font-serif text-blue-600'>VIEW AND EDIT APPLICATION FORM</h1>
         </div>
 
@@ -298,24 +298,26 @@ export default function ViewForm() {
 
         {isEditing ? (
           <div className='flex justify-between'>
-            <button onClick={handleCancel} className='bg-gray-500 text-white px-4 py-2 rounded'>
+            <button onClick={handleCancel} className='bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-lg font-semibold'>
               Cancel
             </button>
             <button
               onClick={handleSave}
-              className={`bg-blue-600 text-white px-4 py-2 rounded ${saving && 'opacity-50 cursor-not-allowed'}`}
+              className={`bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded  text-lg font-semibold ${saving && 'opacity-50 cursor-not-allowed'}`}
               disabled={saving}
             >
               {saving ? 'Saving...' : 'Save'}
             </button>
           </div>
         ) : (
-          <button onClick={handleEdit} className='bg-blue-600 text-white px-4 py-2 rounded flex justify-center items-center'>
+          <div className='my-2 flex md:justify-start md:items-start justify-center items-center '>
+            <button onClick={handleEdit} className='bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded flex justify-center items-center text-lg font-semibold'>
             Edit
           </button>
+          </div>
         )}
 
-        <div className='text-lg flex justify-center items-center'>
+        <div className='text-lg flex justify-center items-center my-3 text-red-600 font-semibold'>
           <Link to='/formstatus'>View your form status</Link>
         </div>
       </div>
