@@ -231,10 +231,7 @@ export default function Introduction() {
     </div>
   </div>
 </div>
-
-
-
-      <div className='container mt-12 mb-12'>
+<div className='container mt-12 mb-12'>
         <h1 className='text-3xl font-semibold mb-6 text-blue-600'>FACULTY</h1>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
           <div className="card mx-auto transition-transform transform h-[380px] w-[330px] hover:scale-105">

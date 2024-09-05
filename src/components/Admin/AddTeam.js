@@ -41,7 +41,7 @@ export class AddTeam extends Component {
       },
     })
     .then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       alert("You have added a new teacher");
     })
     .catch((error) => {
@@ -53,10 +53,10 @@ export class AddTeam extends Component {
     const { formData, errors } = this.state;
 
     return (
-      <div className="flex">
+      <div className="">
         <Sidebar />
         <div className="flex-1 p-6">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl text-red-600 font-semibold text-center mb-6 transition-all duration-500 hover:text-red-800">
+          <h1 className="text-3xl md:text-xl lg:text-2xl text-red-600 font-bold text-center mb-6 transition-all duration-500 hover:text-red-800">
             Add Team
           </h1>
           <div className="max-w-lg mx-auto">
@@ -69,7 +69,7 @@ export class AddTeam extends Component {
                       type="file"
                       name="photo"
                       onChange={this.handleChange}
-                      className="block border border-blue-700 rounded-lg px-4 py-2 mt-2"
+                      className="block px-4 py-2 mt-2 w-full border border-blue-600 rounded-lg"
                       required
                     />
                     {errors.photo && <p className="text-red-700">{errors.photo}</p>}
@@ -139,12 +139,14 @@ export class AddTeam extends Component {
                     </div>
                     {errors.faculty && <p className="text-red-700">{errors.faculty}</p>}
                   </div>
+                  <div className="flex items-center justify-center">
                   <button
                     type="submit"
-                    className="mt-6 bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-800"
+                    className="mt-6 w-full max-w-xs sm:w-[50%] lg:w-[25%] bg-red-600 text-white py-2 px-6 text-center rounded-lg hover:bg-red-800"
                   >
                     Submit
                   </button>
+                </div>
                 </div>
               </div>
             </form>

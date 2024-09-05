@@ -13,32 +13,56 @@ export const Sidebar = () => {
 
   return (
     <>
-      <div className={`fixed top-0 left-0 h-screen bg-blue-800 p-4 ${menuOpen ? 'w-64' : 'w-16'} transition-width duration-300 md:w-64`}>
-        <div className="flex justify-between items-center">
-          <h1 className="text-white text-xl mb-8">
-            <Link to='/'><img src={logo}/></Link>
-          </h1>
-          <div className="md:hidden" onClick={toggleMenu} aria-label="Toggle menu">
-            {menuOpen ? (
-              <FaTimes className="text-white text-3xl cursor-pointer hover:text-gray-300" />
-            ) : (
-              <FaBars className="text-white text-3xl cursor-pointer hover:text-gray-300" />
-            )}
-          </div>
+      {/* Sidebar for large screens */}
+      <div className={`hidden md:block fixed top-0 left-0 h-screen bg-blue-800 p-4 w-64`}>
+        <div className="flex justify-between items-center mb-8">
+          <Link to='/' className="block">
+            <img src={logo} alt='Logo' className="text-white text-xl" />
+          </Link>
         </div>
-        <ul className={`mt-8 flex flex-col ${menuOpen ? 'block' : 'hidden'} md:flex md:items-start md:space-y-4`}>
-          <li className="text-gray-300 hover:text-white mb-4">
-            <Link to="/applicationstatus" className="flex items-center text-xl text-white hover:text-gray-300 transition duration-300">
+        <ul className="flex flex-col space-y-4">
+          <li className="text-gray-300 hover:text-white">
+            <Link to="/applicationstatus" className="text-xl text-white hover:text-gray-300 transition duration-300">
               Application Status
             </Link>
           </li>
-          <li className="text-gray-300 hover:text-white mb-4">
-            <Link to="/addteam" className="flex items-center text-xl text-white hover:text-gray-300 transition duration-300">
-               Add Team
+          <li className="text-gray-300 hover:text-white">
+            <Link to="/addteam" className="text-xl text-white hover:text-gray-300 transition duration-300">
+              Add Team
             </Link>
           </li>
         </ul>
-        
+      </div>
+
+      {/*Navbar for small screens */}
+      <div className={`block md:hidden bg-blue-900 py-2`}>
+        <div className="flex  items-center mb-4">
+          {/* Logo icon hidden on small screens */}
+          {/* <Link to='/' className="hidden md:block">
+            <img src={logo} alt='Logo' className="h-10" />
+          </Link> */}
+          <div onClick={toggleMenu} aria-label="Toggle menu">
+            {menuOpen ? (
+              <FaTimes className="text-2xl text-white hover:text-gray-300 transition duration-300 font-semibold cursor-pointer my-1 mx-4" />
+            ) : (
+              <FaBars className="text-2xl text-white hover:text-gray-300 transition duration-300 font-semibold cursor-pointer my-1 mx-3" />
+            )}
+          </div>
+        </div>
+        {menuOpen && (
+          <ul className="flex flex-row justify-around">
+            <li className="text-xl text-white hover:text-gray-300 transition duration-300 font-semibold">
+              <Link to="/applicationstatus" className="text-xl text-white hover:text-gray-300 transition duration-300">
+                Application Status
+              </Link>
+            </li>
+            <li className="text-gray-300 hover:text-white">
+              <Link to="/addteam" className="text-xl text-white hover:text-gray-300 transition duration-300 font-semibold">
+                Add Team
+              </Link>
+            </li>
+          </ul>
+        )}
       </div>
     </>
   );

@@ -121,14 +121,14 @@ export default function OnlineApply() {
 
 
   return (
-    <div className='container mx-auto p-6'>
+    <div className='container w-[94%] mx-auto p-6'>
       <div className='text-center mb-12'>
         <h1 className='text-4xl font-bold text-blue-700' style={{ fontFamily: "'Merriweather', serif" }}>
           APPLY YOUR JEC <br />ADMISSION FORM ONLINE
         </h1>
       </div>
 
-      <div className='flex flex-col md:flex-row md:justify-between items-center'>
+      <div className='flex flex-col md:flex-row md:justify-between items-center text-justify'>
         <div className='md:w-1/2 mb-8 md:mb-0'>
           <p className='text-lg' style={{ fontFamily: "'Merriweather', serif" }}>
             Applying for admission to Janakpur Engineering College (JEC) is now easier than ever with our online application form. Prospective students can visit our official website, fill out the required information, upload necessary documents, and submit the form from the comfort of their homes. This streamlined process is designed to save time and ensure that all applications are processed efficiently. Don’t miss the opportunity to be part of JEC’s vibrant academic community. Apply online today and take the first step towards a promising engineering career!
@@ -139,15 +139,15 @@ export default function OnlineApply() {
         </div>
       </div>
 
-      <div className='my-12'>
+      <div className='my-4'>
         <h1 className='text-3xl font-bold text-blue-700 text-center' style={{ fontFamily: "'Merriweather', serif" }}>
           APPLICATION FORM
         </h1>
       </div>
 
-      <form className='space-y-8' onSubmit={handleSubmit}>
+      <form className='space-y-8 border border-gray-400 rounded-lg shadow-md py-5 w-[90%] mx-auto px-5' onSubmit={handleSubmit}>
         <div className='flex flex-col md:flex-row gap-8'>
-          <div className='md:w-1/2'>
+          <div className='md:w-1/2 block'>
             <label className='block text-lg font-bold mb-2' style={{ fontFamily: "'Merriweather', serif" }}>
               FULL NAME:
               <input
@@ -165,7 +165,7 @@ export default function OnlineApply() {
               <label className='block text-lg font-bold mb-2' style={{ fontFamily: "'Merriweather', serif" }}>
                 GENDER:
               </label>
-              <div className='flex gap-4'>
+              <div className='flex gap-4 md:flex-row flex-col'>
                 <label className='flex items-center'>
                   <input type="radio" name="gender" value="M" onChange={handleChange} className='mr-2' required />
                   MALE
@@ -194,7 +194,20 @@ export default function OnlineApply() {
               />
               {errors.date_of_birth && <p className='text-red-700'>{errors.date_of_birth}</p>}
             </label>
+          {/* </div> */}
 
+          {/* <div className='md:w-1/2 flex flex-col items-center'> */}
+            <label className='text-lg font-bold mb-2' style={{ fontFamily: "'Merriweather', serif" }}>
+              PHOTO
+              <input
+                type='file'
+                name='photo'
+                onChange={handleChange}
+                className='block mt-2'
+                required
+              />
+              {errors.photo && <p className='text-red-700'>{errors.photo}</p>}
+            </label>
             <label className='block text-lg font-bold mb-2 mt-3' style={{ fontFamily: "'Merriweather', serif" }}>
               ADDRESS:
               <input
@@ -208,36 +221,22 @@ export default function OnlineApply() {
               {errors.address && <p className='text-red-700'>{errors.address}</p>}
             </label>
           </div>
-
-          <div className='md:w-1/2 flex flex-col items-center'>
-            <label className='text-lg font-bold mb-2' style={{ fontFamily: "'Merriweather', serif" }}>
-              PHOTO
-              <input
-                type='file'
-                name='photo'
-                onChange={handleChange}
-                className='block border border-blue-700 rounded-lg px-4 py-2 mt-2'
-                required
-              />
-              {errors.photo && <p className='text-red-700'>{errors.photo}</p>}
-            </label>
-          </div>
         </div>
 
-        <div className='text-center'>
+        <div className='text-left'>
           <h1 className='text-2xl font-bold text-red-700' style={{ fontFamily: "'Merriweather', serif" }}>
             Choose The Interested interested_course
           </h1>
-          <div className='flex flex-row items-center justify-center mt-4 gap-5'>
-            <label className='flex items-center'>
+          <div className='flex md:flex-row flex-col  items-start justify-start mt-4 gap-5'>
+            <label className='flex'>
               <input type="radio" name="interested_course" value="civil" onChange={handleChange} className='mr-2' required />
               B.E Civil
             </label>
-            <label className='flex items-center'>
+            <label className='flex'>
               <input type="radio" name="interested_course" value="computer" onChange={handleChange} className='mr-2' required />
               B.E Computer
             </label>
-            <label className='flex items-center'>
+            <label className='flex'>
               <input type="radio" name="interested_course" value="electronics" onChange={handleChange} className='mr-2' required />
               B.E Electronics
             </label>
@@ -294,7 +293,7 @@ export default function OnlineApply() {
                     type='file'
                     name='transcript'
                     onChange={handleChange}
-                    className='block border border-blue-700 rounded-lg px-4 py-2 mt-2'
+                    className='block mt-2'
                     required
                   />
                   {errors.transcript && <p className='text-red-700'>{errors.transcript}</p>}
@@ -307,7 +306,7 @@ export default function OnlineApply() {
                     type='file'
                     name='migration'
                     onChange={handleChange}
-                    className='block border border-blue-700 rounded-lg px-4 py-2 mt-2'
+                    className='block mt-2'
                     required
                   />
                   {errors.migration && <p className='text-red-700'>{errors.migration}</p>}
@@ -320,7 +319,7 @@ export default function OnlineApply() {
                     type='file'
                     name='character'
                     onChange={handleChange}
-                    className='block border border-blue-700 rounded-lg px-4 py-2 mt-2'
+                    className='block  mt-2'
                     required
                   />
                   {errors.character && <p className='text-red-700'>{errors.character}</p>}
@@ -339,7 +338,7 @@ export default function OnlineApply() {
                 name="agreement"
                 checked={formData.agreement}
                 onChange={handleChange}
-                className='mr-2'
+                className='mr-2 text-justify font-semibold'
                 required
               />
               I hereby declare that the particulars furnished in this application form are correct and true and I fully agree to whatever actions taken as per rules and regulations of JEC Kupondole if found false or incorrect.
