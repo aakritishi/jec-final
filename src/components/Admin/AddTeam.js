@@ -43,6 +43,7 @@ export class AddTeam extends Component {
     .then((response) => {
       // console.log(response.data);
       alert("You have added a new teacher");
+      window.location.reload();
     })
     .catch((error) => {
       console.error(error);

@@ -35,7 +35,7 @@ export const Sidebar = () => {
       </div>
 
       {/*Navbar for small screens */}
-      <div className={`block md:hidden bg-blue-900 py-2`}>
+      <div className={`block md:hidden bg-gray-600 py-2`}>
         <div className="flex  items-center mb-4">
           {/* Logo icon hidden on small screens */}
           {/* <Link to='/' className="hidden md:block">

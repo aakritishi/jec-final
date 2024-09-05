@@ -145,7 +145,7 @@ export default function OnlineApply() {
         </h1>
       </div>
 
-      <form className='space-y-8 border border-gray-400 rounded-lg shadow-md py-5 w-[90%] mx-auto px-5' onSubmit={handleSubmit}>
+      <form className='space-y-8 border border-gray-400 rounded-lg shadow-md py-5 w-[94%] mx-auto px-7' onSubmit={handleSubmit}>
         <div className='flex flex-col md:flex-row gap-8'>
           <div className='md:w-1/2 block'>
             <label className='block text-lg font-bold mb-2' style={{ fontFamily: "'Merriweather', serif" }}>
