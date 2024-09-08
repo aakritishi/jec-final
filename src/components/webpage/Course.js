@@ -12,9 +12,9 @@ export default function Course() {
        <div>
     <div className="container">
         <div className="row">
-          <div className="col-md-6 col-2xl-12 col-sm-12 flex text-center h-[300px] align-items-center justify-content-center">
+          <div className="col-md-6 col-2xl-12 col-sm-12 flex text-center md:h-[300px] h-[90px] align-items-center justify-content-center">
             <h1
-              className="text-[45px] mb-[10px] "
+              className="text-[45px] mb-[7px] "
               style={{ fontFamily: "'Merriweather', serif" }}
             >
               Courses Offered

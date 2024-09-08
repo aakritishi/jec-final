@@ -53,7 +53,7 @@ export const IntroductionSection = () => {
           <source src={video} type="video/mp4" />
         </VideoBackground>
         <ContentWrapper>
-          <div className="w-full md:w-3/4 lg:w-1/2 p-4">
+          <div className="w-full md:w-3/4 lg:w-1/2 p-4 py-4 my-5">
             <h1 className="text-3xl md:text-4xl font-semibold" style={{ fontFamily: "'Merriweather', serif" }}>
               JANAKPUR ENGINEERING COLLEGE
             </h1>

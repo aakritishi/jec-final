@@ -8,8 +8,8 @@ export default function AboutUniversity() {
   return (
     <>
       <div className="container">
-        <div className="row">
-          <div className="col-md-6 col-2xl-12 col-sm-12 flex text-center h-[300px] align-items-center justify-content-center">
+        <div className="row mb-20">
+          <div className="col-md-6 col-2xl-12 col-sm-12 flex text-center md:h-[210px] h-[100px] align-items-center justify-content-center">
             <h1
               className="text-[45px] mb-[10px] "
               style={{ fontFamily: "'Merriweather', serif" }}
@@ -18,7 +18,7 @@ export default function AboutUniversity() {
             </h1>
           </div>
 
-          <div className="col-md-6 col-2xl-12 col-sm-12 d-flex flex-column  h-[300px] align-items-start justify-content-center">
+          <div className="col-md-6 col-2xl-12 col-sm-12 d-flex flex-column  h-[210px] align-items-start justify-content-center">
             <p
               className="text-[18px] mt-[120px]"
               style={{ fontFamily: "'Merriweather', serif" }}
