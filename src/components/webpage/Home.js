@@ -9,7 +9,7 @@ import LatestUpdate from "./LatestUpdate";
 
 export const Home = () => {
   return (
-    <>
+    <div className="w-[94%] mx-auto">
       <IntroductionSection />
       <Updates />
       <LatestUpdate />
@@ -17,7 +17,7 @@ export const Home = () => {
       <AboutUniversity />
       <ImageSlider />
       <Course />
-    </>
+    </div>
   );
 };
 export default Home;

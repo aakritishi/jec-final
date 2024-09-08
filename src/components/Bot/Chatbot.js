@@ -142,7 +142,7 @@ export default function Chatbot() {
             />
             <button
               type="button"
-              className="ml-2 bg-gradient-to-r from-blue-500 to-blue-700 text-white p-2 md:p-3 rounded-lg shadow-sm "
+              className="ml-2 bg-gradient-to-r from-blue-500 to-blue-700 text-white p-2 md:p-3 rounded-lg shadow-lg"
               onClick={handleSendMessage}
             >
               <span className="font-bold text-xs md:text-sm lg:text-base">

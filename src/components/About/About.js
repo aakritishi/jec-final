@@ -2,10 +2,10 @@ import React, { useRef, useState, useEffect } from 'react';
 import CountUp from 'react-countup';
 import students from '../images/jec-students.jpg';
 import about from '../images/jec-about.png';
-import leader from '../images/student.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
-import logo from '../images/jec-logo.png';
+// import leader from '../images/student.png';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
+// import logo from '../images/jec-logo.png';
 
 export default function About() {
   const [countersInView, setCountersInView] = useState({
@@ -65,7 +65,7 @@ export default function About() {
     <>
       <div className="container mx-auto px-4 py-8" style={{ fontFamily: "'Merriweather', serif" }}>
         <div className="sm:mx-0 md:mx-6 lg:mx-16">
-          <div className="my-3">
+          <div className="my-3 text-justify">
             <h1 className="text-xl md:text-2xl lg:text-3xl leading-relaxed font-semibold text-blue-600 transition-transform transform hover:scale-105 text-justify">
               We are a research institution focused on providing massive <br />
               opportunities through value education. University is one of the<br />
@@ -73,7 +73,7 @@ export default function About() {
             </h1>
           </div>
           <br />
-          <div className="flex flex-col gap-6 md:flex-row md:gap-12">
+          <div className="flex flex-col gap-6 md:flex-row md:gap-12 text-justify">
             <div className="md:w-7/12 w-full text-justify">
               <p className="md:text-lg leading-relaxed text-gray-700 text-justify">
                 Our impact on individuals, our region, and the world is profound
@@ -114,29 +114,29 @@ export default function About() {
         <div className='flex flex-col md:flex-row items-center justify-center text-center'>
           <div className='md:w-1/3 p-4 transition-transform transform hover:scale-105' ref={countersRef.students}>
             <h1 className="text-4xl font-bold text-blue-600">
-              {countersInView.students ? <CountUp end={10000} duration={2} /> : '0'}
+              {countersInView.students ? <CountUp end={1000} duration={2} /> : '0'}
             </h1>
             <p className="text-lg mt-2 text-gray-700">STUDENTS</p>
           </div>
           <div className='md:w-1/3 p-4 transition-transform transform hover:scale-105' ref={countersRef.professors}>
             <h1 className="text-4xl font-bold text-blue-600">
-              {countersInView.professors ? <CountUp end={300} duration={2} /> : '0'}
+              {countersInView.professors ? <CountUp end={30} duration={2} /> : '0'}
             </h1>
             <p className="text-lg mt-2 text-gray-700">PROFESSORS</p>
           </div>
-          <div className='md:w-1/3 p-4 transition-transform transform hover:scale-105' ref={countersRef.startups}>
+          {/* <div className='md:w-1/3 p-4 transition-transform transform hover:scale-105' ref={countersRef.startups}>
             <h1 className="text-4xl font-bold text-blue-600">
               {countersInView.startups ? <CountUp end={50} duration={2} /> : '0'}
             </h1>
             <p className="text-lg mt-2 text-gray-700">STARTUPS</p>
-          </div>
+          </div> */}
         </div>
       </div>
 
       <div className='container mt-12'>
         <div className='flex flex-col lg:flex-row items-center'>
           <div className='lg:w-1/2 p-4'>
-            <h1 className='text-3xl font-bold text-blue-600 mb-4 transition-transform transform hover:scale-105'>Meet our Principle</h1>
+            <h1 className='text-3xl font-bold text-blue-600 mb-4 transition-transform transform hover:scale-105'>Meessage from our Principle</h1>
             <p className='mb-6 text-gray-700 text-justify'>
               Emma J Coleman is the first President and founder of University. She is one of the most influential leaders in the field of education with experience spanning decades. She is now looking over the overall functioning of University and also acts as the head of the Department of Humanities.
             </p>
