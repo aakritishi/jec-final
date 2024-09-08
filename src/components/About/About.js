@@ -140,7 +140,7 @@ export default function About() {
             <p className='mb-6 text-gray-700 text-justify'>
               Emma J Coleman is the first President and founder of University. She is one of the most influential leaders in the field of education with experience spanning decades. She is now looking over the overall functioning of University and also acts as the head of the Department of Humanities.
             </p>
-            <div className='grid grid-cols-2 gap-6'>
+            {/* <div className='grid grid-cols-2 gap-6'>
               <div className='text-center transition-transform transform hover:scale-105' ref={countersRef.researchPapers}>
                 <h1 className="text-4xl font-bold text-blue-600">
                   {countersInView.researchPapers ? <CountUp end={37} duration={2} /> : '0'}
@@ -165,7 +165,7 @@ export default function About() {
                 </h1>
                 <h2 className="text-lg mt-2">Awards &<br />Recognitions</h2>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className='lg:w-1/2 p-4'>
             <img src className='w-full h-auto rounded-lg shadow-lg transition-transform transform hover:scale-105' alt="President" />
@@ -173,7 +173,7 @@ export default function About() {
         </div>
       </div>
 
-      <div className='container mt-12 mb-12'>
+      {/* <div className='container mt-12 mb-12'>
         <h1 className='text-3xl font-semibold mb-6 text-blue-600'>fACULTYS</h1>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
         <div className="card mx-auto transition-transform transform h-[380px] w-[330px] hover:scale-105">
@@ -205,7 +205,7 @@ export default function About() {
           </div>
 
         </div>
-      </div>
+      </div> */}
 
      
     </>
