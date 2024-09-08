@@ -1,11 +1,11 @@
-import React, { useRef, useState, useEffect } from 'react';
-import CountUp from 'react-countup';
-import students from '../images/jec-students.jpg';
-import about from '../images/jec-about.png';
-import leader from '../images/student.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
-import logo from '../images/jec-logo.png';
+import React, { useRef, useState, useEffect } from "react";
+import CountUp from "react-countup";
+import students from "../images/jec-students.jpg";
+import about from "../images/jec-about.png";
+import leader from "../images/student.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
+import logo from "../images/jec-logo.png";
 
 export default function Introduction() {
   const [countersInView, setCountersInView] = useState({
@@ -63,37 +63,43 @@ export default function Introduction() {
 
   return (
     <>
-      <div className="container mx-auto px-4 py-8" style={{ fontFamily: "'Merriweather', serif" }}>
+      <div
+        className="container mx-auto px-4 py-8"
+        style={{ fontFamily: "'Merriweather', serif" }}
+      >
         <div className="sm:mx-0 md:mx-6 lg:mx-16">
           <div className="my-3">
-            <h1 className="text-xl md:text-2xl lg:text-3xl leading-relaxed font-semibold text-blue-600 transition-transform transform">
+            <h1 className="text-xl md:text-2xl lg:text-3xl leading-relaxed font-semibold text-blue-600 transition-transform transform text-justify">
               We are a research institution focused on providing massive <br />
-              opportunities through value education. University is one of the<br />
+              opportunities through value education. University is one of the
+              <br />
               world’s preeminent public universities.
             </h1>
           </div>
           <br />
           <div className="flex flex-col gap-6 md:flex-row md:gap-12">
-            <div className="md:w-7/12 w-full">
+            <div className="md:w-7/12 w-full text-justify">
               <p className="text-base md:text-lg leading-relaxed text-gray-700">
                 Our impact on individuals, our region, and the world is profound
-                — whether we are launching young people into a boundless future
-                or confronting the grand challenges of our time through undaunted
-                research and scholarship. We turn ideas into impact and transform
-                lives and our world.
-                <br /><br />
-                In a sense, University’s greatest invention may be itself — an
+                whether we are launching young people into a boundless future or
+                confronting the grand challenges of our time through undaunted
+                research and scholarship. We turn ideas into impact and
+                transform lives and our world.
+                <br />
+                <br />
+                In a sense, University’s greatest invention may be itself an
                 unusual concentration of unusual talent, forever reinventing
                 itself on a mission to make a better world. That invention is
                 powered by individuals: a global community of educators,
-                researchers, and learners with different perspectives but a shared
-                commitment to serving humanity. Come, join us on the journey.
+                researchers, and learners with different perspectives but a
+                shared commitment to serving humanity. Come, join us on the
+                journey.
               </p>
             </div>
             <div className="md:w-5/12 w-full">
-              <img 
+              <img
                 src={students}
-                className='rounded-lg border-2 border-blue-500 shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out h-auto w-full md:w-[400px] lg:w-[500px] transform hover:scale-105'
+                className="rounded-lg border-2 border-blue-500 shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out h-auto w-full md:w-[400px] lg:w-[500px] transform hover:scale-105"
                 alt="Students"
               />
             </div>
@@ -104,134 +110,100 @@ export default function Introduction() {
       <div className="flex justify-center items-center mb-8 mt-24">
         <div
           className="w-full max-w-[1100px] h-[380px] rounded-lg relative overflow-hidden"
-          style={{ backgroundImage: `url(${about})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-        >
-       
-        </div>
+          style={{
+            backgroundImage: `url(${about})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        ></div>
       </div>
 
-      <div className='container mb-12'>
-        <div className='flex flex-col md:flex-row items-center justify-center text-center'>
-          <div className='md:w-1/3 p-4 transition-transform transform hover:scale-105' ref={countersRef.students}>
+      <div className="container mb-12">
+        <div className="flex flex-col md:flex-row items-center justify-center text-center">
+          <div
+            className="md:w-1/3 p-4 transition-transform transform hover:scale-105"
+            ref={countersRef.students}
+          >
             <h1 className="text-4xl font-bold text-blue-600">
-              {countersInView.students ? <CountUp end={10000} duration={2} /> : '0'}
+              {countersInView.students ? (
+                <CountUp end={1000} duration={2} />
+              ) : (
+                "0"
+              )}
             </h1>
             <p className="text-lg mt-2 text-gray-700">STUDENTS</p>
           </div>
-          <div className='md:w-1/3 p-4 transition-transform transform hover:scale-105' ref={countersRef.professors}>
+          <div
+            className="md:w-1/3 p-4 transition-transform transform hover:scale-105"
+            ref={countersRef.professors}
+          >
             <h1 className="text-4xl font-bold text-blue-600">
-              {countersInView.professors ? <CountUp end={300} duration={2} /> : '0'}
+              {countersInView.professors ? (
+                <CountUp end={30} duration={2} />
+              ) : (
+                "0"
+              )}
             </h1>
             <p className="text-lg mt-2 text-gray-700">PROFESSORS</p>
           </div>
-          <div className='md:w-1/3 p-4 transition-transform transform hover:scale-105' ref={countersRef.startups}>
+          {/* <div className='md:w-1/3 p-4 transition-transform transform hover:scale-105' ref={countersRef.startups}>
             <h1 className="text-4xl font-bold text-blue-600">
               {countersInView.startups ? <CountUp end={50} duration={2} /> : '0'}
             </h1>
             <p className="text-lg mt-2 text-gray-700">STARTUPS</p>
+          </div> */}
+        </div>
+      </div>
+
+      <div className="container mx-auto p-4">
+        {/* Principle Section */}
+        <div className="flex flex-col lg:flex-row lg:items-center gap-12 mb-12">
+          {/* Text Section */}
+          <div className="lg:w-1/2 p-4">
+            <h1 className="text-3xl font-bold text-blue-600 mb-4 transition-transform transform hover:scale-105">
+              Meet Our Principal
+            </h1>
+            <p className="mb-6 text-gray-950 text-justify">
+              Emma J Coleman is the first President and founder of University. She is one of the most influential leaders in the field of education with experience spanning decades. She is now looking over the overall functioning of University and also acts as the head of the Department of Humanities.
+            </p>
+          </div>
+          
+          {/* Image Section */}
+          <div className="lg:w-1/2 p-4">
+            <img
+              src={leader}
+              className="w-full h-auto rounded-lg shadow-2xl transition-transform transform hover:scale-105 hover:shadow-xl"
+              alt="President"
+            />
+          </div>
+        </div>
+
+        {/* Chairperson Section */}
+        <div className="flex flex-col-reverse lg:flex-row lg:items-center gap-12">
+          {/* Image Section */}
+          <div className="lg:w-1/2 p-4">
+            <img
+              src={leader}
+              className="w-full h-auto rounded-lg shadow-2xl transition-transform transform hover:scale-105 hover:shadow-xl"
+              alt="President"
+            />
+          </div>
+
+          {/* Text Section */}
+          <div className="lg:w-1/2 p-4">
+            <h1 className="text-3xl font-bold text-blue-600 mb-4 transition-transform transform hover:scale-105">
+              Meet Our Chairperson
+            </h1>
+            <p className="mb-6 text-gray-950 text-justify">
+              Emma J Coleman is the first President and founder of University. She is one of the most influential leaders in the field of education with experience spanning decades. She is now looking over the overall functioning of University and also acts as the head of the Department of Humanities.
+            </p>
           </div>
         </div>
       </div>
 
 
-<div className='container'>
-  <div className='row'>
-    <div className='col-6'>
-    <div className='flex flex-col lg:flex-row gap-12'>
- 
- <div className='lg:w-1/2 p-4'>
-   <h1 className='text-3xl font-bold text-blue-600 mb-4 transition-transform transform hover:scale-105'>Meet Our Principle</h1>
-   <p className='mb-6 text-gray-700'>
-     Emma J Coleman is the first President and founder of University. She is one of the most influential leaders in the field of education with experience spanning decades. She is now looking over the overall functioning of University and also acts as the head of the Department of Humanities.
-   </p>
-   <div className='grid grid-cols-2 gap-6'>
-     <div className='text-center transition-transform transform hover:scale-105' ref={countersRef.researchPapers}>
-       <h1 className="text-4xl font-bold text-blue-600">
-         {countersInView.researchPapers ? <CountUp end={37} duration={2} /> : '0'}
-       </h1>
-       <h2 className="text-lg mt-2">Research Papers<br />Published</h2>
-     </div>
-     <div className='text-center transition-transform transform hover:scale-105' ref={countersRef.researchGrants}>
-       <h1 className="text-4xl font-bold text-blue-600">
-         {countersInView.researchGrants ? <CountUp end={7} duration={2} /> : '0'}
-       </h1>
-       <h2 className="text-lg mt-2">Research Grants<br />Received</h2>
-     </div>
-     <div className='text-center transition-transform transform hover:scale-105' ref={countersRef.textbooks}>
-       <h1 className="text-4xl font-bold text-blue-600">
-         {countersInView.textbooks ? <CountUp end={3} duration={2} /> : '0'}
-       </h1>
-       <h2 className="text-lg mt-2">Textbooks<br />Published</h2>
-     </div>
-     <div className='text-center transition-transform transform hover:scale-105' ref={countersRef.awards}>
-       <h1 className="text-4xl font-bold text-blue-600">
-         {countersInView.awards ? <CountUp end={23} duration={2} /> : '0'}
-       </h1>
-       <h2 className="text-lg mt-2">Awards &<br />Recognitions</h2>
-     </div>
-   </div>
- </div>
- {/* Image Section */}
- <div className='lg:w-1/2 p-4'>
-  <img 
-    src={leader} 
-    className='w-full h-auto rounded-lg shadow-2xl transition-transform transform hover:scale-105 hover:shadow-xl' 
-    alt="President" 
-  />
-</div>
-</div>
 
-    </div>
-    <div className='col-6'>
-    <div className='flex flex-col lg:flex-row gap-12'>
- 
- <div className='lg:w-1/2 p-4'>
-   <h1 className='text-3xl font-bold text-blue-600 mb-4 transition-transform transform hover:scale-105'>Meet Our President</h1>
-   <p className='mb-6 text-gray-700'>
-     Emma J Coleman is the first President and founder of University. She is one of the most influential leaders in the field of education with experience spanning decades. She is now looking over the overall functioning of University and also acts as the head of the Department of Humanities.
-   </p>
-   <div className='grid grid-cols-2 gap-6'>
-     <div className='text-center transition-transform transform hover:scale-105' ref={countersRef.researchPapers}>
-       <h1 className="text-4xl font-bold text-blue-600">
-         {countersInView.researchPapers ? <CountUp end={37} duration={2} /> : '0'}
-       </h1>
-       <h2 className="text-lg mt-2">Research Papers<br />Published</h2>
-     </div>
-     <div className='text-center transition-transform transform hover:scale-105' ref={countersRef.researchGrants}>
-       <h1 className="text-4xl font-bold text-blue-600">
-         {countersInView.researchGrants ? <CountUp end={7} duration={2} /> : '0'}
-       </h1>
-       <h2 className="text-lg mt-2">Research Grants<br />Received</h2>
-     </div>
-     <div className='text-center transition-transform transform hover:scale-105' ref={countersRef.textbooks}>
-       <h1 className="text-4xl font-bold text-blue-600">
-         {countersInView.textbooks ? <CountUp end={3} duration={2} /> : '0'}
-       </h1>
-       <h2 className="text-lg mt-2">Textbooks<br />Published</h2>
-     </div>
-     <div className='text-center transition-transform transform hover:scale-105' ref={countersRef.awards}>
-       <h1 className="text-4xl font-bold text-blue-600">
-         {countersInView.awards ? <CountUp end={23} duration={2} /> : '0'}
-       </h1>
-       <h2 className="text-lg mt-2">Awards &<br />Recognitions</h2>
-     </div>
-   </div>
- </div>
- {/* Image Section */}
- <div className='lg:w-1/2 p-4'>
-  <img 
-    src={leader} 
-    className='w-full h-auto rounded-lg shadow-2xl transition-transform transform hover:scale-105 hover:shadow-xl' 
-    alt="President" 
-  />
-</div>
-
-</div>
-
-    </div>
-  </div>
-</div>
-<div className='container mt-12 mb-12'>
+      {/* <div className='container mt-12 mb-12'>
         <h1 className='text-3xl font-semibold mb-6 text-blue-600'>FACULTY</h1>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
           <div className="card mx-auto transition-transform transform h-[380px] w-[330px] hover:scale-105">
@@ -259,7 +231,7 @@ export default function Introduction() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

@@ -48,7 +48,7 @@ export default function Footer() {
             <div className='w-full md:w-1/4 px-4 mb-6'>
               <h1 className='text-2xl font-bold mb-4'>Our University</h1>
               <div className='flex flex-col gap-3'>
-                <Link to='/about' className='hover:text-red-600 transition-colors'>About Us</Link>
+                <Link to='/about/introduction' className='hover:text-red-600 transition-colors'>About Us</Link>
                 <Link to='/facilities' className='hover:text-red-600 transition-colors'>Facilities</Link>
                 <Link to='/academics' className='hover:text-red-600 transition-colors'>Academics</Link>
                 <Link to='/news' className='hover:text-red-600 transition-colors'>News</Link>

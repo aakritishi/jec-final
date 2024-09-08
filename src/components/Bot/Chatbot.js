@@ -86,7 +86,7 @@ export default function Chatbot() {
       {isChatbotVisible && (
         <div
           style={{ fontFamily: "'Merriweather', serif" }}
-          className="fixed bottom-4 right-4 md:bottom-6 md:right-6 lg:bottom-8 lg:right-8 z-50 w-[90%] max-w-xs md:max-w-md lg:max-w-[30%] h-80 md:h-96 lg:h-[460px] bg-white border-2 border-gray-300 rounded-lg shadow-xl flex flex-col"
+          className="fixed bottom-4 right-4 md:bottom-6 md:right-6 lg:bottom-8 lg:right-8 z-50 w-[90%] max-w-xs md:max-w-md lg:max-w-[30%] h-96 md:h-96 lg:h-[460px] bg-white border-2 border-gray-300 rounded-lg shadow-xl flex flex-col"
         >
           <div className="flex justify-between items-center bg-blue-500 p-3 rounded-t-lg h-16 shadow-md">
             <h1 className="text-lg md:text-lg lg:text-xl font-bold text-white">
