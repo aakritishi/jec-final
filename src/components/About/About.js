@@ -74,15 +74,15 @@ export default function About() {
           </div>
           <br />
           <div className="flex flex-col gap-6 md:flex-row md:gap-12">
-            <div className="md:w-7/12 w-full">
-              <p className="text-base md:text-lg leading-relaxed text-gray-700 text-justify">
+            <div className="md:w-7/12 w-full text-justify">
+              <p className="md:text-lg leading-relaxed text-gray-700 text-justify">
                 Our impact on individuals, our region, and the world is profound
-                — whether we are launching young people into a boundless future
+                whether we are launching young people into a boundless future
                 or confronting the grand challenges of our time through undaunted
                 research and scholarship. We turn ideas into impact and transform
                 lives and our world.
                 <br /><br />
-                In a sense, University’s greatest invention may be itself — an
+                In a sense, University’s greatest invention may be itself an
                 unusual concentration of unusual talent, forever reinventing
                 itself on a mission to make a better world. That invention is
                 powered by individuals: a global community of educators,
@@ -137,7 +137,7 @@ export default function About() {
         <div className='flex flex-col lg:flex-row items-center'>
           <div className='lg:w-1/2 p-4'>
             <h1 className='text-3xl font-bold text-blue-600 mb-4 transition-transform transform hover:scale-105'>Meet our Principle</h1>
-            <p className='mb-6 text-gray-700'>
+            <p className='mb-6 text-gray-700 text-justify'>
               Emma J Coleman is the first President and founder of University. She is one of the most influential leaders in the field of education with experience spanning decades. She is now looking over the overall functioning of University and also acts as the head of the Department of Humanities.
             </p>
             <div className='grid grid-cols-2 gap-6'>

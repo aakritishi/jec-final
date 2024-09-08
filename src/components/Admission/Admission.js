@@ -15,7 +15,7 @@ export class Admission extends Component {
         <div className='bg-gray-100 p-8 rounded-lg shadow-lg mb-8'>
           <div className='flex flex-col md:flex-row'>
             <div className='md:w-1/2 mb-6 md:mb-0'>
-              <p className='font-[12px] md:font-[12px] leading-relaxed'>
+              <p className='font-[12px] md:font-[12px] leading-relaxed text-justify'>
 
                 To gain admission to JEC, candidates must meet several requirements. They should have completed their Intermediate Level examination and achieved a minimum score of 40% in the IOE Entrance Examination. Required documents include the Entrance Score Card, Mark Sheet and Character Certificate of +2, Mark Sheet and Character Certificate of SEE, Migration Certificate, Citizenship Certificate, and two passport-sized photographs. Meeting these criteria ensures eligibility for admission into one of JEC's engineering programs.
               </p>
