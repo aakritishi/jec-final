@@ -154,67 +154,63 @@ export default function Academics() {
           </div>
         </div>
 
-        <div className="my-[60px]">
-          <h1
-            style={{ fontFamily: "'Merriweather', serif", color: "#D80027" }}
-            className="text-[45px]"
-          >
-            Courses Offered
-          </h1>
-        </div>
-        <div className="container-fluid mb-5">
-          <div
-            className="flex flex-wrap justify-content-between"
-            style={{ gap: "20px" }}
-          >
-            {coursesData.map((course, index) => (
-              <Link
-                to={course.link}
-                key={index}
+      <div className="my-[60px]">
+        <h1
+          style={{ fontFamily: "'Merriweather', serif", color: "#D80027" }}
+          className="text-[45px]"
+        >
+          Courses Offered
+        </h1>
+      </div>
+      <div className="container-fluid mb-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+          {coursesData.map((course, index) => (
+            <Link
+              to={course.link}
+              key={index}
+              className="flex flex-col"
+            >
+              <div
+                className="card transform transition-transform hover:scale-105 hover:shadow-xl"
                 style={{
-                  flex: "1 1 calc(33.333% - 20px)",
-                  marginBottom: "20px",
+                  border: "1px solid #e0e0e0",
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                  cursor: "pointer",
+                  height: "100%",
                 }}
+                onClick={() => openModal(course)}
               >
-                <div
-                  className="card transform transition-transform hover:scale-105 hover:shadow-xl"
-                  style={{
-                    border: "1px solid #e0e0e0",
-                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                    cursor: "pointer",
-                    height: "100%",
-                  }}
-                  onClick={() => openModal(course)}
-                >
-                  <img
-                    src={course.img}
-                    className="card-img-top transition-transform transform hover:scale-110"
-                    style={{ height: "200px", objectFit: "cover" }}
-                    alt={course.title}
-                  />
-                  <div className="card-body">
-                    <h5
-                      className="card-title"
-                      style={{
-                        fontFamily: "'Merriweather', serif",
-                        fontSize: "20px",
-                        color: "#003366",
-                      }}
-                    >
-                      {course.title}
-                    </h5>
-                    <p style={{ fontSize: "14px", color: "#757575" }}>
-                      Starting in Fall 2022
-                    </p>
-                    <h1 style={{ fontSize: "16px", fontWeight: "normal" }}>
-                      Duration: 4 Years
-                    </h1>
-                  </div>
+                <img
+                  src={course.img}
+                  className="card-img-top transition-transform transform hover:scale-110 rounded-lg"
+                  style={{ height: "200px", objectFit: "cover" }}
+                  alt={course.title}
+                />
+                <div className="card-body">
+                  <h5
+                    className="card-title"
+                    style={{
+                      fontFamily: "'Merriweather', serif",
+                      fontSize: "20px",
+                      color: "#003366",
+                    }}
+                  >
+                    {course.title}
+                  </h5>
+                  <p style={{ fontSize: "14px", color: "#757575" }}>
+                    Starting in Fall 2022
+                  </p>
+                  <h1 style={{ fontSize: "16px", fontWeight: "normal" }}>
+                    Duration: 4 Years
+                  </h1>
                 </div>
-              </Link>
-            ))}
-          </div>
+              </div>
+            </Link>
+          ))}
         </div>
+      </div>
+
+
       </div>
     </>
   );
