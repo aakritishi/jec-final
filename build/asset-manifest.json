@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/JEC-V2/static/js/main.2b782e18.js",
+    "main.js": "/JEC-V2/static/js/main.cfe815a5.js",
     "static/js/453.ed3810f9.chunk.js": "/JEC-V2/static/js/453.ed3810f9.chunk.js",
     "static/media/jec.mp4": "/JEC-V2/static/media/jec.af1ec883ff870b151398.mp4",
     "static/media/jec-about.png": "/JEC-V2/static/media/jec-about.9b474afc330b95fa309d.png",
@@ -32,10 +32,10 @@
     "static/media/counselling.jpg": "/JEC-V2/static/media/counselling.abd97c0a8188ac39af1e.jpg",
     "static/media/requirements.jfif": "/JEC-V2/static/media/requirements.9f95b63519da10de50cc.jfif",
     "index.html": "/JEC-V2/index.html",
-    "main.2b782e18.js.map": "/JEC-V2/static/js/main.2b782e18.js.map",
+    "main.cfe815a5.js.map": "/JEC-V2/static/js/main.cfe815a5.js.map",
     "453.ed3810f9.chunk.js.map": "/JEC-V2/static/js/453.ed3810f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.2b782e18.js"
+    "static/js/main.cfe815a5.js"
   ]
 }
