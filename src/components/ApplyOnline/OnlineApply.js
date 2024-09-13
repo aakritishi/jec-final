@@ -8,6 +8,8 @@ export default function OnlineApply() {
     full_name: '',
     gender: '',
     date_of_birth: '',
+    phone_number: '',
+    email: '',
     address: '',
     photo: null,
     interested_course: '',
@@ -34,13 +36,13 @@ export default function OnlineApply() {
       checkSubmissionStatus(token);
     } else {
       setIsLoggedIn(false);
-      navigate('/login'); // Redirect to login page if not logged in
+      // navigate('/login'); // Redirect to login page if not logged in
     }
   }, [navigate]);
 
   const checkSubmissionStatus = async (token) => {
     try {
-      const response = await axios.get('http://192.168.1.135:8000/api/application-forms/', {
+      const response = await axios.get('https://jec.edu.np/api/application-forms/', {
         headers: {
           'Authorization': `Token ${token}`,
         },
@@ -66,10 +68,10 @@ export default function OnlineApply() {
     e.preventDefault();
 
     if (validate()) {
-      if (!isLoggedIn) {
-        alert('You must be logged in to submit the form.');
-        return;
-      }
+      // if (!isLoggedIn) {
+      //   alert('You must be logged in to submit the form.');
+      //   return;
+      // }
 
       const formDataToSend = new FormData();
       formDataToSend.append('user', user); 
@@ -82,10 +84,10 @@ export default function OnlineApply() {
       try {
         console.log(formData);
         const token = localStorage.getItem('authToken');
-        const response = await axios.post('http://192.168.1.135:8000/api/application-forms/', formDataToSend, {
+        const response = await axios.post('https://jec.edu.np/api/application-forms/', formDataToSend, {
           headers: {
             'Content-Type': 'multipart/form-data',
-            'Authorization': `Token ${token}`,
+            // 'Authorization': `Token ${token}`,
           },
         });
         setHasSubmitted(true);
@@ -113,6 +115,8 @@ export default function OnlineApply() {
     if (!formData.migration) newErrors.migration = 'Migration Certificate is required';
     if (!formData.character) newErrors.character = 'Character Certificate is required';
     if (!formData.agreement) newErrors.agreement = 'You must agree to the declaration';
+    if (!formData.email) newErrors.email = 'email is required';
+    if (!formData.phone_number) newErrors.phone_number = 'phone number is required';
 
     setErrors(newErrors);
 
@@ -219,6 +223,30 @@ export default function OnlineApply() {
                 required
               />
               {errors.address && <p className='text-red-700'>{errors.address}</p>}
+            </label>
+            <label className='block text-lg font-bold mb-2 mt-3' style={{ fontFamily: "'Merriweather', serif" }}>
+              EMAIL:
+              <input
+                type='text'
+                name='email'
+                value={formData.email}
+                onChange={handleChange}
+                className='block w-full border border-blue-700 rounded-lg px-4 py-2 mt-2'
+                required
+              />
+              {errors.email && <p className='text-red-700'>{errors.email}</p>}
+            </label>
+            <label className='block text-lg font-bold mb-2 mt-3' style={{ fontFamily: "'Merriweather', serif" }}>
+              Phone Number:
+              <input
+                type='text'
+                name='phone_number'
+                value={formData.phone_number}
+                onChange={handleChange}
+                className='block w-full border border-blue-700 rounded-lg px-4 py-2 mt-2'
+                required
+              />
+              {errors.phone_number && <p className='text-red-700'>{errors.phone_number}</p>}
             </label>
           </div>
         </div>

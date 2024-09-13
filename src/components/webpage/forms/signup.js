@@ -48,14 +48,14 @@ const Signup = () => {
 
     try {
       const response = await axios.post(
-        'http://192.168.1.135:8000/signup/',
+        'https://jec.edu.np/signup/',
         formData,{
           headers: {
             'Content-Type': 'application/json',
           },
         }
       );
-      setSuccess('Signup successful!');
+      setSuccess('Signup successful!!');
       setError('');
       
       setTimeout(() => {

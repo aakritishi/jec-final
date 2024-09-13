@@ -14,7 +14,7 @@ export default function ViewForm() {
     const fetchFormData = async () => {
       try {
         const token = localStorage.getItem('authToken');
-        const response = await axios.get('http://192.168.1.135:8000/api/application-forms/', {
+        const response = await axios.get('https://jec.edu.np/api/application-forms/', {
           headers: { Authorization: `Token ${token}` },
         });
 
@@ -56,7 +56,7 @@ export default function ViewForm() {
     try {
       const token = localStorage.getItem('authToken');
       const formId = formData.id; // Ensure you have the form ID to update
-      const response = await axios.patch(`http://192.168.1.135:8000/api/application-forms/${formId}/`, formDataToSend, {
+      const response = await axios.patch(`https://jec.edu.np/api/application-forms/${formId}/`, formDataToSend, {
         headers: {
           Authorization: `Token ${token}`,
           'Content-Type': 'multipart/form-data',
@@ -150,6 +150,37 @@ export default function ViewForm() {
                   />
                 ) : (
                   ` ${formData.address || 'N/A'}`
+                )}
+              </div>
+                {/* email */}
+              <div className='text-base font-serif'>
+                <strong>Email:</strong>
+                {isEditing ? (
+                  <input
+                    type='text'
+                    name='email'
+                    value={formData.email || ''}
+                    onChange={handleChange}
+                    className='border rounded p-1 ml-2 w-full'
+                  />
+                ) : (
+                  ` ${formData.email || 'N/A'}`
+                )}
+              </div>
+
+              {/* phone number */}
+              <div className='text-base font-serif'>
+                <strong>Phone Number:</strong>
+                {isEditing ? (
+                  <input
+                    type='text'
+                    name='phone_number'
+                    value={formData.phone_number || ''}
+                    onChange={handleChange}
+                    className='border rounded p-1 ml-2 w-full'
+                  />
+                ) : (
+                  ` ${formData.phone_number || 'N/A'}`
                 )}
               </div>
 

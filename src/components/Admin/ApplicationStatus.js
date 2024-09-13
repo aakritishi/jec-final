@@ -16,7 +16,7 @@ const ApplicationStatus = () => {
       return;
     }
 
-    axios.get('http://192.168.1.135:8000/api/application-forms/', {
+    axios.get('https://jec.edu.np/api/application-forms/', {
       headers: {
         Authorization: `Token ${token}`,
       },
@@ -46,7 +46,7 @@ const ApplicationStatus = () => {
       return;
     }
 
-    axios.patch(`http://192.168.1.135:8000/api/application-forms/${formId}/`,
+    axios.patch(`https://jec.edu.np/api/application-forms/${formId}/`,
       { action: 'accepted' },
       {
         headers: {
@@ -71,7 +71,7 @@ const ApplicationStatus = () => {
       return;
     }
 
-    axios.patch(`http://192.168.1.135:8000/api/application-forms/${formId}/`,
+    axios.patch(`https://jec.edu.np/api/application-forms/${formId}/`,
       { action: 'rejected' },
       {
         headers: {

@@ -18,7 +18,7 @@ export default function PrintForm() {
           throw new Error("Unauthorized access");
         }
 
-        const response = await axios.get(`http://192.168.1.135:8000/api/application-forms/${formId}/`, {
+        const response = await axios.get(`https://jec.edu.np/api/application-forms/${formId}/`, {
           headers: {
             'Authorization': `Token ${token}`,
           },
@@ -67,6 +67,12 @@ export default function PrintForm() {
                 </div>
                 <div className="text-base font-serif">
                   <strong>Address:</strong> {formData.address || 'N/A'}
+                </div>
+                <div className="text-base font-serif">
+                  <strong>Email:</strong> {formData.email || 'N/A'}
+                </div>
+                <div className="text-base font-serif">
+                  <strong>Phone Number:</strong> {formData.phone_number || 'N/A'}
                 </div>
                 <div className="text-base font-serif">
                   <strong>Gender:</strong> {formData.gender === 'M' ? 'Male' : formData.gender === 'F' ? 'Female' : formData.gender === 'O' ? 'Others' : 'N/A'}

@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import logo from '../media/images/jec-logo.png';
-import ProfileIcon from '../webpage/forms/ProfileIcon';
+import ProfileIcon from '../webpage/forms/ProfileIcon'; // This will display if user is logged in
 import axios from 'axios';
 
 export const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // New state to track login status
 
     // Toggle the mobile menu
     const toggleMenu = () => {
@@ -25,8 +26,9 @@ export const Header = () => {
         const checkLoginStatus = async () => {
             const token = localStorage.getItem('authToken');
             if (token) {
+                setIsLoggedIn(true); // User is logged in if token exists
                 try {
-                    const response = await axios.get('http://192.168.1.135:8000/api/accounts/user/', {
+                    const response = await axios.get('https://jec.edu.np/user/', {
                         headers: {
                             'Authorization': `Token ${token}`,
                         },
@@ -36,7 +38,7 @@ export const Header = () => {
                     console.log('API Response:', response.data);
 
                     // Adjust the access based on the actual response structure
-                    const userData = response.data; // Adjust this based on actual structure
+                    const userData = response.data;
 
                     // Check if userData has is_staff property
                     if (userData && userData.is_staff !== undefined) {
@@ -47,6 +49,8 @@ export const Header = () => {
                 } catch (error) {
                     console.error('Error fetching user role:', error.response ? error.response.data : error.message);
                 }
+            } else {
+                setIsLoggedIn(false); // No token means user is not logged in
             }
         };
 
@@ -79,13 +83,19 @@ export const Header = () => {
                                 <li><Link to="/teachers" className="block px-4 py-2 hover:bg-slate-200 hover:text-gray-800 rounded-b-lg">JEC Teachers</Link></li>
                             </ul>
                         </li>
+                        {!isAdmin &&<li><Link to="/onlineapply" className="text-xl text-white hover:text-gray-300 transition duration-300">Apply Online</Link></li>}
                         <li><Link to='/admission' className="text-xl text-white hover:text-gray-300 transition duration-300">Admission</Link></li>
                         <li><Link to='/facilities' className="text-xl text-white hover:text-gray-300 transition duration-300">Facilities</Link></li>
                         <li><Link to='/news' className="text-xl text-white hover:text-gray-300 transition duration-300">News & Updates</Link></li>
                         <li><Link to='/contact-us' className="text-xl text-white hover:text-gray-300 transition duration-300">Contact</Link></li>
                         {isAdmin && <li><Link to="/admin/adminhome" className='text-xl text-white hover:text-gray-300 transition duration-300'>Admin</Link></li>}
                     </ul>
-                    <ProfileIcon />
+                    {/* Show ProfileIcon if logged in, otherwise show Login button */}
+                    {isLoggedIn ? (
+                        <ProfileIcon />
+                    ) : (
+                        <Link to="/login" className="text-xl text-white hover:text-gray-300 transition duration-300">Login</Link>
+                    )}
                 </div>
             </div>
 
@@ -100,7 +110,12 @@ export const Header = () => {
                 <ul className='flex flex-col gap-5 p-3 mt-10'>
                     <li>
                         <div className='mb-4'>
-                            <ProfileIcon />
+                            {/* Show ProfileIcon if logged in, otherwise show Login button */}
+                            {isLoggedIn ? (
+                                <ProfileIcon />
+                            ) : (
+                                <Link to="/login" className="text-xl text-white hover:text-gray-300 transition duration-300">Login</Link>
+                            )}
                         </div>
                         <button 
                             onClick={toggleDropdown} 
@@ -117,6 +132,7 @@ export const Header = () => {
                             </ul>
                         )}
                     </li>
+                    {!isAdmin &&<li><Link to="/onlineapply" className="text-xl text-white hover:text-gray-300 transition duration-300">Apply Online</Link></li>}
                     <li><Link to='/admission' className="text-xl text-white hover:text-gray-300 transition duration-300">Admission</Link></li>
                     <li><Link to='/news' className="text-xl text-white hover:text-gray-300 transition duration-300">News & Updates</Link></li>
                     <li><Link to='/contact-us' className="text-xl text-white hover:text-gray-300 transition duration-300">Contact</Link></li>

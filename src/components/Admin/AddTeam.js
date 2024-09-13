@@ -34,7 +34,7 @@ export class AddTeam extends Component {
     formDataObj.append("subject", formData.subject);
     formDataObj.append("faculty", formData.faculty);
 
-    axios.post('http://192.168.1.135:8000/api/teachers/', formDataObj, {
+    axios.post('https://jec.edu.np/api/teachers/', formDataObj, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Token ${token}`, 

@@ -9,7 +9,7 @@ export default function Teachers() {
     const fetchTeachers = async () => {
       try {
         const token = localStorage.getItem('authToken');
-        const response = await axios.get('http://192.168.1.135:8000/api/teachers/', {
+        const response = await axios.get('https://jec.edu.np/api/teachers/', {
             headers: { Authorization: `Token ${token}` },
           });
         setTeachers(response.data);
