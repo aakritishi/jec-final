@@ -48,7 +48,7 @@ const Signup = () => {
 
     try {
       const response = await axios.post(
-        'https://jec.edu.np/signup/',
+        'https://jec.edu.np/api/signup/',
         formData,{
           headers: {
             'Content-Type': 'application/json',
