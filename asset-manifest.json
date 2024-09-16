@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/jec-final/static/css/main.6d5294a0.css",
-    "main.js": "/jec-final/static/js/main.b4dbdb8b.js",
-    "static/js/453.68693753.chunk.js": "/jec-final/static/js/453.68693753.chunk.js",
+    "main.css": "/jec-final/static/css/main.900c1a46.css",
+    "main.js": "/jec-final/static/js/main.217c2f40.js",
+    "static/js/453.ed3810f9.chunk.js": "/jec-final/static/js/453.ed3810f9.chunk.js",
     "static/media/jec.mp4": "/jec-final/static/media/jec.af1ec883ff870b151398.mp4",
     "static/media/jec-about.png": "/jec-final/static/media/jec-about.9b474afc330b95fa309d.png",
     "static/media/electronics.jpg": "/jec-final/static/media/electronics.058ce2e85fb92a92d725.jpg",
@@ -32,17 +32,13 @@
     "static/media/libary.png": "/jec-final/static/media/libary.91cccfecb5807d77c0e6.png",
     "static/media/counselling.jpg": "/jec-final/static/media/counselling.abd97c0a8188ac39af1e.jpg",
     "static/media/requirements.jfif": "/jec-final/static/media/requirements.9f95b63519da10de50cc.jfif",
-    "static/media/slick.svg": "/jec-final/static/media/slick.2630a3e3eab21c607e21.svg",
-    "static/media/slick.eot": "/jec-final/static/media/slick.a4e97f5a2a64f0ab1323.eot",
-    "static/media/slick.ttf": "/jec-final/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "index.html": "/jec-final/index.html",
-    "static/media/slick.woff": "/jec-final/static/media/slick.295183786cd8a1389865.woff",
-    "main.6d5294a0.css.map": "/jec-final/static/css/main.6d5294a0.css.map",
-    "main.b4dbdb8b.js.map": "/jec-final/static/js/main.b4dbdb8b.js.map",
-    "453.68693753.chunk.js.map": "/jec-final/static/js/453.68693753.chunk.js.map"
+    "main.900c1a46.css.map": "/jec-final/static/css/main.900c1a46.css.map",
+    "main.217c2f40.js.map": "/jec-final/static/js/main.217c2f40.js.map",
+    "453.ed3810f9.chunk.js.map": "/jec-final/static/js/453.ed3810f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6d5294a0.css",
-    "static/js/main.b4dbdb8b.js"
+    "static/css/main.900c1a46.css",
+    "static/js/main.217c2f40.js"
   ]
 }
