@@ -1,5 +1,6 @@
 {
   "files": {
+
     "main.css": "/jec-final/static/css/main.6d5294a0.css",
     "main.js": "/jec-final/static/js/main.8eec7d12.js",
     "static/js/453.68693753.chunk.js": "/jec-final/static/js/453.68693753.chunk.js",
@@ -44,5 +45,6 @@
   "entrypoints": [
     "static/css/main.6d5294a0.css",
     "static/js/main.8eec7d12.js"
+
   ]
 }
