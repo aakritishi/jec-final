@@ -18,7 +18,7 @@ const ProfileIcon = () => {
 
     if (token) {
       // Fetch user data
-      axios.get('https://jec.edu.np/user/', {
+      axios.get('https://jec.edu.np/api/user/', {
         headers: { Authorization: `Token ${token}` }
       })
       .then(response => {
