@@ -10,15 +10,13 @@ import LatestUpdate from "./LatestUpdate";
 import ExclusiveNews from "../News/ExclusiveNews";
 
 export const Home = () => {
-  const [showOverlay, setShowOverlay] = useState(false); // Start as false to delay showing the overlay
+  const [showOverlay, setShowOverlay] = useState(false); 
 
   useEffect(() => {
-    // Set a timer to show the overlay after 3 seconds
     const timer = setTimeout(() => {
       setShowOverlay(true);
     }, 3000);
 
-    // Cleanup timer on component unmount
     return () => clearTimeout(timer);
   }, []);
 
