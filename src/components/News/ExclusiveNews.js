@@ -16,7 +16,7 @@ const ExclusiveNews = () => {
   const fetchNewsItems = async () => {
     try {
     //   const token = localStorage.getItem('authToken');
-      const response = await axios.get("https://jec.edu.np/exclusive-news/", {
+      const response = await axios.get("https://jec.edu.np/api/exclusive-news/", {
         headers: {
           'Content-Type': 'multipart/form-data',
         //   'Authorization': `Token ${token}`,
