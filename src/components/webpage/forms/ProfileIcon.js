@@ -28,7 +28,8 @@ const ProfileIcon = () => {
         console.error('Error fetching user data:', err);
       });
     }
-  }, []);
+  }, 
+  []);
 
   useEffect(() => {
     // Handle clicks outside the dropdown

@@ -35,7 +35,7 @@ export const Header = () => {
                     });
 
                     // Log the entire response for debugging
-                    console.log('API Response:', response.data);
+                    // console.log('API Response:', response.data);
 
                     // Adjust the access based on the actual response structure
                     const userData = response.data;

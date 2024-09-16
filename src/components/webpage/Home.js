@@ -7,7 +7,8 @@ import AboutUniversity from "./AboutUniversity";
 import Course from "./Course";
 import Cardslider from "./Cardslider";
 import LatestUpdate from "./LatestUpdate";
-import ExclusiveNews from "../News/ExclusiveNews";
+// import ExclusiveNews from "../News/ExclusiveNews";
+import Exclnews from "../News/Exclnews";
 
 export const Home = () => {
   const [showOverlay, setShowOverlay] = useState(false); 
@@ -15,7 +16,7 @@ export const Home = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowOverlay(true);
-    }, 3000);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -36,15 +37,15 @@ export const Home = () => {
       {/* <Cardslider /> */}
 
       {showOverlay && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-md flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-md flex items-center justify-center z-40">
           <div className="relative bg-white p-4 rounded-lg max-w-md mx-auto">
             <button
               onClick={handleCloseOverlay}
-              className="absolute top-2 right-2 text-white text-xl bg-gray-800 rounded-full p-4"
+              className="absolute top-2 right-2 text-white text-xl bg-gray-800 rounded-full p-4 z-50"
             >
               X
             </button>
-            <ExclusiveNews className='w-[80%] mx-auto' />
+            <Exclnews className='w-[80%] mx-auto' />
           </div>
         </div>
       )}

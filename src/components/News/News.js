@@ -58,6 +58,7 @@ export default function News() {
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     if (name === 'photo') {
+      console.log("response", e.target.files);
       setNewNews({
         ...newNews,
         [name]: e.target.files[0]
