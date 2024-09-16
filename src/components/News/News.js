@@ -3,7 +3,7 @@ import { CgMathPlus } from "react-icons/cg";
 import { AiFillDelete } from "react-icons/ai";
 import axios from "axios";
 import NewsBody from "./NewsBody";
-import ExclusiveNews from "./ExclusiveNews";
+// import ExclusiveNews from "./ExclusiveNews";
 
 export default function News() {
   const [editMode, setEditMode] = useState(false);
@@ -21,7 +21,7 @@ export default function News() {
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
-    axios.get("https://jec.edu.np/user/", {
+    axios.get("https://jec.edu.np/api/user/", {
       headers: {
         'Content-Type': 'multipart/form-data',
         'Authorization': `Token ${token}`,
