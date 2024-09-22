@@ -107,13 +107,9 @@ export default function OnlineApply() {
     if (!formData.gender) newErrors.gender = 'Gender is required';
     if (!formData.date_of_birth) newErrors.date_of_birth = 'Date of Birth is required';
     if (!formData.address) newErrors.address = 'Address is required';
-    if (!formData.photo) newErrors.photo = 'Photo is required';
     if (!formData.interested_course) newErrors.interested_course = 'Interested Course selection is required';
     if (!formData.ioe_roll_no) newErrors.ioe_roll_no = 'IOE Roll Number is required';
     if (!formData.ioe_rank) newErrors.ioe_rank = 'IOE Rank is required';
-    if (!formData.transcript) newErrors.transcript = 'Transcript is required';
-    if (!formData.migration) newErrors.migration = 'Migration Certificate is required';
-    if (!formData.character) newErrors.character = 'Character Certificate is required';
     if (!formData.agreement) newErrors.agreement = 'You must agree to the declaration';
     if (!formData.email) newErrors.email = 'email is required';
     if (!formData.phone_number) newErrors.phone_number = 'phone number is required';
@@ -208,7 +204,6 @@ export default function OnlineApply() {
                 name='photo'
                 onChange={handleChange}
                 className='block mt-2'
-                required
               />
               {errors.photo && <p className='text-red-700'>{errors.photo}</p>}
             </label>
@@ -322,7 +317,6 @@ export default function OnlineApply() {
                     name='transcript'
                     onChange={handleChange}
                     className='block mt-2'
-                    required
                   />
                   {errors.transcript && <p className='text-red-700'>{errors.transcript}</p>}
                 </label>
@@ -335,7 +329,6 @@ export default function OnlineApply() {
                     name='migration'
                     onChange={handleChange}
                     className='block mt-2'
-                    required
                   />
                   {errors.migration && <p className='text-red-700'>{errors.migration}</p>}
                 </label>
@@ -348,7 +341,6 @@ export default function OnlineApply() {
                     name='character'
                     onChange={handleChange}
                     className='block  mt-2'
-                    required
                   />
                   {errors.character && <p className='text-red-700'>{errors.character}</p>}
                 </label>
@@ -372,6 +364,10 @@ export default function OnlineApply() {
               I hereby declare that the particulars furnished in this application form are correct and true and I fully agree to whatever actions taken as per rules and regulations of JEC Kupondole if found false or incorrect.
               {errors.agreement && <p className='text-red-700'>{errors.agreement}</p>}
             </p>
+
+            <p className='text-red-600 text-sm mt-2'>
+              Note: Photo fields are optional. While uploading a profile photo, make sure it is less than 2 MB.
+           </p>
           </div>
 
           <div className='flex justify-center text-xl'>

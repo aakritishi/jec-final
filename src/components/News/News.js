@@ -40,19 +40,33 @@ export default function News() {
   }, []);
 
   const fetchNewsItems = () => {
-    const token = localStorage.getItem('authToken');
-    axios.get("https://jec.edu.np/api/news/", {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        'Authorization': `Token ${token}`,
-      },
-    })
-    .then(response => {
-      setNewsList(response.data);
-    })
-    .catch(error => {
-      console.error("There was an error fetching the news items", error);
-    });
+    //const token = localStorage.getItem('authToken');
+    //axios.get("https://jec.edu.np/api/news/", {
+      //headers: {
+        //'Content-Type': 'multipart/form-data',
+        //'Authorization': `Token ${token}`,
+      //},
+    //})
+    //.then(response => {
+      //setNewsList(response.data);
+    //})
+    //.catch(error => {
+      //console.error("There was an error fetching the news items", error);
+    //});
+  //};
+   const config ={
+     headers: {
+       'Content-Type': 'multipart/form-data',
+     },
+   };
+   
+   axios.get("https://jec.edu.np/api/news/", config)
+     .then(response => {
+        setNewsList(response.data);
+     })
+     .catch(error => {
+       console.error("There was an error fetching the news items", error);
+     });
   };
 
   const handleInputChange = (e) => {
@@ -303,11 +317,13 @@ export default function News() {
             key={news.id}
             className="col-span-1 bg-white border border-gray-300 rounded-lg shadow-md p-2"
           >
+           <a href={news.photo} download>
             <img
               src={news.photo}
               alt="news"
               className="w-full h-48 object-cover rounded-md mb-4"
             />
+           </a>
             <h2 className="text-xl font-bold text-gray-900 mb-2">
               {news.title}
             </h2>
