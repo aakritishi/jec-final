@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import ImageSlider from "./ImageSlider";
 import { IntroductionSection } from "./IntroductionSection";
 import Updates from "./Updates";
@@ -7,50 +6,20 @@ import AboutUniversity from "./AboutUniversity";
 import Course from "./Course";
 import Cardslider from "./Cardslider";
 import LatestUpdate from "./LatestUpdate";
-// import ExclusiveNews from "../News/ExclusiveNews";
-import Exclnews from "../News/Exclnews";
+import MainEvent from "./Events/MainEvent"
 
 export const Home = () => {
-  const [showOverlay, setShowOverlay] = useState(false); 
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowOverlay(true);
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleCloseOverlay = () => {
-    setShowOverlay(false);
-  };
-
   return (
     <div className="w-[94%] mx-auto">
       <IntroductionSection />
       <Updates />
       <LatestUpdate />
+      <MainEvent/>
       <Events />
       <AboutUniversity />
       <ImageSlider />
       <Course />
-      {/* <Cardslider /> */}
-
-      {showOverlay && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-md flex items-center justify-center z-40">
-          <div className="relative bg-white p-4 rounded-lg max-w-md mx-auto">
-            <button
-              onClick={handleCloseOverlay}
-              className="absolute top-2 right-2 text-white text-xl bg-gray-800 rounded-full p-4 z-50"
-            >
-              X
-            </button>
-            <Exclnews className='w-[80%] mx-auto' />
-          </div>
-        </div>
-      )}
     </div>
   );
 };
-
 export default Home;

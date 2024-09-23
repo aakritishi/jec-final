@@ -155,7 +155,7 @@ export default function News() {
             </h1>
             {isAdmin && (
               <button
-                className="bg-blue-800 px-4 py-2 rounded-lg text-white text-lg"
+                className="px-4 py-2 text-lg text-white bg-green-500 rounded-lg"
                 onClick={() => setEditMode(!editMode)}
               >
                 {editMode ? "Done" : "Edit"}
@@ -165,12 +165,12 @@ export default function News() {
         <NewsBody/>
         </div>
 
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           <div>
             {editMode && (
               <div className="py-4 px-7">
                 <button
-                  className="p-4 border bg-blue-700 rounded-lg"
+                  className="p-4 bg-blue-700 border rounded-lg"
                   onClick={handleNewsFormToggle}
                 >
                   <CgMathPlus className="text-2xl font-bold text-white" />
@@ -188,7 +188,7 @@ export default function News() {
             <form onSubmit={handleFormSubmit} className="container">
               <div className="row">
                 <div className="col-12 col-md-6 col-lg-4 mb-[30px]">
-                  <div className="card mx-auto max-w-sm rounded-lg shadow-lg relative p-6">
+                  <div className="relative max-w-sm p-6 mx-auto rounded-lg shadow-lg card">
                     <div className="relative">
                       <label
                         htmlFor="imageUrl"
@@ -200,13 +200,13 @@ export default function News() {
                         id="imageUrl"
                         type="file"
                         name="photo"
-                        className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                         placeholder="Enter image"
                         onChange={handleInputChange}
                       />
                     </div>
 
-                    <div className="card-body p-2">
+                    <div className="p-2 card-body">
                       <div className="mb-4">
                         <label
                           htmlFor="title"
@@ -218,7 +218,7 @@ export default function News() {
                           id="title"
                           type="text"
                           name="title"
-                          className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                          className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                           placeholder="Enter news title"
                           value={newNews.title}
                           onChange={handleInputChange}
@@ -236,7 +236,7 @@ export default function News() {
                           id="description"
                           type="text"
                           name="description"
-                          className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                          className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                           placeholder="Enter news description"
                           value={newNews.description}
                           onChange={handleInputChange}
@@ -254,7 +254,7 @@ export default function News() {
                           id="date"
                           type="date"
                           name="date"
-                          className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                          className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                           value={newNews.date}
                           onChange={handleInputChange}
                         />
@@ -271,14 +271,14 @@ export default function News() {
                           id="publisher"
                           type="text"
                           name="publisher"
-                          className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                          className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                           placeholder="Enter author name"
                           value={newNews.publisher}
                           onChange={handleInputChange}
                         />
                       </div>
 
-                      <div className="mb-4 flex items-center">
+                      <div className="flex items-center mb-4">
                         <input
                           id="is_exclusive"
                           type="checkbox"
@@ -298,7 +298,8 @@ export default function News() {
                       <div className="mt-4">
                         <button
                           type="submit"
-                          className="px-4 py-2 bg-blue-500 text-white rounded-lg"
+                          // onClick={}
+                          className="px-4 py-2 text-white bg-blue-500 rounded-lg"
                         >
                           Add News
                         </button>
@@ -310,38 +311,67 @@ export default function News() {
             </form>
           </div>
         )}
+<div className="grid grid-cols-1 gap-6 px-4 py-6 md:grid-cols-2 lg:grid-cols-3">
+  {newsList.map((news) => (
+    <div
+      key={news.id}
+      className="relative col-span-1 p-5 transition-transform border border-gray-200 shadow-lg bg-gradient-to-r from-white via-gray-50 to-white rounded-2xl hover:shadow-2xl hover:scale-105"
+    >
+      <a href={news.photo} download className="block overflow-hidden rounded-lg">
+        <img
+          src={news.photo}
+          alt="news"
+          className="object-cover w-full h-48 transition-transform duration-500 ease-in-out transform border-2 hover:scale-110 "
+        />
+      </a>
+      <h2
+        className="mt-4 text-xl font-bold tracking-wide text-gray-800"
+        style={{ fontFamily: "'Merriweather', serif" }}
+      >
+        {news.title}
+      </h2>
+      <p className="mt-3 mb-2 leading-relaxed text-gray-700">
+        {news.description}
+      </p>
+      <p
+        className="mt-1 text-sm text-gray-500"
+        style={{ fontFamily: "'Merriweather', serif" }}
+      >
+        {news.date}
+      </p>
+      <p
+        className="text-sm text-gray-500"
+        style={{ fontFamily: "'Merriweather', serif" }}
+      >
+        {news.publisher}
+      </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-5 mx-4">
-        {newsList.map((news) => (
-          <div
-            key={news.id}
-            className="col-span-1 bg-white border border-gray-300 rounded-lg shadow-md p-2"
+      {editMode && isAdmin && (
+        <div className="flex justify-between mt-5 space-x-4">
+        <button
+  onClick={() => {
+    if (window.confirm("Are you sure you want to delete this news item?")) {
+      handleDelete(news.id);
+    }
+  }}
+  className="p-2 text-red-600 transition-all duration-300 ease-in-out bg-red-100 rounded-full hover:bg-red-200"
+>
+  <AiFillDelete className="text-2xl" />
+</button>
+
+          <button
+            style={{ fontFamily: "'Merriweather', serif" }}
+            className="flex items-center justify-center px-4 py-2 font-semibold text-white transition-all duration-300 ease-in-out rounded-full shadow-lg bg-gradient-to-r from-blue-500 to-blue-700 hover:shadow-2xl hover:scale-105 active:scale-95"
           >
-           <a href={news.photo} download>
-            <img
-              src={news.photo}
-              alt="news"
-              className="w-full h-48 object-cover rounded-md mb-4"
-            />
-           </a>
-            <h2 className="text-xl font-bold text-gray-900 mb-2">
-              {news.title}
-            </h2>
-            <p className="text-gray-700 mb-2">{news.description}</p>
-            <p className="text-gray-500 mb-2">{news.date}</p>
-            <p className="text-gray-500 mb-4">{news.publisher}</p>
-            <p>{news.is_exclusive ? "" : ""}</p>
-            {editMode && isAdmin && (
-              <button
-                onClick={() => handleDelete(news.id)}
-                className="text-red-600 hover:text-red-800"
-              >
-                <AiFillDelete className="text-2xl" />
-              </button>
-            )}
-          </div>
-        ))}
-      </div>
+            Edit
+          </button>
+        </div>
+      )}
+    </div>
+  ))}
+</div>
+
+
       </div>
     </>
   );

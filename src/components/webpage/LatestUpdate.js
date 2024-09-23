@@ -3,7 +3,7 @@ import React from "react";
 const LatestUpdate = () => {
   return (
     <div>
-      <div className="container mx-auto mt-[180px] md:mt-[100px] w-full max-w-[1150px] mb-[50px] px-4">
+      <div className="container mx-auto mt-[180px] md:mt-[160px] w-full max-w-[1150px] mb-[50px] px-4">
         <div className="flex flex-col md:flex-row">
           <div className="md:w-1/3">
             <h1

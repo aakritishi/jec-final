@@ -8,7 +8,7 @@ import Civil from './Civil';
 import Computer from './Computer';
 import Electronics from './Electronics';
 
-export default function AcademicLearnMore() {
+export default function EletronicsLearnMore() {
   return (
     <>
       <div className='flex items-center justify-center mt-5 text-center'>
@@ -68,21 +68,20 @@ export default function AcademicLearnMore() {
         <h1 className='text-[40px] font-bold'>COURSE <span className='text-red-500'>STRUCTURE</span></h1>
       </div>
 
-          {/* <Civil/>  
-          <Computer/>
-          <Electronics/>   */}
+          <Electronics/>  
 
 
 
-      <div className='flex items-center justify-center mt-4 mb-4'>
-      <Link to='/applyOnline'>
+          <div className='flex items-center justify-center mt-4 mb-4'>
+          <Link to='/onlineApply'>
                 <button
                     className="px-4 py-2 text-sm text-white transition duration-300 bg-blue-600 rounded-lg shadow-md md:text-base hover:bg-blue-700 hover:shadow-lg focus:outline-none"
                 >
                     Apply Online
                 </button>
             </Link>
-      </div>
+</div>
+
     </>
   );
 }

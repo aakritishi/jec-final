@@ -69,10 +69,10 @@ const Signup = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-4 bg-white shadow-md rounded-lg my-6">
-      <h2 className="text-2xl font-bold mb-4 text-center">Sign Up</h2>
-      {error && <p className="text-red-500 text-center">{error}</p>}
-      {success && <p className="text-green-500 text-center">{success}</p>}
+    <div className="max-w-md p-4 mx-auto my-6 bg-white rounded-lg shadow-md">
+      <h2 className="mb-4 text-2xl font-bold text-center">Sign Up</h2>
+      {error && <p className="text-center text-red-500">{error}</p>}
+      {success && <p className="text-center text-green-500">{success}</p>}
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="first_name" className="block text-gray-950">First Name</label>
@@ -140,11 +140,11 @@ const Signup = () => {
             required
           />
         </div>
-        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-lg">
+        <button type="submit" className="w-full py-2 text-white bg-blue-500 rounded-lg">
           Sign Up
         </button>
 
-        <h2 className="text-center mt-2">Already have an account?</h2>
+        <h2 className="mt-2 text-center">Already have an account?</h2>
         <Link to="/login">
           <h2 className="px-3 py-2 font-semibold text-center">Login</h2>
         </Link>

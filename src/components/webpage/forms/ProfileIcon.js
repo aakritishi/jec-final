@@ -28,8 +28,7 @@ const ProfileIcon = () => {
         console.error('Error fetching user data:', err);
       });
     }
-  }, 
-  []);
+  }, []);
 
   useEffect(() => {
     // Handle clicks outside the dropdown
@@ -70,8 +69,7 @@ const ProfileIcon = () => {
           {dropdownVisible && (
             <div
               ref={dropdownRef}
-              className="absolute mt-28 w-48 bg-white rounded-lg shadow-lg z-50 
-                         right-0 lg:mt-20 lg:right-0 "
+              className="absolute right-0 z-50 w-48 bg-white rounded-lg shadow-lg mt-28 lg:mt-20 lg:right-0 "
             >
               <div className="px-4 py-2 text-gray-800">
                 {userData ? (
@@ -84,7 +82,7 @@ const ProfileIcon = () => {
               </div>
               <button
                 onClick={handleLogout}
-                className="block w-full text-left px-4 py-2 text-gray-800 hover:text-red-600 rounded-lg transition-colors duration-200"
+                className="block w-full px-4 py-2 text-left text-gray-800 transition-colors duration-200 rounded-lg hover:text-red-600"
               >
                 Logout
               </button>

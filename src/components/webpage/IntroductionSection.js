@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
-// import { Link } from "react-router-dom";
-import video from "../media/images/jec.mp4";
-// import axios from "axios";
+import { Link } from 'react-router-dom';
+import video from '../media/images/jec.mp4';
+import axios from 'axios';
 
 const VideoBackground = styled.video`
   position: absolute;
@@ -26,28 +26,25 @@ const ContentWrapper = styled.div`
 `;
 
 export const IntroductionSection = () => {
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // const [isStaff, setIsStaff] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isStaff, setIsStaff] = useState(false);
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("authToken");
-  //   console.log(token);
-  //   if (token) {
-  //     setIsLoggedIn(true);
-  //     // Fetch user data
-  //     axios
-  //       .get("https://jec.edu.np/user/", {
-  //         headers: { Authorization: `Token ${token}` },
-  //       })
-  //       .then((response) => {
-  //         setIsStaff(response.data.is_staff);
-  //         console.log(response.data);
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error fetching user data:", error);
-  //       });
-  //   }
-  // }, []);
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    console.log(token);
+    if (token) {
+      setIsLoggedIn(true);
+      // Fetch user data
+      axios.get('jec.edu.np/api/accounts/user/', { headers: { Authorization: `Token ${token}` } })
+        .then(response => {
+          setIsStaff(response.data.is_staff);
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching user data:', error);
+        });
+    }
+  }, []);
 
   return (
     <>
@@ -56,33 +53,18 @@ export const IntroductionSection = () => {
           <source src={video} type="video/mp4" />
         </VideoBackground>
         <ContentWrapper>
-          <div className="w-full md:w-3/4 lg:w-1/2 p-4 py-4 my-5">
-            <h1
-              className="text-3xl md:text-4xl font-semibold"
-              style={{ fontFamily: "'Merriweather', serif" }}
-            >
+          <div className="w-full p-4 py-4 my-5 md:w-3/4 lg:w-1/2" style={{ fontFamily: "'Merriweather', serif" }}>
+            <h1 className="text-3xl font-semibold md:text-4xl" style={{ fontFamily: "'Merriweather', serif" }}>
               JANAKPUR ENGINEERING COLLEGE
             </h1>
-            <p className="text-lg mt-4 mb-6">
-              Janakpur Engineering is a leading research university pushing
-              boundaries and frontiers to brighten the future of the students.
+            <p className="mt-4 mb-6 text-lg">
+              Janakpur Engineering is a leading research university pushing boundaries and frontiers to brighten the future of the students.
             </p>
-            {/* buttons for apply online and login */}
-            {/* <div className="gap-5">
-              {isLoggedIn && !isStaff ? (
-              <Link to="/onlineapply">
-                <button className="px-3 py-2 text-xl font-semibold hover:bg-blue-500 hover:text-white rounded-lg border border-black">
-                  Apply Online
-                </button>
-              </Link>
-              ) : !isLoggedIn ? (
-              <Link to="/login">
-                <button className="px-3 py-2 text-xl font-semibold hover:bg-blue-500 hover:text-white rounded-lg border border-black">
-                  Login
-                </button>
-              </Link>
-              ) : null} 
-            </div> */}
+
+            
+         
+
+          
           </div>
         </ContentWrapper>
       </header>

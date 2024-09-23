@@ -13,23 +13,23 @@ const coursesData = [
     img: computer,
     title: "Bachelor of Computer Engineering (BCE)",
     description: "Detailed description about Computer Engineering.",
-    route: "/alearnmore",
-    link: "/alearnmore",
+    route: "/Computer-learn-more",
+    link: "/Computer-learn-more",
   },
   {
     img: civil,
     title: "Bachelor of Civil Engineering (BCT)",
     description: "Detailed description about Civil Engineering.",
-    route: "/alearnmore",
-    link: "/alearnmore",
+    route: "/Civil-learn-more",
+    link: "/Civil-learn-more",
   },
   {
     img: electronics,
     title: "Bachelor of Electronics and Information Engineering (BEI)",
     description:
       "Detailed description about Electronics and Information Engineering.",
-    route: "/alearnmore",
-    link: "/alearnmore",
+    route: "/Eletronics-learn-more",
+    link: "/Eletronics-learn-more",
   },
 ];
 
@@ -80,7 +80,7 @@ export default function Academics() {
               Janakpur Engineering College.
             </h1>
           </div>
-          <div className="flex items-end justify-end text-end mt-3">
+          <div className="flex items-end justify-end mt-3 text-end">
             <p>
               Restless learners change
               <br /> the world.
@@ -105,7 +105,7 @@ export default function Academics() {
               </p>
             </div>
 
-            <div className="col-sm-12 col-md-6 flex items-end justify-end">
+            <div className="flex items-end justify-end col-sm-12 col-md-6">
               <img
                 src={learnMoreImage}
                 className="h-[220px] transition-transform transform hover:scale-105"
@@ -125,9 +125,9 @@ export default function Academics() {
               <br /> turn mirrors into windows"
             </h1>
           </div>
-          <div
+          {/* <div
             id="stats"
-            className="flex items-end justify-end text-end mt-3 gap-4"
+            className="flex items-end justify-end gap-4 mt-3 text-end"
           >
             <div>
               <h1 className="text-[50px] text-center ms-3">
@@ -151,7 +151,7 @@ export default function Academics() {
                 EMPLOYMENT RATE
               </h1>
             </div>
-          </div>
+          </div> */}
         </div>
 
       <div className="my-[60px]">
@@ -162,8 +162,8 @@ export default function Academics() {
           Courses Offered
         </h1>
       </div>
-      <div className="container-fluid mb-5">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+      <div className="mb-5 container-fluid">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
           {coursesData.map((course, index) => (
             <Link
               to={course.link}
@@ -171,7 +171,7 @@ export default function Academics() {
               className="flex flex-col"
             >
               <div
-                className="card transform transition-transform hover:scale-105 hover:shadow-xl"
+                className="transition-transform transform card hover:scale-105 hover:shadow-xl"
                 style={{
                   border: "1px solid #e0e0e0",
                   boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
@@ -182,7 +182,7 @@ export default function Academics() {
               >
                 <img
                   src={course.img}
-                  className="card-img-top transition-transform transform hover:scale-110 rounded-lg"
+                  className="transition-transform transform rounded-lg card-img-top hover:scale-110"
                   style={{ height: "200px", objectFit: "cover" }}
                   alt={course.title}
                 />
