@@ -28,7 +28,7 @@ export const Header = () => {
             if (token) {
                 setIsLoggedIn(true); // User is logged in if token exists
                 try {
-                    const response = await axios.get('https://jec.edu.np/api/user/', {
+                    const response = await axios.get('http://192.168.1.136:8000/api/user/', {
                         headers: {
                             'Authorization': `Token ${token}`,
                         },
