@@ -1,65 +1,88 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CountUp from "react-countup";
-import students from "../images/jec-students.jpg";
 import about from "../images/jec-about.png";
-import leader from "../images/student.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
-import logo from "../images/jec-logo.png";
-
+import students from "../images/jec-students.jpg";
 export default function Introduction() {
-  const [countersInView, setCountersInView] = useState({
-    students: false,
-    professors: false,
-    startups: false,
-    researchPapers: false,
-    researchGrants: false,
-    textbooks: false,
-    awards: false,
+  const [data, setData] = useState({
+    students: 0,
+    professors: 0,
+    principal: { name: "", photo: "", description: "" },
+    chairman: { name: "", photo: "", description: "" },
   });
 
-  const countersRef = {
-    students: useRef(null),
-    professors: useRef(null),
-    startups: useRef(null),
-    researchPapers: useRef(null),
-    researchGrants: useRef(null),
-    textbooks: useRef(null),
-    awards: useRef(null),
-  };
+  const [adminData, setAdminData] = useState({
+    students: data.students,
+    professors: data.professors,
+    principalDescription: data.principal.description,
+    principalPhoto: null,
+    chairmanDescription: data.chairman.description,
+    chairmanPhoto: null,
+  });
+
+  const [showAdminPanel, setShowAdminPanel] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const key = Object.keys(countersRef).find(
-              (refKey) => countersRef[refKey].current === entry.target
-            );
-            if (key) {
-              setCountersInView((prev) => ({ ...prev, [key]: true }));
-              observer.unobserve(entry.target);
-            }
-          }
+    // Fetch dynamic data from the server
+    fetch("/api/data")
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data);
+        setAdminData({
+          students: data.students,
+          professors: data.professors,
+          principalDescription: data.principal.description,
+          principalPhoto: null, // Reset to null for file upload
+          chairmanDescription: data.chairman.description,
+          chairmanPhoto: null, // Reset to null for file upload
         });
-      },
-      { threshold: 0.5 } // Adjust as needed
-    );
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  }, []);
 
-    Object.values(countersRef).forEach((ref) => {
-      if (ref.current) {
-        observer.observe(ref.current);
-      }
+  const handleAdminInputChange = (e) => {
+    const { name, value } = e.target;
+    setAdminData({
+      ...adminData,
+      [name]: value,
     });
+  };
 
-    return () => {
-      Object.values(countersRef).forEach((ref) => {
-        if (ref.current) {
-          observer.unobserve(ref.current);
-        }
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    const file = files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setAdminData({
+        ...adminData,
+        [name]: reader.result, // Set the image data as a base64 string
       });
     };
-  }, []);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleAdminSubmit = (e) => {
+    e.preventDefault();
+
+    // Send updated data to the server (admin update)
+    fetch("/api/data", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(adminData),
+    })
+      .then((response) => response.json())
+      .then((updatedData) => setData(updatedData))
+      .catch((error) => console.error("Error updating data:", error));
+  };
+
+  const toggleAdminPanel = () => {
+    setShowAdminPanel((prev) => !prev);
+  };
 
   return (
     <>
@@ -111,127 +134,150 @@ export default function Introduction() {
         <div
           className="w-full max-w-[1100px] h-[380px] rounded-lg relative overflow-hidden"
           style={{
-            backgroundImage: `url(${about})`,
+              backgroundImage: `url(${about})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         ></div>
-      </div>
+    </div>
+      <button
+        onClick={toggleAdminPanel}
+        className="bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 transition duration-200 ease-in-out mb-6"
+      >
+        {showAdminPanel ? "Hide Admin Panel" : "Show Admin Panel"}
+      </button>
 
+      {/* Admin Form to Update Information */}
+      {showAdminPanel && (
+        <div className="container mb-12 p-6 border border-gray-300 rounded-lg shadow-lg bg-white transition-all duration-300 ease-in-out transform hover:scale-105">
+          <h2 className="text-2xl font-bold text-blue-600 mb-6">Admin Panel - Update Data</h2>
+          <form onSubmit={handleAdminSubmit}>
+            <div className="mb-4">
+              <label className="block text-lg font-medium text-gray-700">Number of Students</label>
+              <input
+                type="number"
+                name="students"
+                value={adminData.students}
+                onChange={handleAdminInputChange}
+                className="input-field w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-lg font-medium text-gray-700">Number of Professors</label>
+              <input
+                type="number"
+                name="professors"
+                value={adminData.professors}
+                onChange={handleAdminInputChange}
+                className="input-field w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-lg font-medium text-gray-700">Principal's Description</label>
+              <textarea
+                name="principalDescription"
+                value={adminData.principalDescription}
+                onChange={handleAdminInputChange}
+                className="input-field w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-lg font-medium text-gray-700">Principal's Photo</label>
+              <input
+                type="file"
+                name="principalPhoto"
+                onChange={handleFileChange}
+                className="input-field w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                accept="image/*"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-lg font-medium text-gray-700">Chairman's Description</label>
+              <textarea
+                name="chairmanDescription"
+                value={adminData.chairmanDescription}
+                onChange={handleAdminInputChange}
+                className="input-field w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-lg font-medium text-gray-700">Chairman's Photo</label>
+              <input
+                type="file"
+                name="chairmanPhoto"
+                onChange={handleFileChange}
+                className="input-field w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                accept="image/*"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-green-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-green-700 transition duration-200 ease-in-out"
+            >
+              Update Data
+            </button>
+          </form>
+        </div>
+      )}
+
+      {/* Other content (counters, principal, chairman sections) remain unchanged... */}
+      {/* Students and Professors Counter */}
       <div className="container mb-12">
         <div className="flex flex-col md:flex-row items-center justify-center text-center">
-          <div
-            className="md:w-1/3 p-4 transition-transform transform hover:scale-105"
-            ref={countersRef.students}
-          >
+          <div className="md:w-1/3 p-4">
             <h1 className="text-4xl font-bold text-blue-600">
-              {countersInView.students ? (
-                <CountUp end={1000} duration={2} />
-              ) : (
-                "0"
-              )}
+              <CountUp end={data.students} duration={2} />
             </h1>
             <p className="text-lg mt-2 text-gray-700">STUDENTS</p>
           </div>
-          <div
-            className="md:w-1/3 p-4 transition-transform transform hover:scale-105"
-            ref={countersRef.professors}
-          >
+          <div className="md:w-1/3 p-4">
             <h1 className="text-4xl font-bold text-blue-600">
-              {countersInView.professors ? (
-                <CountUp end={30} duration={2} />
-              ) : (
-                "0"
-              )}
+              <CountUp end={data.professors} duration={2} />
             </h1>
             <p className="text-lg mt-2 text-gray-700">PROFESSORS</p>
           </div>
-          {/* <div className='md:w-1/3 p-4 transition-transform transform hover:scale-105' ref={countersRef.startups}>
-            <h1 className="text-4xl font-bold text-blue-600">
-              {countersInView.startups ? <CountUp end={50} duration={2} /> : '0'}
-            </h1>
-            <p className="text-lg mt-2 text-gray-700">STARTUPS</p>
-          </div> */}
         </div>
       </div>
 
+      {/* Principal Section */}
       <div className="container mx-auto p-4">
-        {/* Principle Section */}
         <div className="flex flex-col lg:flex-row lg:items-center gap-12 mb-12">
-          {/* Text Section */}
           <div className="lg:w-1/2 p-4">
-            <h1 className="text-3xl font-bold text-blue-600 mb-4 transition-transform transform hover:scale-105">
-              Meet Our Principal
-            </h1>
-            <p className="mb-6 text-gray-950 text-justify">
-              Emma J Coleman is the first President and founder of University. She is one of the most influential leaders in the field of education with experience spanning decades. She is now looking over the overall functioning of University and also acts as the head of the Department of Humanities.
-            </p>
-          </div>
+            <h1 className="text-3xl font-bold text-blue-600 mb-4">Meet Our Principal</h1>
+            <p className="mb-6 text-gray-950 text-justify">{data.principal.description}</p>
           
-          {/* Image Section */}
+          </div>
           <div className="lg:w-1/2 p-4">
-            <img
-              src={leader}
-              className="w-full h-auto rounded-lg shadow-2xl transition-transform transform hover:scale-105 hover:shadow-xl"
-              alt="President"
+          <img
+              src={data.principal.photo}
+              className="w-full h-auto rounded-lg shadow-2xl"
+              alt="Principal"
             />
           </div>
         </div>
 
-        {/* Chairperson Section */}
+        {/* Chairman Section */}
         <div className="flex flex-col-reverse lg:flex-row lg:items-center gap-12">
-          {/* Image Section */}
-          <div className="lg:w-1/2 p-4">
-            <img
-              src={leader}
-              className="w-full h-auto rounded-lg shadow-2xl transition-transform transform hover:scale-105 hover:shadow-xl"
-              alt="President"
+        <img
+              src={data.chairman.photo}
+              className="w-full h-auto rounded-lg shadow-2xl"
+              alt="Chairman"
             />
-          </div>
-
-          {/* Text Section */}
           <div className="lg:w-1/2 p-4">
-            <h1 className="text-3xl font-bold text-blue-600 mb-4 transition-transform transform hover:scale-105">
-              Meet Our Chairperson
-            </h1>
-            <p className="mb-6 text-gray-950 text-justify">
-              Emma J Coleman is the first President and founder of University. She is one of the most influential leaders in the field of education with experience spanning decades. She is now looking over the overall functioning of University and also acts as the head of the Department of Humanities.
-            </p>
+           
+              <div className="lg:w-1/2 p-4">
+            <h1 className="text-3xl font-bold text-blue-600 mb-4">Meet Our Chairperson</h1>
+            <p className="mb-6 text-gray-950 text-justify">{data.chairman.description}</p>
+          </div>
           </div>
         </div>
       </div>
-
-
-
-      {/* <div className='container mt-12 mb-12'>
-        <h1 className='text-3xl font-semibold mb-6 text-blue-600'>FACULTY</h1>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-          <div className="card mx-auto transition-transform transform h-[380px] w-[330px] hover:scale-105">
-            <img src="..." className="card-img-top h-64 object-cover" alt="..." />
-            <div className="card-body">
-              <h5 className="card-title text-2xl font-semibold text-blue-600">Card title</h5>
-              <p className="text-gray-700">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <button className="mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">LEARN MORE</button>
-            </div>
-          </div>
-          <div className="card mx-auto transition-transform transform h-[380px] w-[330px] hover:scale-105">
-            <img src="..." className="card-img-top h-64 object-cover" alt="..." />
-            <div className="card-body">
-              <h5 className="card-title text-2xl font-semibold text-blue-600">Card title</h5>
-              <p className="text-gray-700">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <button className="mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">LEARN MORE</button>
-            </div>
-          </div>
-          <div className="card mx-auto transition-transform transform h-[380px] w-[330px] hover:scale-105">
-            <img src="..." className="card-img-top h-64 object-cover" alt="..." />
-            <div className="card-body">
-              <h5 className="card-title text-2xl font-semibold text-blue-600">Card title</h5>
-              <p className="text-gray-700">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <button className="mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">LEARN MORE</button>
-            </div>
-          </div>
-        </div>
-      </div> */}
     </>
   );
 }

@@ -19,10 +19,10 @@ import Printform from "./components/ApplyOnline/Printform";
 import PrivacyPolicy from "./components/Privacy Policy/PrivacyPolicy";
 import Admission from "./components/Admission/Admission";
 import Introduction from "./components/About/Introduction";
-import JECadvisory from "./components/About/JECadvisoryBoard";
+// import JECadvisory from "./components/About/JECadvisoryBoard";
 import Teachers from "./components/About/Teachers";
-import Signup from "./components/webpage/forms/signup";
-import Login from "./components/webpage/forms/login";
+import Signup from "./components/webpage/forms/Signup";
+import Login from "./components/webpage/forms/Login"
 import ViewForm from "./components/ApplyOnline/ViewForm";
 import AdminHome from "./components/Admin/AdminHome";
 import ApplicationStatus from "./components/Admin/ApplicationStatus";
@@ -32,6 +32,7 @@ import AddTeam from "./components/Admin/AddTeam";
 import ComputerLearnMore from "./components/About/Academics/ComputerLeranMore";
 import CivilLearnMore from "./components/About/Academics/CivilLearnmore";
 import EletronicsLearnMore from "./components/About/Academics/ElectronicsLernMore";
+import JECadvisory from "./components/About/JECadvisoryBoard"
 function App() {
   return (
     <HashRouter>
