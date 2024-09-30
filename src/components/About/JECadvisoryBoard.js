@@ -265,3 +265,109 @@ export class JECadvisoryBoard extends Component {
 }
 
 export default JECadvisoryBoard;
+
+{/* />
+<input
+type="text"
+name="position"
+value={formData.position}
+onChange={handleInputChange}
+placeholder="Position"
+className="border p-2 w-full mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+required
+/>
+<button type="submit" className="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-500 transition duration-300">
+Update Member
+</button>
+</form>
+</div>
+);
+
+export class JECadvisoryBoard extends Component {
+state = {
+advisoryMemberData: [], // Initially empty, to be filled by data from server
+formData: {
+id: '',
+img: '',
+name: '',
+position: '',
+},
+isEditing: false,
+showForm: false, // New state property to control form visibility
+};
+
+componentDidMount() {
+// Fetch data from the server when component mounts
+fetch("https://api.example.com/advisory-members") // Replace with your actual API URL
+.then((response) => response.json())
+.then((data) => {
+this.setState({ advisoryMemberData: data });
+})
+.catch((error) => console.error("Error fetching advisory members:", error));
+}
+
+handleInputChange = (e) => {
+const { name, value } = e.target;
+this.setState((prevState) => ({
+formData: {
+...prevState.formData,
+[name]: value,
+},
+}));
+};
+
+handleSubmit = (e) => {
+e.preventDefault();
+const { formData, advisoryMemberData, isEditing } = this.state;
+
+if (isEditing) {
+this.setState({
+advisoryMemberData: advisoryMemberData.map((member) =>
+  member.id === formData.id ? { ...formData } : member
+),
+isEditing: false,
+formData: { id: '', img: '', name: '', position: '' },
+showForm: false, // Hide form after submit
+});
+} else {
+this.setState((prevState) => ({
+advisoryMemberData: [
+  ...prevState.advisoryMemberData,
+  { ...formData, id: prevState.advisoryMemberData.length + 1 },
+],
+formData: { id: '', img: '', name: '', position: '' },
+showForm: false, // Hide form after submit
+}));
+}
+};
+
+handleEditClick = (member) => {
+this.setState({
+formData: { ...member },
+isEditing: true,
+showForm: true, // Show form when Edit is clicked
+});
+};
+
+handleDelete = (id) => {
+this.setState((prevState) => ({
+advisoryMemberData: prevState.advisoryMemberData.filter((member) => member.id !== id),
+}));
+};
+
+toggleFormVisibility = () => {
+this.setState((prevState) => ({
+showForm: !prevState.showForm, // Toggle form visibility when Edit button is clicked
+}));
+};
+
+render() {
+const { advisoryMemberData, isEditing, formData, showForm } = this.state;
+
+return (
+<div className="container mx-auto my-10 p-4 md:p-8 bg-gradient-to-br from-white to-gray-100 rounded-lg shadow-xl">
+<h1 className="text-[50px] my-5 text-red-600 text-center font-bold transition-transform duration-500 hover:scale-105" style={{ fontFamily: "'Merriweather', serif" }}>
+  Advisory Board
+</h1>
+
+{/* Render Add or Edit Form based on showForm state */}
