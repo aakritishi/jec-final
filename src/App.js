@@ -70,7 +70,7 @@ function App() {
 
 
           <Route path="/Computer-learn-more" element={<ComputerLearnMore />} />
-          <Route path="/Civil-learn-more" element={<CivilLearnMore />} />
+          <Route path="/civil-learn-more" element={<CivilLearnMore />} />
           <Route path="/Eletronics-learn-more" element={<EletronicsLearnMore />} />
 
 
