@@ -21,8 +21,8 @@ import Admission from "./components/Admission/Admission";
 import Introduction from "./components/About/Introduction";
 // import JECadvisory from "./components/About/JECadvisoryBoard";
 import Teachers from "./components/About/Teachers";
-import Signup from "./components/webpage/forms/signup";
-import Login from "./components/webpage/forms/login"
+import Signup from "./components/webpage/forms/Signup";
+import Login from "./components/webpage/forms/Login"
 import ViewForm from "./components/ApplyOnline/ViewForm";
 import AdminHome from "./components/Admin/AdminHome";
 import ApplicationStatus from "./components/Admin/ApplicationStatus";
