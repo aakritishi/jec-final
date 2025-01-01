@@ -1,5 +1,8 @@
-import React, { Component } from "react";
+import React, { useEffect, useState, Component } from "react";
+import CountUp from "react-countup";
+import axios from "axios"; 
 import imgadv from "../images/academic.png";
+
 // AddMemberForm Component
 const AddMemberForm = ({ formData, handleInputChange, handleFileChange, handleSubmit }) => (
   <div className="p-6 my-10 bg-white rounded-lg shadow-lg">
@@ -23,10 +26,10 @@ const AddMemberForm = ({ formData, handleInputChange, handleFileChange, handleSu
       />
       <input
         type="text"
-        name="position"
-        value={formData.position}
+        name="designation"
+        value={formData.designation}
         onChange={handleInputChange}
-        placeholder="Position"
+        placeholder="Designation"
         className="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         required
       />
@@ -47,7 +50,7 @@ const EditMemberForm = ({ formData, handleInputChange, handleFileChange, handleS
         name="img"
         onChange={handleFileChange}
         className="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        required
+       
       />
       <input
         type="text"
@@ -60,10 +63,10 @@ const EditMemberForm = ({ formData, handleInputChange, handleFileChange, handleS
       />
       <input
         type="text"
-        name="position"
-        value={formData.position}
+        name="designation"
+        value={formData.designation}
         onChange={handleInputChange}
-        placeholder="Position"
+        placeholder="Designation"
         className="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         required
       />
@@ -76,27 +79,76 @@ const EditMemberForm = ({ formData, handleInputChange, handleFileChange, handleS
 
 export class JECadvisoryBoard extends Component {
   state = {
-    advisoryMemberData: [], // Initially empty, to be filled by data from server
+    advisoryMemberData: [],
     formData: {
       id: '',
       img: '',
       name: '',
-      position: '',
+      designation: '',
     },
     isEditing: false,
-    showForm: false, // State to control form visibility
-    currentlyEditingId: null, // State to track the member being edited
+    showForm: false,
+    currentlyEditingId: null,
+    loading: true, // Add loading state
+    isAdmin: false, // Add isAdmin state
   };
 
   componentDidMount() {
-    // Fetch data from the server when component mounts
-    fetch("https://api.example.com/advisory-members") // Replace with your actual API URL
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ advisoryMemberData: data });
-      })
-      .catch((error) => console.error("Error fetching advisory members:", error));
+    this.fetchAdvisoryMembers();
+    this.checkAdminStatus(); // Check admin status when component mounts
   }
+
+  checkAdminStatus = () => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      axios
+        .get("http://192.168.1.136:8000/api/user/", {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Token ${token}`,
+          },
+        })
+        .then((response) => {
+          if (response.data.is_staff) {
+            this.setState({ isAdmin: true });
+          }
+        })
+        .catch((error) => {
+          console.error("There was an error fetching the user data", error);
+        });
+    }
+  };
+
+  fetchAdvisoryMembers = () => {
+    const token = localStorage.getItem("authToken");
+    const headers = token
+      ? { Authorization: `Token ${token}` }
+      : {}; // Only add Authorization header if the token exists
+  
+    fetch("http://192.168.1.136:8000/api/advisory-board", {
+      headers,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        const advisoryMembers = data.map((member) => ({
+          id: member.id,
+          img: member.photo, // Ensure this matches your backend response
+          name: member.name,
+          designation: member.designation,
+        }));
+        this.setState({ advisoryMemberData: advisoryMembers, loading: false });
+      })
+      .catch((error) => {
+        console.error("Error fetching advisory members:", error);
+        this.setState({ loading: false }); // Set loading to false even if there's an error
+      });
+  };
+  
 
   handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -111,72 +163,96 @@ export class JECadvisoryBoard extends Component {
   handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        this.setState((prevState) => ({
-          formData: {
-            ...prevState.formData,
-            img: reader.result, // Set the image URL from file
-          },
-        }));
-      };
-      reader.readAsDataURL(file); // Convert the file to a base64-encoded URL
+      this.setState((prevState) => ({
+        formData: {
+          ...prevState.formData,
+          img: file,
+        },
+      }));
     }
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { formData, advisoryMemberData, isEditing, currentlyEditingId } = this.state;
+    const { formData, isEditing, currentlyEditingId } = this.state;
+    const token = localStorage.getItem("authToken");
 
-    if (isEditing && currentlyEditingId !== null) {
-      // Edit the existing member
-      this.setState({
-        advisoryMemberData: advisoryMemberData.map((member) =>
-          member.id === currentlyEditingId ? { ...formData } : member
-        ),
-        isEditing: false,
-        formData: { id: '', img: '', name: '', position: '' }, // Clear form
-        showForm: false, // Close form after submitting
-        currentlyEditingId: null,
-      });
-    } else {
-      // Add a new member
-      this.setState((prevState) => ({
-        advisoryMemberData: [
-          ...prevState.advisoryMemberData,
-          { ...formData, id: prevState.advisoryMemberData.length + 1 },
-        ],
-        formData: { id: '', img: '', name: '', position: '' }, // Clear form
-        showForm: false, // Close form after submitting
-      }));
-    }
-  };
+    const formDataToSend = new FormData();
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("designation", formData.designation);
+    formDataToSend.append("photo", formData.img);
 
-  handleEditClick = (member) => {
-    this.setState({
-      formData: { ...member },
-      isEditing: true,
-      currentlyEditingId: member.id, // Track the member being edited
-      showForm: true, // Show form when Edit is clicked
-    });
-  };
+    const method = isEditing ? 'PUT' : 'POST';
+    const url = isEditing 
+        ? `http://192.168.1.136:8000/api/advisory-board/${currentlyEditingId}/` 
+        : "http://192.168.1.136:8000/api/advisory-board/";
 
-  handleDelete = (id) => {
-    this.setState((prevState) => ({
-      advisoryMemberData: prevState.advisoryMemberData.filter((member) => member.id !== id),
-    }));
+    fetch(url, {
+      method,
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+      body: formDataToSend,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        this.fetchAdvisoryMembers(); // Refresh the list after successful submission
+        this.setState({
+          formData: { id: '', img: '', name: '', designation: '' },
+          isEditing: false,
+          showForm: false,
+        });
+      })
+      .catch((error) => console.error("Error adding/editing advisory member:", error));
   };
 
   toggleFormVisibility = () => {
     this.setState((prevState) => ({
-      showForm: !prevState.showForm, // Toggle form visibility
-      isEditing: false, // Reset editing mode when toggling the form
-      formData: { id: '', img: '', name: '', position: '' }, // Clear form when toggling
+      showForm: !prevState.showForm,
+      isEditing: false,
+      formData: { id: '', img: '', name: '', designation: '' },
     }));
   };
 
+  handleEditClick = (member) => {
+    this.setState({
+      isEditing: true,
+      showForm: true,
+      currentlyEditingId: member.id,
+      formData: {
+        id: member.id,
+        img: '',
+        name: member.name,
+        designation: member.designation,
+      },
+    });
+  };
+
+  handleDelete = (id) => {
+    const token = localStorage.getItem("authToken");
+    fetch(`http://192.168.1.136:8000/api/advisory-board/${id}/`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        // Refresh the list after successful deletion
+        this.fetchAdvisoryMembers();
+      })
+      .catch((error) => console.error("Error deleting advisory member:", error));
+  };
+
   render() {
-    const { advisoryMemberData, isEditing, formData, showForm, currentlyEditingId } = this.state;
+    const { advisoryMemberData, isEditing, formData, showForm, loading, isAdmin } = this.state;
 
     return (
       <div className="container p-4 mx-auto my-10 rounded-lg shadow-xl md:p-8 bg-gradient-to-br from-white to-gray-100">
@@ -184,28 +260,8 @@ export class JECadvisoryBoard extends Component {
           Advisory Board
         </h1>
 
-        {/* Render Add or Edit Form based on showForm state */}
-        {showForm && (
-          isEditing ? (
-            <EditMemberForm 
-              formData={formData}
-              handleInputChange={this.handleInputChange}
-              handleFileChange={this.handleFileChange}
-              handleSubmit={this.handleSubmit}
-            />
-          ) : (
-            <AddMemberForm 
-              formData={formData}
-              handleInputChange={this.handleInputChange}
-              handleFileChange={this.handleFileChange}
-              handleSubmit={this.handleSubmit}
-            />
-          )
-        )}
-
-        {/* Toggle Button to Show/Hide Form */}
-        <div className="flex flex-col items-center justify-between mt-8 md:flex-row">
-        <div className="md:w-1/2">
+        <div className="flex flex-col items-center justify-between mt-8 mb-6 md:flex-row">
+          <div className="md:w-1/2">
             <p className="text-lg leading-relaxed text-gray-800">
               The Janakpur Engineering College Advisory Board is a prestigious group of industry experts who provide valuable guidance and support to our institution. Comprised of leading professionals from a range of fields, the Advisory Board is committed to helping JEC maintain its position as the nation's premier engineering program.
             </p>
@@ -218,69 +274,88 @@ export class JECadvisoryBoard extends Component {
           </div>
           <img
             src={imgadv}
-            className="mt-6 md:mt-0 md:ml-6 h-[250px] w-full md:w-1/2 rounded-lg shadow-lg transition-transform duration-500 transform hover:scale-105"
+            className="mt-6 md:mt-0 md:ml-6 h-[250px] w-full md:w-1/2 rounded-lg shadow-lg transition-transform duration-500 transform hover:scale-105 border-2 border-gray-300 hover:border-blue-500"
             alt="Advisory Board"
           />
         </div>
-        <div className="my-4 text-center">
-          <button 
-            onClick={this.toggleFormVisibility}
-            className="p-3 text-white transition duration-300 bg-blue-600 rounded-lg hover:bg-blue-500"
-          >
-            {showForm ? "Hide Form" : "Edit Members"}
-          </button>
+
+        <div className="flex flex-col items-center justify-between mt-8 mb-6 md:flex-row">
+          <p className="mb-6 text-lg font-medium text-gray-800 md:text-xl">
+            Total Members: <CountUp end={advisoryMemberData.length} />
+          </p>
+          {isAdmin && (
+            <button onClick={this.toggleFormVisibility} className="p-3 text-white transition duration-300 bg-blue-600 rounded-lg hover:bg-blue-500">
+              {showForm ? "Cancel" : "Add New Member"}
+            </button>
+          )}
         </div>
 
-        {/* Cards for the advisory members */}
-        <div className="my-10 advisory-container">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {loading ? (
+          <p>Loading advisory members...</p>
+        ) : (
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {advisoryMemberData.map((member) => (
               <div
                 key={member.id}
-                className="overflow-hidden transition-shadow duration-300 transform bg-white border border-gray-200 rounded-lg shadow-lg card hover:shadow-2xl hover:scale-105"
+                className="relative p-6 transition-transform duration-300 bg-white rounded-lg shadow-lg hover:scale-105 hover:shadow-2xl"
               >
-                <div className="flex justify-center p-4 bg-gray-100">
+                <div className="flex justify-center">
                   <img
-                    src={member.img}
-                    className="w-[250px] h-[250px] object-cover rounded-full border-4 border-blue-500 transition-transform duration-300 hover:scale-110"
+                    src={member.img || imgadv}
                     alt={member.name}
+                    className="object-cover w-40 h-40 mb-4 rounded-full shadow-lg hover:opacity-90"
                   />
                 </div>
-                <div className="p-4 text-center bg-white">
-                  <h5 className="text-[24px] text-blue-700 font-bold mb-2">{member.name}</h5>
-                  <p className="text-[18px] mb-4 text-gray-700">{member.position}</p>
+                <h3 className="mb-2 text-xl font-semibold text-center text-gray-800 hover:text-blue-500">
+                  {member.name}
+                </h3>
+                <p className="mb-4 text-center text-gray-600">{member.designation}</p>
 
-                  {/* Hide Edit and Delete buttons while editing */}
-                  {showForm && (
-                  !isEditing ? (
-                    <div className="flex justify-center space-x-4">
-                      <button
-                        onClick={() => this.handleEditClick(member)}
-                        className="px-4 py-2 text-white transition duration-300 bg-yellow-500 rounded hover:bg-yellow-400"
-                      >
-                        Edit
-                      </button>
-                      <button
-                          onClick={() => {
-                            if (window.confirm("Are you sure you want to delete ?")) {
-                              this.handleDelete(member.id);
-                            }
-                          }}
-                      
-                        className="px-4 py-2 text-white transition duration-300 bg-red-500 rounded hover:bg-red-400"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  ) : null
+                {isAdmin && (
+                  <div className="flex justify-center mt-4 space-x-4">
+                    <button
+                      onClick={() => this.handleEditClick(member)}
+                      className="flex items-center px-4 py-2 text-white transition-colors duration-200 bg-green-500 rounded-full hover:bg-green-400"
+                    >
+                      <i className="mr-2 fas fa-edit"></i>Edit
+                    </button>
+                    <button
+                      onClick={() => {
+                        if (window.confirm(`Are you sure you want to delete ${member.name}?`)) {
+                          this.handleDelete(member.id);
+                        }
+                      }}
+                      className="flex items-center px-4 py-2 text-white transition-colors duration-200 bg-red-500 rounded-full hover:bg-red-400"
+                    >
+                      <i className="mr-2 fas fa-trash"></i>Delete
+                    </button>
+                  </div>
                 )}
-                </div>
               </div>
             ))}
           </div>
-        </div>
+        )}
+
+        {showForm && (
+          isEditing ? (
+            <EditMemberForm
+              formData={formData}
+              handleInputChange={this.handleInputChange}
+              handleFileChange={this.handleFileChange}
+              handleSubmit={this.handleSubmit}
+            />
+          ) : (
+            <AddMemberForm
+              formData={formData}
+              handleInputChange={this.handleInputChange}
+              handleFileChange={this.handleFileChange}
+              handleSubmit={this.handleSubmit}
+            />
+          )
+        )}
       </div>
     );
   }
 }
+
 export default JECadvisoryBoard;

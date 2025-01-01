@@ -4,6 +4,7 @@ import axios from "axios";
 import { Header } from "../Navbar/Header";
 import students from "../images/jec-students.jpg";
 export default function Introduction() {
+
   const [data, setData] = useState({
     student_count: 0,
     professor_count: 0,
@@ -16,53 +17,82 @@ export default function Introduction() {
     student_count: data.student_count,
     professor_count: data.professor_count,
     principal_description: data.principal.description,
-    principal_photo: null,
+    principal_photo: data.principal_photo,
     chairperson_description: data.chairperson.description,
-    chairperson_photo: null,
+    chairperson_photo: data.chairperson.photo,
   });
+  const useAdminStatus = () => {
+    const [isAdmin, setIsAdmin] = useState(false);
+  
+    useEffect(() => {
+      const token = localStorage.getItem("authToken");
+      if (token) {
+        axios
+          .get("http://192.168.1.136:8000/api/user/", {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Token ${token}`,
+            },
+          })
+          .then((response) => {
+            if (response.data.is_staff) {
+              setIsAdmin(true);
+            }
+          })
+          .catch((error) => {
+            console.error("There was an error fetching the user data", error);
+          });
+      }
+    }, []);
+  
+    return isAdmin;
+  };
+
 
   const [showAdminPanel, setShowAdminPanel] = useState(false);
-
   useEffect(() => {
     // Fetch dynamic data from the server
     const fetchData = async () => {
       try {
         const response = await axios.get("http://192.168.1.136:8000/api/about-us", {
-          headers: { Authorization: `Token ${token}` }
+          headers: { "Content-Type": "multipart/form-data" }
         });
-        const apiData = response.data;
-
+        const apiData = response.data[0]; // Access the first object in the array
+        console.log("Fetched Data:", apiData); // Log to ensure the correct data structure
+  
+        // Update state with API response
         setData({
           student_count: apiData.student_count,
           professor_count: apiData.professor_count,
           principal: {
             description: apiData.principal_description,
-            photo: `http://192.168.1.136:8000${apiData.principal_photo}` // Ensure correct photo URL
+            photo: apiData.principal_photo ? `${apiData.principal_photo}` : "", // Ensure correct photo URL
           },
           chairperson: {
             description: apiData.chairperson_description,
-            photo: `http://192.168.1.136:8000${apiData.chairperson_photo}` // Ensure correct photo URL
+            photo: apiData.chairperson_photo ? `${apiData.chairperson_photo}` : "", // Ensure correct photo URL
           },
         });
-
+  
         setAdminData({
           student_count: apiData.student_count,
           professor_count: apiData.professor_count,
           principal_description: apiData.principal_description,
-          principal_photo: null, // Reset on data load
+          principal_photo: apiData.principal_photo ? `${apiData.principal_photo}` : "", // Reset on data load
           chairperson_description: apiData.chairperson_description,
-          chairperson_photo: null, // Reset on data load
+          chairperson_photo: apiData.chairperson_photo ? `${apiData.chairperson_photo}` : "", // Reset on data load
         });
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-
+  
     fetchData();
   }, [token]);
+  
 
 
-console.log(data)
+// console.log(data)
 
   const handleAdminInputChange = (e) => {
     const { name, value } = e.target;
@@ -72,54 +102,77 @@ console.log(data)
     });
   };
 
-  const handleFileChange = (e) => {
-    const { name, files } = e.target;
-    const file = files[0];
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      setAdminData({
-        ...adminData,
-        [name]: reader.result, // Base64 string
-      });
-    };
-
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  };
 
   const handleAdminSubmit = async (e) => {
     e.preventDefault();
+  
+    const formData = new FormData();
+  
+    // Append text fields
+    formData.append("student_count", adminData.student_count);
+    formData.append("professor_count", adminData.professor_count);
+    formData.append("principal_description", adminData.principal_description);
+    formData.append("chairperson_description", adminData.chairperson_description);
+  
+    // Append files (only if they have been selected)
+    if (adminData.principal_photo) {
+      formData.append("principal_photo", adminData.principal_photo);
+    }
+    if (adminData.chairperson_photo) {
+      formData.append("chairperson_photo", adminData.chairperson_photo);
+    }
+  
     try {
-      const response = await axios.patch("http://192.168.1.136:8000/api/about-us/1/", adminData, {
+      const response = await axios.post("http://192.168.1.136:8000/api/about-us/", formData, {
         headers: {
           Authorization: `Token ${token}`,
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data", // Let axios handle this automatically
         },
       });
+  
       const updatedData = response.data;
+  
+      // Update the UI with the response data
       setData({
         student_count: updatedData.student_count,
         professor_count: updatedData.professor_count,
         principal: {
           description: updatedData.principal_description,
-          photo: `http://192.168.1.136:8000${updatedData.principal_photo}`, // Updated with valid URL
+          photo: updatedData.principal_photo ? `${updatedData.principal_photo}` : "", // Only construct URL if photo exists
         },
         chairperson: {
           description: updatedData.chairperson_description,
-          photo: `http://192.168.1.136:8000${updatedData.chairperson_photo}`, // Updated with valid URL
+          photo: updatedData.chairperson_photo ? `${updatedData.chairperson_photo}` : "", // Only construct URL if photo exists
         },
       });
+      
     } catch (error) {
       console.error("Error updating data:", error);
     }
   };
+  
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    const file = files[0];
+  
+    if (file) {
+      setAdminData({
+        ...adminData,
+        [name]: file, // Store the file object directly
+      });
+    }
+  };
+  
+  
 
   const toggleAdminPanel = () => {
     setShowAdminPanel((prev) => !prev);
   };
+  // console.log(data.principal.photo)
+ // Log the entire response
+ const isAdmin = useAdminStatus();
 
+ console.log(data)
   return (
     <>
          <div
@@ -166,13 +219,14 @@ console.log(data)
         </div>
       
       <div className="container px-4 py-8 mx-auto" style={{ fontFamily: "'Merriweather', serif" }}>
+      {isAdmin &&(
         <button
           onClick={toggleAdminPanel}
           className="px-4 py-2 mb-6 text-white transition duration-200 ease-in-out bg-blue-600 rounded-lg shadow-md hover:bg-blue-700"
         >
           {showAdminPanel ? "Hide Admin Panel" : "Show Admin Panel"}
         </button>
-
+)}
         {showAdminPanel && (
           <div className="container p-6 mb-12 bg-white border border-gray-300 rounded-lg shadow-lg">
             <h2 className="mb-6 text-2xl font-bold text-blue-600">Admin Panel - Update Data</h2>
@@ -217,7 +271,7 @@ console.log(data)
                   onChange={handleFileChange}
                   className="w-full p-3 border rounded-md input-field focus:outline-none focus:ring-2 focus:ring-blue-400"
                   accept="image/*"
-                  required
+      
                 />
               </div>
               <div className="mb-4">
@@ -238,7 +292,7 @@ console.log(data)
                   onChange={handleFileChange}
                   className="w-full p-3 border rounded-md input-field focus:outline-none focus:ring-2 focus:ring-blue-400"
                   accept="image/*"
-                  required
+       
                 />
               </div>
               <button
@@ -270,30 +324,31 @@ console.log(data)
 
         {/* Principal Section */}
         <div className="container p-4 mx-auto">
-          <div className="flex flex-col gap-12 mb-12 lg:flex-row lg:items-center">
-            <div className="p-4 lg:w-1/2">
-              <h1 className="mb-4 text-3xl font-bold text-blue-600">Meet Our Principal</h1>
-              <p className="mb-6 text-justify text-gray-950">{data.principal.description}</p>
-            </div>
-            <div className="p-4 lg:w-1/2">
-              <img
-                src={data.principal.photo}
-                alt="Principal"
-                className="w-full h-auto rounded-lg shadow-md"
-              />
-            </div>
-          </div>
-        </div>
+  <div className="flex flex-col gap-12 mb-12 lg:flex-row lg:items-center">
+    <div className="p-4 lg:w-1/2">
+      <h1 className="mb-4 text-3xl font-bold text-blue-600">Meet Our Principal</h1>
+      <p className="mb-6 text-justify text-gray-950">{data.principal.description}</p>
+    </div>
+    <div className="p-4 lg:w-1/2">
+      <img
+        src={data.principal.photo || "/path/to/fallback-image.jpg"} // Use a fallback image if no photo is provided
+        alt="Principal"
+        className="w-full h-auto rounded-lg shadow-md"
+      />
+    </div>
+  </div>
+</div>
+
 
         {/* Chairperson Section */}
         <div className="container p-4 mx-auto">
           <div className="flex flex-col gap-12 mb-12 lg:flex-row lg:items-center">
           <div className="p-4 lg:w-1/2">
-              <img
-                src={data.chairperson.photo}
-                alt="Chairperson"
-                className="w-full h-auto rounded-lg shadow-md"
-              />
+          <img
+  src={data.chairperson.photo || "/path/to/fallback-image.jpg"} // Use a fallback image if no photo is provided
+  alt="Chairperson"
+  className="w-full h-auto rounded-lg shadow-md"
+/>
             </div>
            <div className="p-4 lg:w-1/2">
               <h1 className="mb-4 text-3xl font-bold text-blue-600">Meet Our Chairperson</h1>
