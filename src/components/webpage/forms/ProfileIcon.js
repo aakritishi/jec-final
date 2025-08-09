@@ -18,7 +18,7 @@ const ProfileIcon = () => {
 
     if (token) {
       // Fetch user data
-      axios.get('http://192.168.1.136:8000/api/user/', {
+      axios.get('https://jec.edu.np/api/user/', {
         headers: { Authorization: `Token ${token}` }
       })
       .then(response => {

@@ -16,7 +16,7 @@ export default function CivilLearnMore() {
   useEffect(() => {
     const fetchCourseData = async () => {
       try {
-        const response = await axios.get('http://192.168.1.136:8000/api/courses/', {
+        const response = await axios.get('https://jec.edu.np/api/courses/', {
           headers: {
             Authorization: `Token ${token}`,
           },
@@ -44,7 +44,7 @@ export default function CivilLearnMore() {
     };
 
     try {
-      await axios.post('http://192.168.1.136:8000/api/courses/', updatedData, {
+      await axios.post('https://jec.edu.np/api/courses/', updatedData, {
         headers: {
           Authorization: `Token ${token}`,
         },

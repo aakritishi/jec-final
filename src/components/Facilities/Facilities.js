@@ -12,7 +12,7 @@ const useAdminStatus = () => {
     const token = localStorage.getItem("authToken");
     if (token) {
       axios
-        .get("http://192.168.1.136:8000/api/user/", {
+        .get("https://jec.edu.np/api/user/", {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Token ${token}`,
@@ -47,7 +47,7 @@ export default function Facilities() {
   useEffect(() => {
     const fetchFacilitiesData = async () => {
       try {
-        const response = await fetch('http://192.168.1.136:8000/api/facilities'); 
+        const response = await fetch('https://jec.edu.np/api/facilities'); 
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
@@ -88,7 +88,7 @@ export default function Facilities() {
       formData.append('description', newFacility.description);
       formData.append('photo', newFacility.photo);
 
-      const response = await fetch('http://192.168.1.136:8000/api/facilities/', {
+      const response = await fetch('https://jec.edu.np/api/facilities/', {
         method: 'POST',
         headers: {
           Authorization: `Token ${token}`,
@@ -128,7 +128,7 @@ export default function Facilities() {
         formData.append('photo', newFacility.photo); // Include photo only if changed
       }
 
-      const response = await fetch(`http://192.168.1.136:8000/api/facilities/${editFacility.id}/`, {
+      const response = await fetch(`https://jec.edu.np/api/facilities/${editFacility.id}/`, {
         method: 'PUT',
         headers: {
           Authorization: `Token ${token}`,
@@ -151,7 +151,7 @@ export default function Facilities() {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem('authToken');
-      const response = await fetch(`http://192.168.1.136:8000/api/facilities/${id}/`, {
+      const response = await fetch(`https://jec.edu.np/api/facilities/${id}/`, {
         method: 'DELETE',
         headers: {
           Authorization: `Token ${token}`,

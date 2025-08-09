@@ -26,7 +26,7 @@ export default function Civil() {
   useEffect(() => {
     async function fetchCourses() {
       try {
-        const response = await axios.get('http://192.168.1.136:8000/api/structure');
+        const response = await axios.get('https://jec.edu.np/api/structure');
         setData(response.data);
       } catch (error) {
         console.error("Error fetching courses:", error);
@@ -56,7 +56,7 @@ export default function Civil() {
 
       const token = localStorage.getItem("authToken");
       try {
-        await axios.post('http://192.168.1.136:8000/api/structure/', 
+        await axios.post('https://jec.edu.np/api/structure/', 
         { 
           year: formData.currentYear,
           semester: formData.currentSemester,
@@ -105,7 +105,7 @@ export default function Civil() {
 
       try {
         const token = localStorage.getItem("authToken");
-        await axios.put(`http://192.168.1.136:8000/api/structure/${formData.editCourseIndex}/`, 
+        await axios.put(`https://jec.edu.np/api/structure/${formData.editCourseIndex}/`, 
         { 
           year: formData.currentYear,
           semester: formData.currentSemester,
@@ -142,7 +142,7 @@ export default function Civil() {
       setData(newData);
 
       try {
-        await axios.delete('http://192.168.1.136:8000/api/structure', {
+        await axios.delete('https://jec.edu.np/api/structure', {
           data: {
             year: formData.currentYear,
             semester: formData.currentSemester,

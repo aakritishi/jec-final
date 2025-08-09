@@ -102,7 +102,7 @@ export class JECadvisoryBoard extends Component {
     const token = localStorage.getItem("authToken");
     if (token) {
       axios
-        .get("http://192.168.1.136:8000/api/user/", {
+        .get("https://jec.edu.np/api/user/", {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Token ${token}`,
@@ -125,7 +125,7 @@ export class JECadvisoryBoard extends Component {
       ? { Authorization: `Token ${token}` }
       : {}; // Only add Authorization header if the token exists
   
-    fetch("http://192.168.1.136:8000/api/advisory-board", {
+    fetch("https://jec.edu.np/api/advisory-board", {
       headers,
     })
       .then((response) => {
@@ -184,8 +184,8 @@ export class JECadvisoryBoard extends Component {
 
     const method = isEditing ? 'PUT' : 'POST';
     const url = isEditing 
-        ? `http://192.168.1.136:8000/api/advisory-board/${currentlyEditingId}/` 
-        : "http://192.168.1.136:8000/api/advisory-board/";
+        ? `https://jec.edu.np/api/advisory-board/${currentlyEditingId}/` 
+        : "https://jec.edu.np/api/advisory-board/";
 
     fetch(url, {
       method,
@@ -235,7 +235,7 @@ export class JECadvisoryBoard extends Component {
 
   handleDelete = (id) => {
     const token = localStorage.getItem("authToken");
-    fetch(`http://192.168.1.136:8000/api/advisory-board/${id}/`, {
+    fetch(`https://jec.edu.np/api/advisory-board/${id}/`, {
       method: 'DELETE',
       headers: {
         Authorization: `Token ${token}`,

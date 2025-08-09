@@ -28,7 +28,7 @@ export default function Introduction() {
       const token = localStorage.getItem("authToken");
       if (token) {
         axios
-          .get("http://192.168.1.136:8000/api/user/", {
+          .get("https://jec.edu.np/api/user/", {
             headers: {
               "Content-Type": "multipart/form-data",
               Authorization: `Token ${token}`,
@@ -54,7 +54,7 @@ export default function Introduction() {
     // Fetch dynamic data from the server
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://192.168.1.136:8000/api/about-us", {
+        const response = await axios.get("https://jec.edu.np/api/about-us", {
           headers: { "Content-Type": "multipart/form-data" }
         });
         const apiData = response.data[0]; // Access the first object in the array
@@ -123,7 +123,7 @@ export default function Introduction() {
     }
   
     try {
-      const response = await axios.post("http://192.168.1.136:8000/api/about-us/", formData, {
+      const response = await axios.post("https://jec.edu.np/api/about-us/", formData, {
         headers: {
           Authorization: `Token ${token}`,
           "Content-Type": "multipart/form-data", // Let axios handle this automatically
