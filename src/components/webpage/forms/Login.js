@@ -30,7 +30,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://jec.edu.np/api/login/', formData, {
+      const response = await axios.post('https://jec.edu.np/api/accounts/login/', formData, {
         headers: {
           'Content-Type': 'application/json',
         },

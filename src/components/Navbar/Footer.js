@@ -128,7 +128,8 @@ export default function Footer() {
               <h1 className="text-2xl font-bold mb-4">Contact Details</h1>
               <div className="flex flex-col gap-3">
                 <p>Tathali, Bhaktapur, Nepal</p>
-                <p>Phone: 01-5555555</p>
+                <p>Landline: 015091616 </p>
+                <p>Phone: 9764577250</p>
                 <p>Email: info@jec.edu.np</p>
               </div>
             </div>
