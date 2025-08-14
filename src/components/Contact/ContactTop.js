@@ -11,11 +11,15 @@ export class ContactTop extends Component {
               <li>
                 <span className="text-slate-400 text-2xl">Janakpur Engineering College</span>
                 <br />
-                Lalitpur 44600
+                Tathali, Bhaktapur, Nepal
               </li>
               <li>
-                <span className="text-slate-400 text-2xl">Telephone</span> <br />
-                015435822
+                <span className="text-slate-400 text-2xl">Landline</span> <br />
+                015091616
+              </li>
+              <li>
+                <span className="text-slate-400 text-2xl">Phone</span> <br />
+                9764577250
               </li>
               <li>
                 <span className="text-slate-400 text-2xl">Email</span> <br />
