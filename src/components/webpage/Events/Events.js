@@ -7,14 +7,14 @@ import electronics from "../../images/electronics.jpg";
 const coursesDataList = [
   {
     img: computer,
-    title: "Bachelor of Computer Engineering (BCE)",
+    title: "Bachelor of Computer Engineering (BCT)",
     description: "Detailed description about Computer Engineering.",
     route: "/alearnmore",
     link: "/alearnmore",
   },
   {
     img: civil,
-    title: "Bachelor of Civil Engineering (BCT)",
+    title: "Bachelor of Civil Engineering (BCE)",
     description: "Detailed description about Civil Engineering.",
     route: "/alearnmore",
     link: "/alearnmore",
