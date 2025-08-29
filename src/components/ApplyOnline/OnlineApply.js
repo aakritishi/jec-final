@@ -124,14 +124,14 @@ export default function OnlineApply() {
     <div className='container w-[94%] mx-auto p-6'>
       <div className='mb-12 text-center'>
         <h1 className='text-4xl font-bold text-blue-700' style={{ fontFamily: "'Merriweather', serif" }}>
-          APPLY YOUR JEC <br />ADMISSION FORM ONLINE
+          APPLY YOUR ICE <br />ADMISSION FORM ONLINE
         </h1>
       </div>
 
       <div className='flex flex-col items-center text-justify md:flex-row md:justify-between'>
         <div className='mb-8 md:w-1/2 md:mb-0'>
           <p className='text-lg' style={{ fontFamily: "'Merriweather', serif" }}>
-            Applying for admission to Janakpur Engineering College (JEC) is now easier than ever with our online application form. Prospective students can visit our official website, fill out the required information, upload necessary documents, and submit the form from the comfort of their homes. This streamlined process is designed to save time and ensure that all applications are processed efficiently. Don’t miss the opportunity to be part of JEC’s vibrant academic community. Apply online today and take the first step towards a promising engineering career!
+            Applying for admission to Imperial College of Engineering (ICE) is now easier than ever with our online application form. Prospective students can visit our official website, fill out the required information, upload necessary documents, and submit the form from the comfort of their homes. This streamlined process is designed to save time and ensure that all applications are processed efficiently. Don’t miss the opportunity to be part of ICE'S vibrant academic community. Apply online today and take the first step towards a promising engineering career!
           </p>
         </div>
         <div className='flex justify-center md:w-1/2'>
@@ -361,7 +361,7 @@ export default function OnlineApply() {
                 className='mr-2 font-semibold text-justify'
                 required
               />
-              I hereby declare that the particulars furnished in this application form are correct and true and I fully agree to whatever actions taken as per rules and regulations of JEC Kupondole if found false or incorrect.
+              I hereby declare that the particulars furnished in this application form are correct and true and I fully agree to whatever actions taken as per rules and regulations of ICE if found false or incorrect.
               {errors.agreement && <p className='text-red-700'>{errors.agreement}</p>}
             </p>
 

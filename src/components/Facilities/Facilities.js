@@ -186,7 +186,7 @@ export default function Facilities() {
       <div className='sm:mx-[20px] md:mx-[120px]'>
         <div>
           <h1 className='text-[38px] my-5 text-red-500 sm:text-center md:text-start' style={{ fontFamily: "'Merriweather', serif" }}>
-            Know the facilities<br /> provided by JEC.
+            Know the facilities<br /> provided by ICE.
           </h1>
         </div>
 
@@ -269,7 +269,7 @@ export default function Facilities() {
           <div className="row">
             <div className="col-md-6">
               <p className='font-[12px]'>
-                Janakpur Engineering College (JEC) offers excellent facilities for an optimal learning environment. The college has a comprehensive library, modern laboratories, and advanced classrooms with projectors and smart boards. A fully equipped computer center provides high-speed internet and the latest software. Additionally, comfortable and secure hostel accommodations ensure a conducive living environment for students.
+                Imperial College of Engineering (ICE) offers excellent facilities for an optimal learning environment. The college has a comprehensive library, modern laboratories, and advanced classrooms with projectors and smart boards. A fully equipped computer center provides high-speed internet and the latest software. Additionally, comfortable and secure hostel accommodations ensure a conducive living environment for students.
               </p>
             </div>
             <div className="flex items-center justify-end col-md-6">

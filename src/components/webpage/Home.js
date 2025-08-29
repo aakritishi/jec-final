@@ -26,15 +26,49 @@ export const Home = () => {
 
   return (
     <div className="w-[94%] mx-auto">
-        <IntroductionSection />
-        <Updates />
-        <LatestUpdate />
-        <Events />
-        <AboutUniversity />
-        <ImageSlider />
-        <Course />
-        {/* <Cardslider /> */}
+      <IntroductionSection />
+      <Updates />
+      <LatestUpdate />
+      <Events />
+      <AboutUniversity />
+      <ImageSlider />
+      <Course />
+      {/* <Cardslider /> */}
 
+      <div className="md:relative md:flex hidden md:z-10">
+        {showOverlay && (
+          <div
+            className="fixed md:w-full w-[65%] inset-0 z-40 flex items-center justify-center transition-opacity duration-500 ease-in-out bg-black bg-opacity-70 backdrop-blur-md"
+            aria-hidden={!showOverlay}
+          >
+            <div className="relative p-6 mx-auto transition-transform duration-500 transform scale-100 bg-white shadow-lg rounded-xl">
+              <button
+                onClick={handleCloseOverlay}
+                aria-label="Close overlay"
+                className="absolute z-50 p-2 text-gray-600 transition-transform transform bg-gray-200 rounded-full top-3 right-3 hover:bg-gray-300 hover:scale-110"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+              <Exclnews className="w-full p-4 mx-auto" />
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className="md:hidden">
         {showOverlay && (
           <div
             className="fixed inset-0 z-40 flex items-center justify-center transition-opacity duration-500 ease-in-out bg-black bg-opacity-70 backdrop-blur-md"
@@ -54,7 +88,11 @@ export const Home = () => {
                   stroke="currentColor"
                   strokeWidth={2}
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
               <Exclnews className="w-full p-4 mx-auto" />
@@ -62,7 +100,7 @@ export const Home = () => {
           </div>
         )}
       </div>
-  
+    </div>
   );
 };
 

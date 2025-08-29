@@ -52,7 +52,7 @@ export default function Chatbot() {
   
         
         if (botResponse === "The requested information is not found in the retrieved data. Please try another query or topic.") {
-          botResponse = "I am a JEC virtual assistant and I am able to help with questions and curiosity related to Janakpur Engineering College only.";
+          botResponse = "I am a JEC virtual assistant and I am able to help with questions and curiosity related to Imperial College of Engineering only.";
         }
   
 

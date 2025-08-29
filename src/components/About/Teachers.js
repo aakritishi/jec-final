@@ -25,12 +25,12 @@ export default function Teachers() {
     <div className='sm:mx-4 md:mx-12 lg:mx-24 xl:mx-32 mb-5 w-[90%] mx-auto'>
       <section className='mt-8 mb-12'>
         <h1 className='text-3xl md:text-4xl lg:text-5xl text-red-600 font-semibold text-center transition-all duration-500 hover:text-red-800'>
-          JEC'S FACULTY
+          ICE'S FACULTY
         </h1>
         <div className='mt-6 md:mt-10'>
           <div className='flex flex-col md:flex-row items-center justify-between'>
             <p className='text-base md:text-lg lg:text-xl font-serif text-gray-800 leading-relaxed'>
-              The teachers at Janakpur Engineering College are instrumental in shaping the future of engineering...
+              The teachers at Imperial College of Engineering are instrumental in shaping the future of engineering...
             </p>
             <img src={teacherImagePlaceholder} className='mt-6 md:mt-0 md:ml-6 h-[300px] w-full md:w-1/2 rounded-lg shadow-lg transition-transform duration-500 transform hover:scale-105' alt="Teachers" />
           </div>

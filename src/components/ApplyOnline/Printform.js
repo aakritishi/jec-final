@@ -134,7 +134,7 @@ export default function PrintForm() {
                 className="mr-2"
                 readOnly
               />
-              I hereby declare that the particulars furnished in this application form are correct and true and I fully agree to whatever actions taken as per rules and regulations of JEC Kupondole if found false or incorrect.
+              I hereby declare that the particulars furnished in this application form are correct and true and I fully agree to whatever actions taken as per rules and regulations of ICE if found false or incorrect.
             </p>
           </div>
 

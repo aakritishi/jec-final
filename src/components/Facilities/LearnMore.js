@@ -16,7 +16,7 @@ export default function LearnMore() {
         <div className='flex flex-wrap'>
           <div className='w-full md:w-1/2 mt-5 flex flex-col items-center justify-center'>
             <p className='text-base md:text-lg lg:text-xl text-justify leading-7' style={{ fontFamily: "'Merriweather', serif" }}>
-              Janakpur Engineering College (JEC) provides comprehensive Wi-Fi facilities designed to support its academic community by ensuring campus-wide high-speed internet access. These facilities enable seamless connectivity across classrooms, libraries, laboratories, and common areas, supporting multiple devices while maintaining secure access through robust encryption and authentication protocols. The high-speed internet fosters an enhanced learning environment by enabling students and faculty to access digital resources, online educational tools, and up-to-date information, thereby facilitating interactive and engaging teaching and research activities.
+              Imperial College of Engineering (JEC) provides comprehensive Wi-Fi facilities designed to support its academic community by ensuring campus-wide high-speed internet access. These facilities enable seamless connectivity across classrooms, libraries, laboratories, and common areas, supporting multiple devices while maintaining secure access through robust encryption and authentication protocols. The high-speed internet fosters an enhanced learning environment by enabling students and faculty to access digital resources, online educational tools, and up-to-date information, thereby facilitating interactive and engaging teaching and research activities.
             </p>
           </div>
           <div className='w-full md:w-1/2 mt-5 flex items-center justify-center'>
@@ -26,7 +26,7 @@ export default function LearnMore() {
 
         <div className='mt-5 text-sm md:text-base lg:text-lg leading-8' style={{ fontFamily: "'Merriweather', serif" }}>
           <p>
-            Janakpur Engineering College (JEC) provides comprehensive Wi-Fi facilities designed to support its academic community by ensuring campus-wide high-speed internet access. These facilities enable seamless connectivity across classrooms, libraries, laboratories, and common areas. The Wi-Fi network supports multiple devices simultaneously while maintaining secure access through robust encryption and authentication protocols.
+            Imperial College of Engineering (JEC) provides comprehensive Wi-Fi facilities designed to support its academic community by ensuring campus-wide high-speed internet access. These facilities enable seamless connectivity across classrooms, libraries, laboratories, and common areas. The Wi-Fi network supports multiple devices simultaneously while maintaining secure access through robust encryption and authentication protocols.
           </p>
           <p>
             The high-speed internet access at JEC fosters an enhanced learning environment by enabling students and faculty to access digital resources, online educational tools, and up-to-date information. This connectivity facilitates interactive and engaging teaching and research activities. Students can easily collaborate on projects, access e-books and online journals, and participate in virtual classes and seminars. Faculty members benefit from the ability to integrate digital content into their lectures, conduct research with the latest data, and communicate efficiently with their peers and students.

@@ -9,7 +9,7 @@ export class ContactTop extends Component {
             <h1 className="text-2xl font-bold mb-4" style={{ fontFamily: "'Merriweather', serif" }}>Get in Touch</h1>
             <ul className="space-y-4">
               <li>
-                <span className="text-slate-400 text-2xl">Janakpur Engineering College</span>
+                <span className="text-slate-400 text-2xl">Imperial College of Engineering</span>
                 <br />
                 Tathali, Bhaktapur, Nepal
               </li>
@@ -35,7 +35,7 @@ export class ContactTop extends Component {
           </div>
           <div className="w-full md:w-2/3 px-4">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7065.981226302556!2d85.31243600000002!3d27.686685!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb194be4c7eb7f%3A0xc69a5e26c21fb3ef!2sJanakpur%20Engineering%20College!5e0!3m2!1sen!2snp!4v1721615870386!5m2!1sen!2snp"
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7065.981226302556!2d85.31243600000002!3d27.686685!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb194be4c7eb7f%3A0xc69a5e26c21fb3ef!2sImperial%20Engineering%20College!5e0!3m2!1sen!2snp!4v1721615870386!5m2!1sen!2snp"
               className="w-full h-80 md:h-96 border-0 mt-8 md:mt-0"
               allowFullScreen=""
               loading="lazy"

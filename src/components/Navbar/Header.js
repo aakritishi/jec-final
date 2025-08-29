@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import logo from '../media/images/jec-logo.png';
+import logo from '../images/logo_ice.png';
 import ProfileIcon from '../webpage/forms/ProfileIcon'; // This will display if user is logged in
 import axios from 'axios';
 
@@ -79,8 +79,8 @@ export const Header = () => {
                             <ul className="absolute left-0 z-20 hidden mt-0 text-black bg-white border-t-4 border-blue-500 rounded-lg shadow-lg w-60 group-hover:block">
                                 <li><Link to="/about/introduction" className="block px-4 py-2 rounded-t-lg hover:bg-slate-200 hover:text-gray-800">Introduction</Link></li>
                                 <li><Link to="/about/courses-offered" className="block px-4 py-2 hover:bg-slate-200 hover:text-gray-800">Courses Offered</Link></li>
-                                <li><Link to="/about/jec-advisory-board" className="block px-4 py-2 rounded-b-lg hover:bg-slate-200 hover:text-gray-800">JEC Advisory Board</Link></li>
-                                <li><Link to="/teachers" className="block px-4 py-2 rounded-b-lg hover:bg-slate-200 hover:text-gray-800">JEC Teachers</Link></li>
+                                <li><Link to="/about/jec-advisory-board" className="block px-4 py-2 rounded-b-lg hover:bg-slate-200 hover:text-gray-800">ICE Advisory Board</Link></li>
+                                <li><Link to="/teachers" className="block px-4 py-2 rounded-b-lg hover:bg-slate-200 hover:text-gray-800">ICE Teachers</Link></li>
                             </ul>
                         </li>
                         {!isAdmin &&<li><Link to="/onlineapply" className="text-xl text-white transition duration-300 hover:text-gray-300">Apply Online</Link></li>}
@@ -127,8 +127,8 @@ export const Header = () => {
                             <ul className="z-20 mt-2 text-black bg-white rounded-lg shadow-lg">
                                 <li><Link to="/about/introduction" className="block px-4 py-2 rounded-t-lg hover:bg-slate-200 hover:text-gray-800">Introduction</Link></li>
                                 <li><Link to="/about/courses-offered" className="block px-4 py-2 hover:bg-slate-200 hover:text-gray-800">Courses Offered</Link></li>
-                                <li><Link to="/about/jec-advisory-board" className="block px-4 py-2 rounded-b-lg hover:bg-slate-200 hover:text-gray-800">JEC Advisory Board</Link></li>
-                                <li><Link to="/teachers" className="block px-4 py-2 text-lg rounded-b-lg hover:bg-slate-200 hover:text-gray-800">JEC Teachers</Link></li>
+                                <li><Link to="/about/jec-advisory-board" className="block px-4 py-2 rounded-b-lg hover:bg-slate-200 hover:text-gray-800">ICE Advisory Board</Link></li>
+                                <li><Link to="/teachers" className="block px-4 py-2 text-lg rounded-b-lg hover:bg-slate-200 hover:text-gray-800">ICE Teachers</Link></li>
                             </ul>
                         )}
                     </li>

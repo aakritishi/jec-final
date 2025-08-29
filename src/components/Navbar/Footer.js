@@ -6,7 +6,7 @@ import {
   faTwitter,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
-import logo from "../images/jec-logo.png";
+import logo from "../images/logo_ice.png";
 import FooterTop from "./FooterTop";
 import { Link } from "react-router-dom";
 

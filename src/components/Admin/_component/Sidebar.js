@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import logo from '../../media/images/jec-logo.png';
+import logo from '../../images/logo_ice.png';
 
 export const Sidebar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -15,9 +15,9 @@ export const Sidebar = () => {
     <>
       {/* Sidebar for large screens */}
       <div className={`hidden md:block fixed top-0 left-0 h-screen bg-blue-800 p-3 w-64`}>
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-center items-center w-full mb-8">
           <Link to='/' className="block">
-            <img src={logo} alt='Logo' className="text-white text-xl" />
+            <img src={logo} alt='Logo' className="text-white text-xl h-24" />
           </Link>
         </div>
         <ul className="flex flex-col space-y-4">

@@ -39,7 +39,7 @@ export default function Academics() {
           <div>
             <h1 className="text-[40px]" style={{ color: "#D80027" }}>
               Become a part of <br />
-              Janakpur Engineering College.
+              Imperial College of Engineering.
             </h1>
           </div>
           <div className="flex items-end justify-end mt-3 text-end">
@@ -57,9 +57,9 @@ export default function Academics() {
                 style={{ fontFamily: "'Merriweather', serif" }}
                 className="text-justify"
               >
-                Janakpur Engineering College offers 3 courses across various
+                Imperial College of Engineering offers 3 courses across various
                 specializations that provoke intellectual and intuitive learning
-                among students. We at Janakpur Engineering College believe that
+                among students. We at Imperial College of Engineering believe that
                 peer learning is essential along with communication, analytic,
                 and problem-solving skills. Instructors from around the world
                 teach thousands of students in our college. We provide the tools

@@ -263,13 +263,13 @@ export class JECadvisoryBoard extends Component {
         <div className="flex flex-col items-center justify-between mt-8 mb-6 md:flex-row">
           <div className="md:w-1/2">
             <p className="text-lg leading-relaxed text-gray-800">
-              The Janakpur Engineering College Advisory Board is a prestigious group of industry experts who provide valuable guidance and support to our institution. Comprised of leading professionals from a range of fields, the Advisory Board is committed to helping JEC maintain its position as the nation's premier engineering program.
+              The Imperial College of Engineering Advisory Board is a prestigious group of industry experts who provide valuable guidance and support to our institution. Comprised of leading professionals from a range of fields, the Advisory Board is committed to helping ICE maintain its position as the nation's premier engineering program.
             </p>
             <p className="mt-4 text-lg leading-relaxed text-gray-800">
-              Through their expertise and insights, the Advisory Board helps JEC to develop innovative academic programs and research initiatives that meet the evolving needs of society. By working closely with the principal, faculty, and students, the Board helps to identify new opportunities and partnerships that will enable JEC to continue to provide the highest standard of education to our students.
+              Through their expertise and insights, the Advisory Board helps ICE to develop innovative academic programs and research initiatives that meet the evolving needs of society. By working closely with the principal, faculty, and students, the Board helps to identify new opportunities and partnerships that will enable ICE to continue to provide the highest standard of education to our students.
             </p>
             <p className="mt-4 text-lg leading-relaxed text-gray-800">
-              At JEC, we are grateful for the contributions of our Advisory Board members, who help us to achieve our mission of preparing the next generation of engineering leaders. Through their dedication and expertise, our Advisory Board members play a vital role in ensuring that JEC remains at the forefront of engineering education and research.
+              At ICE, we are grateful for the contributions of our Advisory Board members, who help us to achieve our mission of preparing the next generation of engineering leaders. Through their dedication and expertise, our Advisory Board members play a vital role in ensuring that ICE remains at the forefront of engineering education and research.
             </p>
           </div>
           <img

@@ -26,8 +26,8 @@ export default function PrivacyPolicy() {
 
         <div className='my-20 text-lg text-blue-800' style={{ fontFamily: "'Merriweather', serif" }}>
           <p>
-            These terms and conditions outline the rules and regulations for the use of Janakpur Engineering College's Website, located at https://jec.edu.np/.<br /><br />
-            By accessing this website we assume you accept these terms and conditions. Do not continue to use Janakpur Engineering College if you do not agree to take all of the terms and conditions stated on this page.<br /><br />
+            These terms and conditions outline the rules and regulations for the use of Imperial College of Engineering's Website, located at https://jec.edu.np/.<br /><br />
+            By accessing this website we assume you accept these terms and conditions. Do not continue to use Imperial College of Engineering if you do not agree to take all of the terms and conditions stated on this page.<br /><br />
             The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice, and all Agreements: "Client", "You" and "Your" refers to you, the person who logs on this website and is compliant with the Company’s terms and conditions. "The Company", "Ourselves", "We", "Our" and "Us", refers to our Company. "Party", "Parties", or "Us", refers to both the Client and ourselves. All terms refer to the offer, acceptance, and consideration of payment necessary to undertake the process of our assistance to the Client in the most appropriate manner for the express purpose of meeting the Client’s needs in respect of the provision of the Company’s stated services, by and subject to, prevailing law of Netherlands. Any use of the above terminology or other words in the singular, plural, capitalization, and/or he/she or they, are taken as interchangeable and therefore as referring to the same.
           </p>
         </div>
@@ -35,7 +35,7 @@ export default function PrivacyPolicy() {
         <div className='my-20 text-lg text-blue-800' style={{ fontFamily: "'Merriweather', serif" }}>
           <h1 className='text-5xl mb-3 text-red-600'>LICENSE</h1>
           <p>
-            Unless otherwise stated, Janakpur Engineering College and/or its licensors own the intellectual property rights for all material on Janakpur Engineering College. All intellectual property rights are reserved. You may access this from Janakpur Engineering College for your personal use subject to restrictions set in these terms and conditions.
+            Unless otherwise stated, Imperial College of Engineering and/or its licensors own the intellectual property rights for all material on Imperial College of Engineering. All intellectual property rights are reserved. You may access this from Imperial College of Engineering for your personal use subject to restrictions set in these terms and conditions.
           </p>
           <p className='font-bold my-3 text-xl'>
             You must not:
@@ -50,10 +50,10 @@ export default function PrivacyPolicy() {
             This Agreement shall begin on the date hereof.
           </p>
           <p>
-            Parts of this website offer an opportunity for users to post and exchange opinions and information in certain areas of the website. Janakpur Engineering College does not filter, edit, publish or review Comments prior to their presence on the website. Comments do not reflect the views and opinions of Janakpur Engineering College, its agents, and/or affiliates. Comments reflect the views and opinions of the person who posts their views and opinions. To the extent permitted by applicable laws, Janakpur Engineering College shall not be liable for the Comments or any liability, damages, or expenses caused and/or suffered as a result of any use of and/or posting of and/or appearance of the Comments on this website.
+            Parts of this website offer an opportunity for users to post and exchange opinions and information in certain areas of the website. Imperial College of Engineering does not filter, edit, publish or review Comments prior to their presence on the website. Comments do not reflect the views and opinions of Imperial College of Engineering, its agents, and/or affiliates. Comments reflect the views and opinions of the person who posts their views and opinions. To the extent permitted by applicable laws, Imperial College of Engineering shall not be liable for the Comments or any liability, damages, or expenses caused and/or suffered as a result of any use of and/or posting of and/or appearance of the Comments on this website.
           </p>
           <p>
-            Janakpur Engineering College reserves the right to monitor all Comments and to remove any Comments which can be considered inappropriate, offensive, or causes a breach of these Terms and Conditions.
+            Imperial College of Engineering reserves the right to monitor all Comments and to remove any Comments which can be considered inappropriate, offensive, or causes a breach of these Terms and Conditions.
           </p>
           <p className='font-bold my-3 text-xl mt-5'>
             You warrant and represent that:
@@ -65,7 +65,7 @@ export default function PrivacyPolicy() {
             <li>The Comments will not be used to solicit or promote business or custom or present commercial activities or unlawful activity.</li>
           </ul>
           <p className='mt-5'>
-            You hereby grant Janakpur Engineering College a non-exclusive license to use, reproduce, edit and authorize others to use, reproduce and edit any of your Comments in any and all forms, formats or media.
+            You hereby grant Imperial College of Engineering a non-exclusive license to use, reproduce, edit and authorize others to use, reproduce and edit any of your Comments in any and all forms, formats or media.
           </p>
 
           <h1 className='text-5xl my-5 text-red-600'>Hyperlinking to our Content</h1>
@@ -83,13 +83,13 @@ export default function PrivacyPolicy() {
             These organizations may link to our home page, to publications or to other Website information so long as the link: (a) is not in any way deceptive; (b) does not falsely imply sponsorship, endorsement or approval of the linking party and its products and/or services; and (c) fits within the context of the linking party’s site.
           </p>
           <p>
-            We will approve link requests from these organizations if we decide that: (a) the link would not make us look unfavorably to ourselves or to our accredited businesses; (b) the organization does not have any negative records with us; (c) the benefit to us from the visibility of the hyperlink compensates the absence of Janakpur Engineering College; and (d) the link is in the context of general resource information.
+            We will approve link requests from these organizations if we decide that: (a) the link would not make us look unfavorably to ourselves or to our accredited businesses; (b) the organization does not have any negative records with us; (c) the benefit to us from the visibility of the hyperlink compensates the absence of Imperial College of Engineering; and (d) the link is in the context of general resource information.
           </p>
           <p>
             These organizations may link to our home page so long as the link: (a) is not in any way deceptive; (b) does not falsely imply sponsorship, endorsement or approval of the linking party and its products or services; and (c) fits within the context of the linking party’s site.
           </p>
           <p>
-            If you are one of the organizations listed in paragraph 2 above and are interested in linking to our website, you must inform us by sending an e-mail to Janakpur Engineering College. Please include your name, your organization name, contact information as well as the URL of your site, a list of any URLs from which you intend to link to our Website, and a list of the URLs on our site to which you would like to link. Wait 2-3 weeks for a response.
+            If you are one of the organizations listed in paragraph 2 above and are interested in linking to our website, you must inform us by sending an e-mail to Imperial College of Engineering. Please include your name, your organization name, contact information as well as the URL of your site, a list of any URLs from which you intend to link to our Website, and a list of the URLs on our site to which you would like to link. Wait 2-3 weeks for a response.
           </p>
           <p>
             Approved organizations may hyperlink to our Website as follows:
@@ -100,7 +100,7 @@ export default function PrivacyPolicy() {
             <li>By use of any other description of our Website being linked to that makes sense within the context and format of content on the linking party’s site.</li>
           </ul>
           <p>
-            No use of Janakpur Engineering College's logo or other artwork will be allowed for linking absent a trademark license agreement.
+            No use of Imperial College of Engineering's logo or other artwork will be allowed for linking absent a trademark license agreement.
           </p>
 
           <h1 className='text-5xl my-5 text-red-600'>iFrames</h1>

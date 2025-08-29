@@ -54,11 +54,11 @@ export const IntroductionSection = () => {
         </VideoBackground>
         <ContentWrapper>
           <div className="w-full p-4 py-4 my-5 md:w-3/4 lg:w-1/2" style={{ fontFamily: "'Merriweather', serif" }}>
-            <h1 className="text-3xl font-semibold md:text-4xl" style={{ fontFamily: "'Merriweather', serif" }}>
-              JANAKPUR ENGINEERING COLLEGE
+            <h1 className="text-3xl font-semibold md:text-4xl text-nowrap" style={{ fontFamily: "'Merriweather', serif" }}>
+              Imperial College of Engineering
             </h1>
             <p className="mt-4 mb-6 text-lg">
-              Janakpur Engineering is a leading research university pushing boundaries and frontiers to brighten the future of the students.
+              Imperial Engineering is a leading research university pushing boundaries and frontiers to brighten the future of the students.
             </p>
 
             

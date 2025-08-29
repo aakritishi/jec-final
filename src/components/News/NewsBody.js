@@ -8,7 +8,7 @@ const NewsBody = () => {
           <div className='row'>
             <div className='col-sm-12 col-md-6'>
               <p className='text-lg text-justify' style={{ fontFamily: "'Merriweather', serif" }}>
-                Welcome to the JEC News & Updates page, your go-to source for the latest happenings and important announcements.
+                Welcome to the ICE News & Updates page, your go-to source for the latest happenings and important announcements.
                 Stay tuned for updates on upcoming events, recent achievements, and important changes within our community. We’re excited to share news that highlights our progress and celebrates our collective efforts.
               </p>
             </div>
