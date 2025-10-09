@@ -8,7 +8,8 @@ const Exclnews = () => {
   const [newsItems, setNewsItems] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
-  const swiperRef = useRef(null);
+  const desktopSwiperRef = useRef(null);
+  const mobileSwiperRef = useRef(null);
 
   useEffect(() => {
     fetchNewsItems();
@@ -32,33 +33,50 @@ const Exclnews = () => {
   };
 
   const handlePrevClick = () => {
-    if (currentIndex > 0) {
-      swiperRef.current.swiper.slidePrev();
-    }
+    const swiper =
+      window.innerWidth >= 768
+        ? desktopSwiperRef.current?.swiper
+        : mobileSwiperRef.current?.swiper;
+
+    if (swiper && currentIndex > 0) swiper.slidePrev();
   };
 
   const handleNextClick = () => {
-    if (currentIndex < newsItems.length - 1) {
-      swiperRef.current.swiper.slideNext();
-    }
+    const swiper =
+      window.innerWidth >= 768
+        ? desktopSwiperRef.current?.swiper
+        : mobileSwiperRef.current?.swiper;
+
+    if (swiper && currentIndex < newsItems.length - 1) swiper.slideNext();
+  };
+
+  const isImage = (url) => {
+    if (!url) return false;
+    const imageExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "webp"];
+    const ext = url.split(".").pop()?.toLowerCase();
+    return imageExtensions.includes(ext);
+  };
+
+  const getPDFFrameSrc = (url) => {
+    return `${url}#toolbar=0&navpanes=0&scrollbar=0`;
   };
 
   return (
     <>
       <div
-        className=" hidden md:flex"
+        className=" hidden md:flex "
         style={{
           position: "relative",
           width: "900px",
-          height: "580px",
-          overflow: "hidden",
+          height: "650px",
+          overflow: "visible",
         }}
       >
         <Swiper
-          ref={swiperRef}
-          spaceBetween={20} // Space between slides
-          slidesPerView={1} // Display one news item at a time
-          onSlideChange={handleSlideChange} // Track slide changes
+          ref={desktopSwiperRef}
+          spaceBetween={20} 
+          slidesPerView={1} 
+          onSlideChange={handleSlideChange} 
           className="swiper-container"
         >
           {loading ? (
@@ -71,18 +89,30 @@ const Exclnews = () => {
           ) : newsItems.length > 0 ? (
             newsItems.map((news) => (
               <SwiperSlide key={news.id} className="news-slide">
-                <div className="news-item p-4 bg-white border border-gray-300 rounded-lg shadow-md">
+                <div className="news-item p-0 bg-white border border-gray-300 rounded-lg shadow-md">
+                  <h3
+                    className="text-center font-bold text-xl px-4"
+                    style={{ fontFamily: "'Merriweather', serif" }}
+                  >
+                    {news.title}
+                  </h3>
                   <a
                     href={news.photo}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <img
-                      src={news.photo} // Use the fetched photo URL
-                      alt="news"
-                      className="responsive-image h-auto w-auto mb-4 mx-auto object-cover rounded-lg"
-                      // style={{ width: 'auto', height: 'auto', maxHeight: 'auto' }}
-                    />
+                    {news.photo && isImage(news.photo) ? (
+                      <img
+                        src={news.photo}
+                        alt="news"
+                        className="responsive-image h-auto w-auto mb-4 mx-auto object-cover rounded-lg"
+                      />
+                    ) : (
+                      <iframe
+                          src={getPDFFrameSrc(news.photo)}
+                          className="absolute top-0 left-0 w-full h-full object-cover rounded-lg"
+                        />
+                    )}
                   </a>
                   <p className="text-gray-700">{news.description}</p>
                 </div>
@@ -120,7 +150,7 @@ const Exclnews = () => {
       </div>
 
       <div
-      className="md:hidden mx-auto"
+        className="md:hidden mx-auto"
         style={{
           position: "relative",
           width: "100%",
@@ -129,10 +159,10 @@ const Exclnews = () => {
         }}
       >
         <Swiper
-          ref={swiperRef}
-          spaceBetween={20} // Space between slides
-          slidesPerView={1} // Display one news item at a time
-          onSlideChange={handleSlideChange} // Track slide changes
+          ref={mobileSwiperRef}
+          spaceBetween={20} 
+          slidesPerView={1} 
+          onSlideChange={handleSlideChange} 
           className="swiper-container"
         >
           {loading ? (
@@ -146,21 +176,29 @@ const Exclnews = () => {
             newsItems.map((news) => (
               <SwiperSlide key={news.id} className="news-slide">
                 <div className="news-item p-4 bg-white border border-gray-300 rounded-lg shadow-md">
+                  <h3
+                    className="text-center font-bold text-xl px-4"
+                    style={{ fontFamily: "'Merriweather', serif" }}
+                  >
+                    {news.title}
+                  </h3>
                   <a
                     href={news.photo}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <img
-                      src={news.photo} // Use the fetched photo URL
-                      alt="news"
-                      className="responsive-image mb-4 mx-auto"
-                      style={{
-                        width: "auto",
-                        height: "auto",
-                        maxHeight: "300px",
-                      }} // Style the image to fit the container
-                    />
+                    {news.photo && isImage(news.photo) ? (
+                      <img
+                        src={news.photo}
+                        alt="news"
+                        className="responsive-image h-auto w-auto mb-4 mx-auto object-cover rounded-lg"
+                      />
+                    ) : (
+                      <iframe
+                        src={getPDFFrameSrc(news.photo)}
+                        className="absolute top-0 left-0 w-full h-[900px] object-contain rounded-lg"
+                      />
+                    )}
                   </a>
                   <p className="text-gray-700">{news.description}</p>
                 </div>
