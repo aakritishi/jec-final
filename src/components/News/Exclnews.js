@@ -116,7 +116,7 @@ const Exclnews = () => {
                       />
                     )}
                   </a>
-                  <p className="text-gray-700">{news.description}</p>
+                  {/* <p className="text-gray-700">{news.description}</p> */}
                 </div>
               </SwiperSlide>
             ))
@@ -204,7 +204,7 @@ const Exclnews = () => {
                       />
                     )}
                   </a>
-                  <p className="text-gray-700">{news.description}</p>
+                  {/* <p className="text-gray-700">{news.description}</p> */}
                 </div>
               </SwiperSlide>
             ))

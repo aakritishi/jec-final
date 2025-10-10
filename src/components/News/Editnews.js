@@ -1,46 +1,63 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-export default function EditNews({ news, setNewsList, setSelectedNews, newsList }) {
-  const [editedNews, setEditedNews] = useState(news);
+export default function EditNews({
+  news,
+  setNewsList,
+  setSelectedNews,
+  newsList,
+}) {
+  const [editedNews, setEditedNews] = useState({
+    ...news,
+    priority: news.priority || "",
+  });
 
   const handleInputChange = (e) => {
     const { name, value, type, checked, files } = e.target;
     if (type === "file") {
       setEditedNews({ ...editedNews, [name]: files[0] });
     } else {
-      setEditedNews({ ...editedNews, [name]: type === "checkbox" ? checked : value });
+      setEditedNews({
+        ...editedNews,
+        [name]: type === "checkbox" ? checked : value,
+      });
     }
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('authToken');
-    
+    const token = localStorage.getItem("authToken");
+
     const formData = new FormData();
     if (editedNews.photo instanceof File) {
-      formData.append('photo', editedNews.photo);
+      formData.append("photo", editedNews.photo);
     }
-    formData.append('title', editedNews.title);
-    formData.append('description', editedNews.description);
-    formData.append('date', editedNews.date);
-    formData.append('publisher', editedNews.publisher);
-    formData.append('is_exclusive', editedNews.is_exclusive);
+    formData.append("title", editedNews.title);
+    formData.append("description", editedNews.description);
+    formData.append("date", editedNews.date);
+    formData.append("publisher", editedNews.publisher);
+    formData.append("is_exclusive", editedNews.is_exclusive);
+    if (editedNews.is_exclusive) {
+      formData.append("priority", editedNews.priority);
+    }
 
-    axios.put(`https://jec.edu.np/api/news/${news.id}/`, formData, {
-      headers: {
-        'Authorization': `Token ${token}`,
-        'Content-Type': 'multipart/form-data',
-      },
-    })
-    .then(response => {
-      const updatedNewsList = newsList.map(item => item.id === response.data.id ? response.data : item);
-      setNewsList(updatedNewsList);
-      setSelectedNews(null);
-    })
-    .catch(error => {
-      console.error("Error updating the news item", error);
-    });
+    axios
+      .put(`https://jec.edu.np/api/news/${news.id}/`, formData, {
+        headers: {
+          Authorization: `Token ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        const updatedNewsList = newsList.map((item) =>
+          item.id === response.data.id ? response.data : item
+        );
+        setNewsList(updatedNewsList);
+        setSelectedNews(null);
+      })
+      .catch((error) => {
+        console.error("Error updating the news item", error);
+      });
   };
 
   return (
@@ -49,11 +66,17 @@ export default function EditNews({ news, setNewsList, setSelectedNews, newsList 
         <div className="row">
           <div className="col-12 col-md-6 col-lg-4 mb-[30px]">
             <div className="relative max-w-sm p-6 mx-auto rounded-lg shadow-lg card">
-              <h2 className="mt-4 text-xl font-bold text-gray-800" style={{ fontFamily: "'Merriweather', serif" }}>
+              <h2
+                className="mt-4 text-xl font-bold text-gray-800"
+                style={{ fontFamily: "'Merriweather', serif" }}
+              >
                 Edit News
               </h2>
               <div className="mt-4">
-                <label htmlFor="photo" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="photo"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Photo
                 </label>
                 <input
@@ -64,7 +87,10 @@ export default function EditNews({ news, setNewsList, setSelectedNews, newsList 
                 />
               </div>
               <div className="mt-4">
-                <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="title"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Title
                 </label>
                 <input
@@ -77,7 +103,10 @@ export default function EditNews({ news, setNewsList, setSelectedNews, newsList 
                 />
               </div>
               <div className="mt-4">
-                <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="description"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Description
                 </label>
                 <textarea
@@ -89,7 +118,10 @@ export default function EditNews({ news, setNewsList, setSelectedNews, newsList 
                 />
               </div>
               <div className="mt-4">
-                <label htmlFor="date" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="date"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Date
                 </label>
                 <input
@@ -102,7 +134,10 @@ export default function EditNews({ news, setNewsList, setSelectedNews, newsList 
                 />
               </div>
               <div className="mt-4">
-                <label htmlFor="publisher" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="publisher"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Publisher
                 </label>
                 <input
@@ -115,7 +150,10 @@ export default function EditNews({ news, setNewsList, setSelectedNews, newsList 
                 />
               </div>
               <div className="mt-4">
-                <label htmlFor="is_exclusive" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="is_exclusive"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Exclusive
                 </label>
                 <input
@@ -126,6 +164,24 @@ export default function EditNews({ news, setNewsList, setSelectedNews, newsList 
                   onChange={handleInputChange}
                 />
               </div>
+              {editedNews.is_exclusive && (
+                <div className="mt-4">
+                  <label
+                    htmlFor="priority"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Priority Number
+                  </label>
+                  <input
+                    type="number"
+                    name="priority"
+                    className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm"
+                    value={editedNews.priority}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+              )}
               <div className="mt-6">
                 <button
                   type="submit"
