@@ -74,9 +74,9 @@ const Exclnews = () => {
       >
         <Swiper
           ref={desktopSwiperRef}
-          spaceBetween={20} 
-          slidesPerView={1} 
-          onSlideChange={handleSlideChange} 
+          spaceBetween={20}
+          slidesPerView={1}
+          onSlideChange={handleSlideChange}
           className="swiper-container"
         >
           {loading ? (
@@ -89,13 +89,13 @@ const Exclnews = () => {
           ) : newsItems.length > 0 ? (
             newsItems.map((news) => (
               <SwiperSlide key={news.id} className="news-slide">
+                <h3
+                  className="text-center font-bold text-xl px-4"
+                  style={{ fontFamily: "'Merriweather', serif" }}
+                >
+                  {news.title}
+                </h3>
                 <div className="news-item p-0 bg-white border border-gray-300 rounded-lg shadow-md">
-                  <h3
-                    className="text-center font-bold text-xl px-4"
-                    style={{ fontFamily: "'Merriweather', serif" }}
-                  >
-                    {news.title}
-                  </h3>
                   <a
                     href={news.photo}
                     target="_blank"
@@ -109,9 +109,11 @@ const Exclnews = () => {
                       />
                     ) : (
                       <iframe
-                          src={getPDFFrameSrc(news.photo)}
-                          className="absolute top-0 left-0 w-full h-full object-cover rounded-lg"
-                        />
+                        src={`https://docs.google.com/viewer?url=${encodeURIComponent(
+                          news.photo
+                        )}&embedded=true`}
+                        className="absolute left-0 w-full h-[90vh] object-cover rounded-lg"
+                      />
                     )}
                   </a>
                   <p className="text-gray-700">{news.description}</p>
@@ -160,9 +162,9 @@ const Exclnews = () => {
       >
         <Swiper
           ref={mobileSwiperRef}
-          spaceBetween={20} 
-          slidesPerView={1} 
-          onSlideChange={handleSlideChange} 
+          spaceBetween={20}
+          slidesPerView={1}
+          onSlideChange={handleSlideChange}
           className="swiper-container"
         >
           {loading ? (
@@ -195,8 +197,10 @@ const Exclnews = () => {
                       />
                     ) : (
                       <iframe
-                        src={getPDFFrameSrc(news.photo)}
-                        className="absolute top-0 left-0 w-full h-[900px] object-contain rounded-lg"
+                        src={`https://docs.google.com/viewer?url=${encodeURIComponent(
+                          news.photo
+                        )}&embedded=true`}
+                        className="absolute left-0 w-full h-[900px] object-contain"
                       />
                     )}
                   </a>

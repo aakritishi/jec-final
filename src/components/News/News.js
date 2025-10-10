@@ -4,20 +4,13 @@ import { AiFillDelete } from "react-icons/ai";
 import axios from "axios";
 import NewsBody from "./NewsBody";
 import EditNews from "./Editnews"; // Import the EditNews component
+import AddNews from "./AddNews";
 
 export default function News() {
   const [editMode, setEditMode] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [showNewsForm, setShowNewsForm] = useState(false);
   const [newsList, setNewsList] = useState([]);
-  const [newNews, setNewNews] = useState({
-    photo: "",
-    title: "",
-    description: "",
-    date: "",
-    publisher: "",
-    is_exclusive: false,
-  });
   const [selectedNews, setSelectedNews] = useState(null); // State to track the news to edit
 
   useEffect(() => {
@@ -80,52 +73,10 @@ export default function News() {
   };
 
   const handleEdit = (news) => {
-    setSelectedNews(news); // Set the selected news to be edited
+    setSelectedNews(news); 
   };
 
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setNewNews({
-      ...newNews,
-      [name]: type === "checkbox" ? checked : value,
-    });
-  };
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    const token = localStorage.getItem("authToken");
-
-    const formData = new FormData();
-    formData.append("photo", newNews.photo);
-    formData.append("title", newNews.title);
-    formData.append("description", newNews.description);
-    formData.append("date", newNews.date);
-    formData.append("publisher", newNews.publisher);
-    formData.append("is_exclusive", newNews.is_exclusive);
-
-    axios
-      .post("https://jec.edu.np/api/news/", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Token ${token}`,
-        },
-      })
-      .then((response) => {
-        setNewsList([...newsList, response.data]);
-        setShowNewsForm(false);
-        setNewNews({
-          photo: "",
-          title: "",
-          description: "",
-          date: "",
-          publisher: "",
-          is_exclusive: false,
-        });
-      })
-      .catch((error) => {
-        console.error("There was an error adding the news item", error);
-      });
-  };
+  
 
   return (
     <>
@@ -165,116 +116,7 @@ export default function News() {
         )}
 
         {showNewsForm && (
-          <div className="max-w-lg p-6 mx-auto bg-white rounded-lg shadow-lg form-container">
-            <form onSubmit={handleFormSubmit} className="space-y-6">
-              <div>
-                <label
-                  htmlFor="photo"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Photo
-                </label>
-                <input
-                  type="file"
-                  name="photo"
-                  className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  onChange={(e) =>
-                    setNewNews({ ...newNews, photo: e.target.files[0] })
-                  }
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="title"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Title
-                </label>
-                <input
-                  type="text"
-                  name="title"
-                  value={newNews.title}
-                  className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="description"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Description
-                </label>
-                <textarea
-                  name="description"
-                  value={newNews.description}
-                  className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="date"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Date
-                </label>
-                <input
-                  type="date"
-                  name="date"
-                  value={newNews.date}
-                  className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="publisher"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Publisher
-                </label>
-                <input
-                  type="text"
-                  name="publisher"
-                  value={newNews.publisher}
-                  className="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  name="is_exclusive"
-                  className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
-                  checked={newNews.is_exclusive}
-                  onChange={handleInputChange}
-                />
-                <label
-                  htmlFor="is_exclusive"
-                  className="block ml-2 text-sm text-gray-900"
-                >
-                  Exclusive
-                </label>
-              </div>
-
-              <button
-                type="submit"
-                className="w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                Submit News
-              </button>
-            </form>
-          </div>
+          <AddNews setNewsList={setNewsList} setShowNewsForm={setShowNewsForm} newsList={newsList} />
         )}
 
         {selectedNews && (
@@ -319,7 +161,9 @@ export default function News() {
                       />
                     ) : (
                       <iframe
-                        src={news.photo}
+                        src={`https://docs.google.com/viewer?url=${encodeURIComponent(
+                          news.photo
+                        )}&embedded=true`}
                         title="news"
                         className="object-cover w-full h-48 transition-transform duration-300 transform hover:scale-110"
                       />
